@@ -73,6 +73,7 @@
     <Compile Include="DAL\Logdiagnostic.cs" />
     <Compile Include="DAL\WMIAccess.cs" />
     <Compile Include="Entity\AppKeyName.cs" />
+    <Compile Include="Entity\ConstanteName.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
