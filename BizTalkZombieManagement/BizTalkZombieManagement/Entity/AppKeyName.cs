@@ -7,6 +7,7 @@ namespace BizTalkZombieManagement.Entity
 {
     public class AppKeyName
     {
-        public const String FilePath = "FilePath";
+        public const String FilePath = "FILE_DumpFolder";
+        public const String FileActivated = "FILE_Activated";
     }
 }

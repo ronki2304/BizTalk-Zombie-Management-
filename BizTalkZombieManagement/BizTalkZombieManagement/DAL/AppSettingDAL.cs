@@ -9,18 +9,12 @@ namespace BizTalkZombieManagement.DAL
 {
     public static class AppSettingDAL
     {
-        private static String _FilePath=String.Empty;
+       
+       
 
-        public static String FilePath
+        public static String RetrieveSpecificKey(String KeyName)
         {
-            get
-            {
-                if (String.IsNullOrEmpty(_FilePath))
-                {
-                    _FilePath = ConfigurationManager.AppSettings[AppKeyName.FilePath];
-                }
-                return _FilePath;
-            }
+            return ConfigurationManager.AppSettings[KeyName];
         }
     }
 }

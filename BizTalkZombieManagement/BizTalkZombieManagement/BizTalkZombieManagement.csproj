@@ -20,7 +20,7 @@
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -69,8 +69,10 @@
     <Compile Include="Business\WMIProperties.cs" />
     <Compile Include="Business\ZombieManagement.cs" />
     <Compile Include="DAL\AppSettingDAL.cs" />
-    <Compile Include="DAL\BizTalkArtifact.cs" />
+    <Compile Include="DAL\BizTalkArtifacts.cs" />
+    <Compile Include="DAL\SaveFile.cs" />
     <Compile Include="DAL\Logdiagnostic.cs" />
+    <Compile Include="DAL\PerfCounter.cs" />
     <Compile Include="DAL\WMIAccess.cs" />
     <Compile Include="Entity\AppKeyName.cs" />
     <Compile Include="Entity\ConstanteName.cs" />

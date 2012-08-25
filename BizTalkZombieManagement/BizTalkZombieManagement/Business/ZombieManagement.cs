@@ -6,35 +6,13 @@ using System.Management;
 using System.Xml.Linq;
 using BizTalkZombieManagement.DAL;
 using System.IO;
+using BizTalkZombieManagement.Entity.ConstanteName;
+using System.Threading.Tasks;
 
 namespace BizTalkZombieManagement.Business
 {
     public static class ZombieManagement
     {
-
-        #region private member
-
-        #region WMI query
-        /// <summary>
-        /// Serivce Instance  : orcherstration Instance ID 
-        /// ReferenceType 8 zombie message
-        /// </summary>
-        private const String _SelectZombieMessage = "SELECT * FROM MSBTS_MessageInstance WHERE ServiceInstanceID like '{0}' and ReferenceType=8";
-
-        /// <summary>
-        /// Retrieve orchestration suspended informations
-        /// </summary>
-        private const String _SelectOrchestration = "SELECT * FROM MSBTS_ServiceInstance WHERE InstanceID like '{0}'";
-        #endregion
-
-
-        private const String _WMIScope = "root\\MicrosoftBizTalkServer";
-
-        #endregion
-
-
-
-
 
         /// <summary>
         /// get back the zombie message, replay it and delete the zombie orchestration
@@ -44,52 +22,55 @@ namespace BizTalkZombieManagement.Business
         {
             Boolean DeleteOrchestrationAction = false;
 
-            String sQuery = String.Format(_SelectZombieMessage, ServiceInstanceID.ToString("B"));
 
 
-            ManagementObjectSearcher searchZombieMessages =
-                    new ManagementObjectSearcher(new ManagementScope(_WMIScope), new ObjectQuery(sQuery), null);
+            WMIAccess wmiAccess = new WMIAccess();
+            wmiAccess.GetZombieMessage(ServiceInstanceID);
 
-
+            //Initialize artifact list
+            BizTalkArtifacts btArtifact = new BizTalkArtifacts();
 
             // Loop over the returned messages from the query
-            // Write the message and context to the supplied folder
-            foreach (ManagementObject objServiceInstance in searchZombieMessages.Get())
+            if (wmiAccess.MessageFound)
             {
                 DeleteOrchestrationAction = true;
-                Console.WriteLine("New Message Zombie Found");
-                //getting body message
-                String Message = BizTalkArtifact.GetMessageBodyByMessageID(Guid.Parse(objServiceInstance.Properties[WMIProperties.MessageInstanceID].Value.ToString())
-                                , Guid.Parse(objServiceInstance.Properties[WMIProperties.ServiceInstanceID].Value.ToString()));
-
-
-
-                String sAction;
-                String sDomaine;
-                ////Getting mesage context
-                //ExtractDataFromContextMessage(XDocument.Parse(objServiceInstance.Properties[WMIProperties.Context].Value.ToString()), out sAction, out sDomaine);
-                //StarshipDB.insertEvenement(Message, sDomaine, sAction);
-
-                //String path = @"c:\Bts_Test\{0}.xml";
-                //SaveToFile(Message,path);
-
+                LogHelper.WriteInfo(String.Format("New Message Zombie Found for service instance {0}", ServiceInstanceID));
+                
+                
+                //check for save zombie message to file
+                if (ConfigParameter.FileActivated)
+                {
+                    UsingFileLayer(ServiceInstanceID, wmiAccess, btArtifact);
+                }
+            }
+            else
+            {
+                LogHelper.WriteInfo(String.Format("No zombie message found, the instance {0} is not a zombie instance",ServiceInstanceID));
             }
 
             //Now terminate the current orchestration 
             if (DeleteOrchestrationAction)
             {
-                TerminateOrchestration(ServiceInstanceID);
+                LogHelper.WriteInfo("Now delete zombie orchestration");
+                WMIAccess.TerminateOrchestration(ServiceInstanceID);
             }
         }
 
-        private static void SaveToFile(String Message,String sPath)
+        /// <summary>
+        /// Saving all messages in directory
+        /// </summary>
+        /// <param name="ServiceInstanceID"></param>
+        /// <param name="wmiAccess"></param>
+        /// <param name="btArtifact"></param>
+        private static void UsingFileLayer(Guid ServiceInstanceID, WMIAccess wmiAccess, BizTalkArtifacts btArtifact)
         {
-            using (FileStream fs = File.Create(String.Format(sPath,Guid.NewGuid())))
+            LogHelper.WriteInfo("Saving all message to file...");
+            foreach (Guid gu in wmiAccess.ListMessageID)
             {
-                Byte[] info = new UTF8Encoding(true).GetBytes(Message);
-                fs.Write(info, 0, info.Length);
+                String sMessage = btArtifact.GetMessageBodyByMessageID(gu, ServiceInstanceID);
+                SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
             }
-
+            LogHelper.WriteInfo("All Messages saved to file !");
         }
 
         /// <summary>
@@ -120,20 +101,6 @@ namespace BizTalkZombieManagement.Business
             }
         }
 
-        /// <summary>
-        /// Terminate Orchestration which have created zombie message
-        /// </summary>
-        /// <param name="ServiceInstanceID"></param>
-        private static void TerminateOrchestration(Guid ServiceInstanceID)
-        {
-            String sQuery = String.Format(_SelectOrchestration, ServiceInstanceID.ToString("B"));
-
-            ManagementObjectSearcher searchZombieMessages =
-                  new ManagementObjectSearcher(new ManagementScope(_WMIScope), new ObjectQuery(sQuery), null);
-
-            foreach (ManagementObject Mob in searchZombieMessages.Get())
-                Mob.InvokeMethod("Terminate", new Object[] { ServiceInstanceID.ToString("B") });
-
-        }
+       
     }
 }
