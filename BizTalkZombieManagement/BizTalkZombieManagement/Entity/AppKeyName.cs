@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BizTalkZombieManagement.Entity
 {
-    public class AppKeyName
+    public static class AppKeyName
     {
         public const String FilePath = "FILE_DumpFolder";
         public const String FileActivated = "FILE_Activated";

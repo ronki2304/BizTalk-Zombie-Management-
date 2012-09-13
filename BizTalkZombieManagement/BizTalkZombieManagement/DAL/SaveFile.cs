@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
-    public class SaveFile
+    public static class SaveFile
     {
         public static void SaveToFile(Guid MessageInstanceId, String Message,String Path)
         {

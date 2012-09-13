@@ -20,7 +20,7 @@ namespace BizTalkZombieManagement
 
             this.ZombieManagementServiceInstaller.StartType = ServiceStartMode.Automatic;
             this.ZombieManagementServiceInstaller.Description = "Service to handle BizTalk Zombie instance";
-            this.ZombieManagementServiceInstaller.ServicesDependedOn = new String[] { "ENTSSO" };
+            this.ZombieManagementServiceInstaller.ServicesDependedOn = new String[] { "ENTSSO" }; //check if sso is install
             //Setting credential
             this.serviceProcessInstaller1.Account = ServiceAccount.User;
 
@@ -30,8 +30,10 @@ namespace BizTalkZombieManagement
         private void AfterInstallService(object send, InstallEventArgs e)
         {
             //start the service
-            ServiceController sc = new ServiceController("ZombieManagementService");
-            sc.Start();
+            using (ServiceController sc = new ServiceController("ZombieManagementService"))
+            {
+                sc.Start();
+            }
         }
         public override void Commit(IDictionary savedState)
         {

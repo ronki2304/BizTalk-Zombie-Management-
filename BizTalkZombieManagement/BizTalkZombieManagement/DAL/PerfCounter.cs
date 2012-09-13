@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     class PerfCounter
     {

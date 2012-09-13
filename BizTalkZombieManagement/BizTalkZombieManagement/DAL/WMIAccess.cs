@@ -6,7 +6,7 @@ using BizTalkZombieManagement.Entity.ConstanteName;
 using System.Management;
 using BizTalkZombieManagement.Business;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     public class WMIAccess
     {
@@ -49,19 +49,17 @@ namespace BizTalkZombieManagement.DAL
         {
             
             String sQuery = String.Format(WMIQuery.SelectZombieMessage, ServiceInstanceID.ToString("B"));
-            ManagementObjectSearcher searchZombieMessages =
-                   new ManagementObjectSearcher(new ManagementScope(WMIQuery.WMIScope), new ObjectQuery(sQuery), null);
-
-
-
-            foreach (ManagementObject objServiceInstance in searchZombieMessages.Get())
+            using (ManagementObjectSearcher searchZombieMessages =
+                   new ManagementObjectSearcher(new ManagementScope(WMIQuery.WMIScope), new ObjectQuery(sQuery), null))
             {
-                ListZombieMessage.Add(objServiceInstance);
+                foreach (ManagementObject objServiceInstance in searchZombieMessages.Get())
+                {
+                    ListZombieMessage.Add(objServiceInstance);
 
-                if (!MessageFound)
-                    MessageFound = true;
+                    if (!MessageFound)
+                        MessageFound = true;
+                }
             }
-
         }
 
         /// <summary>
@@ -90,12 +88,13 @@ namespace BizTalkZombieManagement.DAL
         {
             String sQuery = String.Format(WMIQuery.SelectOrchestration, ServiceInstanceID.ToString("B"));
             // à reecrire sans object searcher
-            ManagementObjectSearcher searchZombieMessages =
-                  new ManagementObjectSearcher(new ManagementScope(WMIQuery.WMIScope), new ObjectQuery(sQuery), null);
+            using (ManagementObjectSearcher searchZombieMessages =
+                  new ManagementObjectSearcher(new ManagementScope(WMIQuery.WMIScope), new ObjectQuery(sQuery), null))
+            {
+                foreach (ManagementObject Mob in searchZombieMessages.Get())
+                    Mob.InvokeMethod("Terminate", new Object[] { ServiceInstanceID.ToString("B") });
 
-            foreach (ManagementObject Mob in searchZombieMessages.Get())
-                Mob.InvokeMethod("Terminate", new Object[] { ServiceInstanceID.ToString("B") });
-
+            }
         }
         #endregion
     }

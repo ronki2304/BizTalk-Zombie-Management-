@@ -5,12 +5,12 @@ using System.Text;
 
 namespace BizTalkZombieManagement.Entity.ConstanteName
 {
-    public class ConstEventLog
+    public static class ConstEventLog
     {
         public const String SourceName = "Zombie Management";
     }
 
-    public class WMIQuery
+    public static class WMIQuery
     {
          #region WMI query
         /// <summary>
@@ -29,5 +29,10 @@ namespace BizTalkZombieManagement.Entity.ConstanteName
 
         #endregion
 
+    }
+
+    public static class ResourceKeyName
+    {
+        public const String EventArrived = "Event_Arrived";
     }
 }

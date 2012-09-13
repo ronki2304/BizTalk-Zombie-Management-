@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using BizTalkZombieManagement.DAL;
+using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entity;
 
 namespace BizTalkZombieManagement.Business
 {
-    public class ConfigParameter
+    public static class ConfigParameter
     {
         private static String _FilePath;
         public static String FilePath

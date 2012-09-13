@@ -5,9 +5,9 @@ using System.Text;
 using System.Diagnostics;
 using BizTalkZombieManagement.Entity.ConstanteName;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
-    public class Logdiagnostic
+    public static class Logdiagnostic
     {
         public static void LogError(String Message)
         {

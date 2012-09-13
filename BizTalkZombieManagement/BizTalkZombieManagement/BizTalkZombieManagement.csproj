@@ -28,6 +28,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -40,6 +42,15 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.BizTalk.ExplorerOM, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -66,10 +77,12 @@
   <ItemGroup>
     <Compile Include="Business\ConfigParameter.cs" />
     <Compile Include="Business\LogHelper.cs" />
+    <Compile Include="Business\ResourceLogic.cs" />
     <Compile Include="Business\WMIProperties.cs" />
     <Compile Include="Business\ZombieManagement.cs" />
     <Compile Include="DAL\AppSettingDAL.cs" />
     <Compile Include="DAL\BizTalkArtifacts.cs" />
+    <Compile Include="DAL\ResourceDAL.cs" />
     <Compile Include="DAL\SaveFile.cs" />
     <Compile Include="DAL\Logdiagnostic.cs" />
     <Compile Include="DAL\PerfCounter.cs" />
@@ -83,6 +96,11 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource\ZombieResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZombieResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="ZombieManagementService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -92,11 +110,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="key.snk" />
     <None Include="License\license.rtf" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\ZombieResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ZombieResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

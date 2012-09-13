@@ -5,7 +5,7 @@ using System.Text;
 using System.Configuration;
 using BizTalkZombieManagement.Entity;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     public static class AppSettingDAL
     {

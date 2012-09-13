@@ -1,6 +1,9 @@
 ﻿using System.Management;
 using BizTalkZombieManagement.Business;
 using System;
+using System.Resources;
+
+[assembly: CLSCompliant(true)]
 namespace BizTalkZombieManagement
 {
     partial class ZombieManagementService

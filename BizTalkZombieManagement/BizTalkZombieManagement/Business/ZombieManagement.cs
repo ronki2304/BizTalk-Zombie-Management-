@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Management;
 using System.Xml.Linq;
-using BizTalkZombieManagement.DAL;
+using BizTalkZombieManagement.Dal;
 using System.IO;
 using BizTalkZombieManagement.Entity.ConstanteName;
 using System.Threading.Tasks;

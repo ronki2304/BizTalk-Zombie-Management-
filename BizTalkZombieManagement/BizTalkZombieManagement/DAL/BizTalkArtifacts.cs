@@ -8,7 +8,7 @@ using Microsoft.BizTalk.Operations;
 using System.IO;
 using Microsoft.BizTalk.Message.Interop;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     public class BizTalkArtifacts
     {
@@ -62,17 +62,19 @@ namespace BizTalkZombieManagement.DAL
             //check if it is the first message retrieving
             if (!MessageDictionnary.ContainsKey(messageID))
             {
-                BizTalkOperations operations = new BizTalkOperations();
-
-                IBaseMessage message = operations.GetMessage(messageID, InstanceID);
-                String body = String.Empty;
-                using (StreamReader streamReader = new StreamReader(message.BodyPart.Data))
+                using (BizTalkOperations operations = new BizTalkOperations())
                 {
-                    body = streamReader.ReadToEnd();
+
+                    IBaseMessage message = operations.GetMessage(messageID, InstanceID);
+                    String body = String.Empty;
+                    using (StreamReader streamReader = new StreamReader(message.BodyPart.Data))
+                    {
+                        body = streamReader.ReadToEnd();
+                    }
+                    //add the new message to the dictionnary
+                    MessageDictionnary.Add(messageID, body);
+                    return body;
                 }
-                //add the new message to the dictionnary
-                MessageDictionnary.Add(messageID, body);
-                return body;
             }
             else
             {

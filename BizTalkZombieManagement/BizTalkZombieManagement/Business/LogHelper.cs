@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BizTalkZombieManagement.DAL;
+using BizTalkZombieManagement.Dal;
 
 namespace BizTalkZombieManagement.Business
 {
-    public class LogHelper
+    public static class LogHelper
     {
         public static void WriteInfo(String Message)
         {
