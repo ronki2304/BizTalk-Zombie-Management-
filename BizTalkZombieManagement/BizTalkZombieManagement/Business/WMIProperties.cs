@@ -5,11 +5,11 @@ using System.Text;
 
 namespace BizTalkZombieManagement.Business
 {
-    public static class WMIProperties
+    public static class WmiProperties
     {
-        public const String ServiceInstanceID = "ServiceInstanceID";
-        public const String InstanceID = "InstanceID";
-        public const String MessageInstanceID = "MessageInstanceID";
+        public const String ServiceInstanceId = "ServiceInstanceID";
+        public const String InstanceId = "InstanceID";
+        public const String MessageInstanceId = "MessageInstanceID";
         public const String Context = "Context";
     }
 }

@@ -8,19 +8,19 @@ namespace BizTalkZombieManagement.Business
 {
     public static class LogHelper
     {
-        public static void WriteInfo(String Message)
+        public static void WriteInfo(String message)
         {
-            Logdiagnostic.LogInfo(Message);
+            Logdiagnostics.LogInfo(message);
         }
 
-        public static void WriteError(String Message)
+        public static void WriteError(String message)
         {
-            Logdiagnostic.LogError(Message);
+            Logdiagnostics.LogError(message);
         }
 
         public static void WriteError(Exception exception)
         {
-            Logdiagnostic.LogError(exception);
+            Logdiagnostics.LogError(exception);
         }
 
     }

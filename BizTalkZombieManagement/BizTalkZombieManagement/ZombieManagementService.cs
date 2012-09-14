@@ -9,6 +9,7 @@ using System.Text;
 using System.Management;
 using BizTalkZombieManagement.Business;
 using System.IO;
+using BizTalkZombieManagement.Entity.ConstantName;
 
 namespace BizTalkZombieManagement
 {
@@ -48,12 +49,12 @@ namespace BizTalkZombieManagement
                 }
                 else
                 {
-                    LogHelper.WriteError("Service won't start due to validation error");
+                    LogHelper.WriteError(ResourceLogic.GetString(ResourceKeyName.ErrorValidation));
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.WriteError("Service encounters a problem and need to be stopped");
+                LogHelper.WriteError(ResourceLogic.GetString(ResourceKeyName.StopService));
                 LogHelper.WriteError(ex);
             }
             
@@ -101,17 +102,15 @@ namespace BizTalkZombieManagement
                 if (String.IsNullOrEmpty(ConfigParameter.FilePath))
                 {
                     isOK = false;
-                    LogHelper.WriteError(String.Format("Folder address is missing"));
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.AddressMissing)));
                 }
 
                 if (!Directory.Exists(ConfigParameter.FilePath)) //folder not found
                 {
                     isOK = false;
-                    LogHelper.WriteError(String.Format("Folder for dump {0} is not found", ConfigParameter.FilePath));
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.DumpFolderNotFound), ConfigParameter.FilePath));
                 }
             }
-            
-
             return isOK;
         }
     }

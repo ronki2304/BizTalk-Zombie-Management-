@@ -19,15 +19,25 @@ Global
 		SccLocalPath2 = ServiceSetup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Debug|x86.ActiveCfg = Debug|x86
 		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Debug|x86.Build.0 = Debug|x86
+		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Release|x86.ActiveCfg = Release|x86
 		{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}.Release|x86.Build.0 = Release|x86
+		{A6FA922A-487E-4D1E-876C-DB5005557BBB}.Debug|Any CPU.ActiveCfg = Debug
+		{A6FA922A-487E-4D1E-876C-DB5005557BBB}.Debug|Any CPU.Build.0 = Debug
 		{A6FA922A-487E-4D1E-876C-DB5005557BBB}.Debug|x86.ActiveCfg = Debug
+		{A6FA922A-487E-4D1E-876C-DB5005557BBB}.Release|Any CPU.ActiveCfg = Release
+		{A6FA922A-487E-4D1E-876C-DB5005557BBB}.Release|Any CPU.Build.0 = Release
 		{A6FA922A-487E-4D1E-876C-DB5005557BBB}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

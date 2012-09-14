@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BizTalkZombieManagement.Entity.ConstanteName
+namespace BizTalkZombieManagement.Entity.ConstantName
 {
     public static class ConstEventLog
     {
         public const String SourceName = "Zombie Management";
     }
 
-    public static class WMIQuery
+    public static class WmiQuery
     {
          #region WMI query
         /// <summary>
@@ -25,7 +25,7 @@ namespace BizTalkZombieManagement.Entity.ConstanteName
         public const String SelectOrchestration = "SELECT * FROM MSBTS_ServiceInstance WHERE InstanceID like '{0}'";
 
 
-        public const String WMIScope = "root\\MicrosoftBizTalkServer";
+        public const String WmiScope = "root\\MicrosoftBizTalkServer";
 
         #endregion
 
@@ -33,6 +33,12 @@ namespace BizTalkZombieManagement.Entity.ConstanteName
 
     public static class ResourceKeyName
     {
-        public const String EventArrived = "Event_Arrived";
+        public const String EventArrived = "EventArrived";
+
+        public const String ResourceKeyNotFound = "Error_ResourceKeyNotFound";
+        public const String ErrorValidation = "Error_Validation";
+        public const String StopService = "Error_Stop";
+        public const String DumpFolderNotFound = "Error_Folder";
+        public const String AddressMissing = "Error_AddressMissing";
     }
 }

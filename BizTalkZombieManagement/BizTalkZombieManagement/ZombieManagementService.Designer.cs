@@ -2,6 +2,7 @@
 using BizTalkZombieManagement.Business;
 using System;
 using System.Resources;
+using BizTalkZombieManagement.Entity.ConstantName;
 
 [assembly: CLSCompliant(true)]
 namespace BizTalkZombieManagement
@@ -49,8 +50,8 @@ namespace BizTalkZombieManagement
         /// <param name="e"></param>
         private static void HandleEvent(object sender, EventArrivedEventArgs e)
         {
-            LogHelper.WriteInfo("Event arrived");
-            ZombieManagement.ReplayZombieMessage(Guid.Parse(e.NewEvent.Properties[WMIProperties.InstanceID].Value.ToString()));
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.EventArrived));
+            ZombieManagement.ReplayZombieMessage(Guid.Parse(e.NewEvent.Properties[WmiProperties.InstanceId].Value.ToString()));
 
         }
         #endregion

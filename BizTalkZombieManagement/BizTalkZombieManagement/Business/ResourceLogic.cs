@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BizTalkZombieManagement.DAL;
+using BizTalkZombieManagement.Dal;
+using BizTalkZombieManagement.Entity.ConstantName;
 
 namespace BizTalkZombieManagement.Business
 {
     public static class ResourceLogic
     {
-        public static String GetString(String sKeyName)
+        public static String GetString(String KeyName)
         {
-            return ResourceDAL.GetString(sKeyName);
+            if (!String.IsNullOrEmpty(ResourceDal.GetString(KeyName)))
+            {
+                return ResourceDal.GetString(KeyName);
+            }
+            else
+            {
+                return String.Format(ResourceDal.GetString(ResourceKeyName.ResourceKeyNotFound), KeyName);
+            }
         }
     }
 }

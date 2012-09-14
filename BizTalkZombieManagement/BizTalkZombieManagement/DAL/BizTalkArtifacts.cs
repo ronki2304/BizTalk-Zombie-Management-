@@ -55,30 +55,30 @@ namespace BizTalkZombieManagement.Dal
         /// <summary>
         /// retrieve message body by message ID
         /// </summary>
-        /// <param name="messageID"></param>
+        /// <param name="messageId"></param>
         /// <returns></returns>
-        public String GetMessageBodyByMessageID(Guid messageID, Guid InstanceID)
+        public String GetMessageBodyByMessageId(Guid messageId, Guid instanceId)
         {
             //check if it is the first message retrieving
-            if (!MessageDictionnary.ContainsKey(messageID))
+            if (!MessageDictionnary.ContainsKey(messageId))
             {
                 using (BizTalkOperations operations = new BizTalkOperations())
                 {
 
-                    IBaseMessage message = operations.GetMessage(messageID, InstanceID);
+                    IBaseMessage message = operations.GetMessage(messageId, instanceId);
                     String body = String.Empty;
                     using (StreamReader streamReader = new StreamReader(message.BodyPart.Data))
                     {
                         body = streamReader.ReadToEnd();
                     }
                     //add the new message to the dictionnary
-                    MessageDictionnary.Add(messageID, body);
+                    MessageDictionnary.Add(messageId, body);
                     return body;
                 }
             }
             else
             {
-                return MessageDictionnary[messageID];
+                return MessageDictionnary[messageId];
             }
         }
 
@@ -86,12 +86,15 @@ namespace BizTalkZombieManagement.Dal
         /// Retrieve message with a list of Message ID
         /// </summary>
         /// <param name="lGu"></param>
-        /// <param name="InstanceID"></param>
-        public void GetAllMessagesBody(IEnumerable<Guid> lGu, Guid InstanceID)
+        /// <param name="instanceId"></param>
+        public void GetAllMessagesBody(IEnumerable<Guid> messagesId, Guid instanceId)
         {
-            foreach (Guid gu in lGu)
+            if (messagesId != null && messagesId.Count() > 0)
             {
-                GetMessageBodyByMessageID(gu, InstanceID);
+                foreach (Guid gu in messagesId)
+                {
+                    GetMessageBodyByMessageId(gu, instanceId);
+                }
             }
         }
     }

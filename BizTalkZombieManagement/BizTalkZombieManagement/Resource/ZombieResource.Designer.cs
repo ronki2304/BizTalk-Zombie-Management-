@@ -61,11 +61,56 @@ namespace BizTalkZombieManagement.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folder address is missing.
+        /// </summary>
+        internal static string Error_AddressMissing {
+            get {
+                return ResourceManager.GetString("Error_AddressMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder for dump {0} is not found.
+        /// </summary>
+        internal static string Error_Folder {
+            get {
+                return ResourceManager.GetString("Error_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The resource key desired {0} is not found.
+        /// </summary>
+        internal static string Error_ResourceKeyNotFound {
+            get {
+                return ResourceManager.GetString("Error_ResourceKeyNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service encounters a problem and need to be stopped.
+        /// </summary>
+        internal static string Error_Stop {
+            get {
+                return ResourceManager.GetString("Error_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service won&apos;t start due to validation error.
+        /// </summary>
+        internal static string Error_Validation {
+            get {
+                return ResourceManager.GetString("Error_Validation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Event arrived.
         /// </summary>
-        internal static string Event_Arrived {
+        internal static string EventArrived {
             get {
-                return ResourceManager.GetString("Event_Arrived", resourceCulture);
+                return ResourceManager.GetString("EventArrived", resourceCulture);
             }
         }
     }

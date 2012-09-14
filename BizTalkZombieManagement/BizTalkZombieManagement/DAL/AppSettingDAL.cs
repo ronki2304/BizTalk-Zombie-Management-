@@ -7,14 +7,11 @@ using BizTalkZombieManagement.Entity;
 
 namespace BizTalkZombieManagement.Dal
 {
-    public static class AppSettingDAL
+    public static class AppSettingDal
     {
-       
-       
-
-        public static String RetrieveSpecificKey(String KeyName)
+        public static String RetrieveSpecificKey(String keyName)
         {
-            return ConfigurationManager.AppSettings[KeyName];
+            return ConfigurationManager.AppSettings[keyName];
         }
     }
 }

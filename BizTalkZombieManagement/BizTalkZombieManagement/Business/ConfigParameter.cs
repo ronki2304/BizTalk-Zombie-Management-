@@ -11,6 +11,7 @@ namespace BizTalkZombieManagement.Business
     public static class ConfigParameter
     {
         private static String _FilePath;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "FILEDumpFolder", Justification="I name as I want")]
         public static String FilePath
         {
             get
@@ -18,10 +19,10 @@ namespace BizTalkZombieManagement.Business
                 if (String.IsNullOrEmpty(_FilePath))
                 {
                     //check illegal character
-                    if (!AppSettingDAL.RetrieveSpecificKey(AppKeyName.FilePath).Any(it => Path.GetInvalidPathChars().Contains(it))
-                        && !String.IsNullOrEmpty(AppSettingDAL.RetrieveSpecificKey(AppKeyName.FilePath)))
+                    if (!AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath).Any(it => Path.GetInvalidPathChars().Contains(it))
+                        && !String.IsNullOrEmpty(AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath)))
                     {
-                        _FilePath = AppSettingDAL.RetrieveSpecificKey(AppKeyName.FilePath);
+                        _FilePath = AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath);
                     }
                     else
                     {
@@ -34,12 +35,13 @@ namespace BizTalkZombieManagement.Business
         }
 
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "FILEActivated", Justification = "I name as I want")]
         public static Boolean FileActivated
         {
             get
             {
                 Boolean breturn;
-                if (!Boolean.TryParse(AppSettingDAL.RetrieveSpecificKey(AppKeyName.FileActivated),out breturn))
+                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.FileActivated),out breturn))
                 {
                     LogHelper.WriteError(String.Format("Format Exception {0} haven't got a boolean value \n Dump file won't be activate",AppKeyName.FileActivated));
                     return false;

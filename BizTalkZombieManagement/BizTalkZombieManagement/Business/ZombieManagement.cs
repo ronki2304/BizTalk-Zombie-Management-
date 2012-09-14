@@ -6,7 +6,7 @@ using System.Management;
 using System.Xml.Linq;
 using BizTalkZombieManagement.Dal;
 using System.IO;
-using BizTalkZombieManagement.Entity.ConstanteName;
+using BizTalkZombieManagement.Entity.ConstantName;
 using System.Threading.Tasks;
 
 namespace BizTalkZombieManagement.Business
@@ -17,15 +17,15 @@ namespace BizTalkZombieManagement.Business
         /// <summary>
         /// get back the zombie message, replay it and delete the zombie orchestration
         /// </summary>
-        /// <param name="ServiceInstanceID"></param>
-        public static void ReplayZombieMessage(Guid ServiceInstanceID)
+        /// <param name="serviceInstanceId"></param>
+        public static void ReplayZombieMessage(Guid serviceInstanceId)
         {
             Boolean DeleteOrchestrationAction = false;
 
 
 
-            WMIAccess wmiAccess = new WMIAccess();
-            wmiAccess.GetZombieMessage(ServiceInstanceID);
+            WmiIAccess wmiAccess = new WmiIAccess();
+            wmiAccess.GetZombieMessage(serviceInstanceId);
 
             //Initialize artifact list
             BizTalkArtifacts btArtifact = new BizTalkArtifacts();
@@ -34,25 +34,25 @@ namespace BizTalkZombieManagement.Business
             if (wmiAccess.MessageFound)
             {
                 DeleteOrchestrationAction = true;
-                LogHelper.WriteInfo(String.Format("New Message Zombie Found for service instance {0}", ServiceInstanceID));
+                LogHelper.WriteInfo(String.Format("New Message Zombie Found for service instance {0}", serviceInstanceId));
                 
                 
                 //check for save zombie message to file
                 if (ConfigParameter.FileActivated)
                 {
-                    UsingFileLayer(ServiceInstanceID, wmiAccess, btArtifact);
+                    UsingFileLayer(serviceInstanceId, wmiAccess, btArtifact);
                 }
             }
             else
             {
-                LogHelper.WriteInfo(String.Format("No zombie message found, the instance {0} is not a zombie instance",ServiceInstanceID));
+                LogHelper.WriteInfo(String.Format("No zombie message found, the instance {0} is not a zombie instance",serviceInstanceId));
             }
 
             //Now terminate the current orchestration 
             if (DeleteOrchestrationAction)
             {
                 LogHelper.WriteInfo("Now delete zombie orchestration");
-                WMIAccess.TerminateOrchestration(ServiceInstanceID);
+                WmiIAccess.TerminateOrchestration(serviceInstanceId);
             }
         }
 
@@ -62,12 +62,12 @@ namespace BizTalkZombieManagement.Business
         /// <param name="ServiceInstanceID"></param>
         /// <param name="wmiAccess"></param>
         /// <param name="btArtifact"></param>
-        private static void UsingFileLayer(Guid ServiceInstanceID, WMIAccess wmiAccess, BizTalkArtifacts btArtifact)
+        private static void UsingFileLayer(Guid ServiceInstanceID, WmiIAccess wmiAccess, BizTalkArtifacts btArtifact)
         {
             LogHelper.WriteInfo("Saving all message to file...");
-            foreach (Guid gu in wmiAccess.ListMessageID)
+            foreach (Guid gu in wmiAccess.ListMessageId)
             {
-                String sMessage = btArtifact.GetMessageBodyByMessageID(gu, ServiceInstanceID);
+                String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
                 SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
             }
             LogHelper.WriteInfo("All Messages saved to file !");
