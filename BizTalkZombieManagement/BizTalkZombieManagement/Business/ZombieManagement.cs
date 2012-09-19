@@ -36,7 +36,7 @@ namespace BizTalkZombieManagement.Business
             if (wmiAccess.MessageFound)
             {
                 DeleteOrchestrationAction = true;
-                LogHelper.WriteInfo(String.Format("New Message Zombie Found for service instance {0}", serviceInstanceId));
+                LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.ZombieFound), serviceInstanceId));
                 
                 
                 //check for save zombie message to file
@@ -47,13 +47,13 @@ namespace BizTalkZombieManagement.Business
             }
             else
             {
-                LogHelper.WriteInfo(String.Format("No zombie message found, the instance {0} is not a zombie instance",serviceInstanceId));
+                LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.NoZombieFound), serviceInstanceId));
             }
 
             //Now terminate the current orchestration 
             if (DeleteOrchestrationAction)
             {
-                LogHelper.WriteInfo("Now delete zombie orchestration");
+                LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.DeleteZombieOrchestration)));
                 WmiIAccess.TerminateOrchestration(serviceInstanceId);
             }
         }
@@ -66,13 +66,13 @@ namespace BizTalkZombieManagement.Business
         /// <param name="btArtifact"></param>
         private static void UsingFileLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
         {
-            LogHelper.WriteInfo("Saving all message to file...");
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaving));
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
                 SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
             }
-            LogHelper.WriteInfo("All Messages saved to file !");
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaved));
         }
     }
 }

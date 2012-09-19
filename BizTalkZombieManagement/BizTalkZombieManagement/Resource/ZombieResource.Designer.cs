@@ -61,6 +61,15 @@ namespace BizTalkZombieManagement.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Now delete zombie orchestration.
+        /// </summary>
+        internal static string Delete_Zombie_Orchestration {
+            get {
+                return ResourceManager.GetString("Delete_Zombie_Orchestration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Folder address is missing.
         /// </summary>
         internal static string Error_AddressMissing {
@@ -111,6 +120,60 @@ namespace BizTalkZombieManagement.Resource {
         internal static string EventArrived {
             get {
                 return ResourceManager.GetString("EventArrived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format Exception {0} haven&apos;t got a boolean value \n Dump file won&apos;t be activate.
+        /// </summary>
+        internal static string File_Activated_Error {
+            get {
+                return ResourceManager.GetString("File_Activated_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path contain in {0} is not a valid path, service will not start until you correct it, please open configuration file and correct the DumpFolder key value.
+        /// </summary>
+        internal static string File_Invalid_Path {
+            get {
+                return ResourceManager.GetString("File_Invalid_Path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Messages saved to file !.
+        /// </summary>
+        internal static string File_Saved {
+            get {
+                return ResourceManager.GetString("File_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving all message to file....
+        /// </summary>
+        internal static string File_Saving {
+            get {
+                return ResourceManager.GetString("File_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No zombie message found, the instance {0} is not a zombie instance.
+        /// </summary>
+        internal static string No_Zombie_Found {
+            get {
+                return ResourceManager.GetString("No_Zombie_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Message Zombie Found for service instance {0}.
+        /// </summary>
+        internal static string Zombie_Found {
+            get {
+                return ResourceManager.GetString("Zombie_Found", resourceCulture);
             }
         }
     }

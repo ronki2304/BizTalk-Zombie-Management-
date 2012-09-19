@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entity;
+using BizTalkZombieManagement.Entity.ConstantName;
 
 namespace BizTalkZombieManagement.Business
 {
@@ -26,7 +27,7 @@ namespace BizTalkZombieManagement.Business
                     }
                     else
                     {
-                        LogHelper.WriteError(String.Format("Path contain in {0} is not a valid path, service will not start until you correct it, please open configuration file and correct the DumpFolder key value", AppKeyName.FilePath));
+                        LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileInvalidPath), AppKeyName.FilePath));
                     }
                 }
 
@@ -43,7 +44,7 @@ namespace BizTalkZombieManagement.Business
                 Boolean breturn;
                 if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.FileActivated),out breturn))
                 {
-                    LogHelper.WriteError(String.Format("Format Exception {0} haven't got a boolean value \n Dump file won't be activate",AppKeyName.FileActivated));
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileActivatedError),AppKeyName.FileActivated));
                     return false;
                 }
 

@@ -13,5 +13,12 @@ namespace BizTalkZombieManagement.Entity.ConstantName
         public const String StopService = "Error_Stop";
         public const String DumpFolderNotFound = "Error_Folder";
         public const String AddressMissing = "Error_AddressMissing";
+        public const String FileSaving = "File_Saving";
+        public const String FileSaved = "File_Saved";
+        public const String ZombieFound = "Zombie_Found";
+        public const String NoZombieFound = "No_Zombie_Found";
+        public const String DeleteZombieOrchestration = "Delete_Zombie_Orchestration";
+        public const String FileInvalidPath = "File_Invalid_Path";
+        public const String FileActivatedError = "File_Activated_Error";
     }
 }

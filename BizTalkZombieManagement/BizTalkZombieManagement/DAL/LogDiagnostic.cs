@@ -27,7 +27,7 @@ namespace BizTalkZombieManagement.Dal
             }
             else
             {
-                throw new ArgumentNullException("exception parameter is null !!");
+                throw new ArgumentNullException(typeof(LogDiagnostics).Name,"exception parameter is null !!");
             }
         }
 
