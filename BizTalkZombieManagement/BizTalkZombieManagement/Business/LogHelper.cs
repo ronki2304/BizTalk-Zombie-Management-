@@ -6,21 +6,35 @@ using BizTalkZombieManagement.Dal;
 
 namespace BizTalkZombieManagement.Business
 {
+    /// <summary>
+    /// use to call Log Manager 
+    /// </summary>
     public static class LogHelper
     {
+        /// <summary>
+        /// Write detail from String message
+        /// </summary>
+        /// <param name="message"></param>
         public static void WriteInfo(String message)
         {
-            Logdiagnostics.LogInfo(message);
+            LogDiagnostics.LogInfo(message);
         }
-
+        /// <summary>
+        /// Write error from String message
+        /// </summary>
+        /// <param name="message"></param>
         public static void WriteError(String message)
         {
-            Logdiagnostics.LogError(message);
+            LogDiagnostics.LogError(message);
         }
 
+        /// <summary>
+        /// Write message from exception
+        /// </summary>
+        /// <param name="exception"></param>
         public static void WriteError(Exception exception)
         {
-            Logdiagnostics.LogError(exception);
+            LogDiagnostics.LogError(exception);
         }
 
     }

@@ -48,7 +48,7 @@ namespace BizTalkZombieManagement
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void HandleEvent(object sender, EventArrivedEventArgs e)
+        private static void HandleZombieEvent(object sender, EventArrivedEventArgs e)
         {
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.EventArrived));
             ZombieManagement.ReplayZombieMessage(Guid.Parse(e.NewEvent.Properties[WmiProperties.InstanceId].Value.ToString()));

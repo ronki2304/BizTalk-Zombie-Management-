@@ -8,26 +8,25 @@ using BizTalkZombieManagement.Resource;
 
 namespace BizTalkZombieManagement.Dal
 {
+    /// <summary>
+    /// Access to resource file
+    /// </summary>
     public static class ResourceDal
     {
         private static ResourceManager _rm = null;
 
-        //accessor for the resource manager
-        private static ResourceManager ResourceManager
-        {
-            get
-            {
-                if (_rm == null)
-                {
-                    _rm = new ResourceManager(typeof(ZombieResource));
-                }
-                return _rm;
-            }
-        }
-
+        /// <summary>
+        /// return the specified resource text from the key name
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
         public static String GetString(String keyName)
         {
-            return ResourceManager.GetString(keyName);
+            if (_rm == null)
+            {
+                _rm = new ResourceManager(typeof(ZombieResource));
+            }
+            return _rm.GetString(keyName);
         }
 
     }

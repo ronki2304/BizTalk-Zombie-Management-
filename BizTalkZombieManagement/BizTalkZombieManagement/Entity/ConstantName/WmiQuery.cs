@@ -5,14 +5,9 @@ using System.Text;
 
 namespace BizTalkZombieManagement.Entity.ConstantName
 {
-    public static class ConstEventLog
-    {
-        public const String SourceName = "Zombie Management";
-    }
-
     public static class WmiQuery
     {
-         #region WMI query
+        #region WMI query
         /// <summary>
         /// Serivce Instance  : orcherstration Instance ID 
         /// ReferenceType 8 zombie message
@@ -24,21 +19,12 @@ namespace BizTalkZombieManagement.Entity.ConstantName
         /// </summary>
         public const String SelectOrchestration = "SELECT * FROM MSBTS_ServiceInstance WHERE InstanceID like '{0}'";
 
-
+        /// <summary>
+        /// Show the default scope for BizTalk server
+        /// </summary>
         public const String WmiScope = "root\\MicrosoftBizTalkServer";
 
         #endregion
 
-    }
-
-    public static class ResourceKeyName
-    {
-        public const String EventArrived = "EventArrived";
-
-        public const String ResourceKeyNotFound = "Error_ResourceKeyNotFound";
-        public const String ErrorValidation = "Error_Validation";
-        public const String StopService = "Error_Stop";
-        public const String DumpFolderNotFound = "Error_Folder";
-        public const String AddressMissing = "Error_AddressMissing";
     }
 }

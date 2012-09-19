@@ -76,7 +76,7 @@ namespace BizTalkZombieManagement
             watcher = new ManagementEventWatcher(Listener, query);
 
             // Set up a listener for events
-            watcher.EventArrived += new EventArrivedEventHandler(HandleEvent);
+            watcher.EventArrived += new EventArrivedEventHandler(HandleZombieEvent);
 
             // Start listening
             watcher.Start();

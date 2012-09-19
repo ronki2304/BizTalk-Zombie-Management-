@@ -11,30 +11,38 @@ namespace BizTalkZombieManagement.Dal
     public class WmiIAccess
     {
         #region member
-        private List<ManagementObject> ListZombieMessage;
+        private List<ManagementObject> _ListZombieMessage;
         public Boolean MessageFound { get; private set; }
         #endregion
 
+        /// <summary>
+        /// Default constructor intialize the mesage list
+        /// </summary>
         public WmiIAccess()
         {
-            ListZombieMessage = new List<ManagementObject>();
+            _ListZombieMessage = new List<ManagementObject>();
             MessageFound = false;
         }
 
         #region member
+        /// <summary>
+        /// return the number of message
+        /// </summary>
         public Int32 Count
         {
             get
             {
-                return ListZombieMessage.Count();
+                return _ListZombieMessage.Count();
             }
         }
-
+        /// <summary>
+        /// retrieve a list of message GUID
+        /// </summary>
         public IEnumerable<Guid> ListMessageId
         {
             get
             {
-                     return ListZombieMessage.Select(p=> Guid.Parse(p.Properties[WmiProperties.MessageInstanceId].Value.ToString()));
+                     return _ListZombieMessage.Select(p=> Guid.Parse(p.Properties[WmiProperties.MessageInstanceId].Value.ToString()));
             }
         }
         #endregion
@@ -54,7 +62,7 @@ namespace BizTalkZombieManagement.Dal
             {
                 foreach (ManagementObject objServiceInstance in searchZombieMessages.Get())
                 {
-                    ListZombieMessage.Add(objServiceInstance);
+                    _ListZombieMessage.Add(objServiceInstance);
 
                     if (!MessageFound)
                         MessageFound = true;
@@ -67,11 +75,11 @@ namespace BizTalkZombieManagement.Dal
         /// Message have .out extension
         /// Context have .xml extension
         /// </summary>
-        /// <param name="filePath"></param>
+        /// <param name="filePath">Path folder</param>
         public void SaveAllMessageAndContextToFiles(String filePath)
         {
 
-            foreach (ManagementObject message in ListZombieMessage)
+            foreach (ManagementObject message in _ListZombieMessage)
             {
                 message.InvokeMethod("SaveToFile", new Object[] { filePath });
             }

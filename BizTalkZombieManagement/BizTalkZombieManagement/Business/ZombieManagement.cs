@@ -23,8 +23,10 @@ namespace BizTalkZombieManagement.Business
             Boolean DeleteOrchestrationAction = false;
 
 
-
+            //initialize WMI
             WmiIAccess wmiAccess = new WmiIAccess();
+            
+            //retrieve all zombie message id
             wmiAccess.GetZombieMessage(serviceInstanceId);
 
             //Initialize artifact list
@@ -40,7 +42,7 @@ namespace BizTalkZombieManagement.Business
                 //check for save zombie message to file
                 if (ConfigParameter.FileActivated)
                 {
-                    UsingFileLayer(serviceInstanceId, wmiAccess, btArtifact);
+                    UsingFileLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
                 }
             }
             else
@@ -59,48 +61,18 @@ namespace BizTalkZombieManagement.Business
         /// <summary>
         /// Saving all messages in directory
         /// </summary>
-        /// <param name="ServiceInstanceID"></param>
-        /// <param name="wmiAccess"></param>
+        /// <param name="ServiceInstanceID">Service instance concerned</param>
+        /// <param name="MessagesID">list of all messages ID</param>
         /// <param name="btArtifact"></param>
-        private static void UsingFileLayer(Guid ServiceInstanceID, WmiIAccess wmiAccess, BizTalkArtifacts btArtifact)
+        private static void UsingFileLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
         {
             LogHelper.WriteInfo("Saving all message to file...");
-            foreach (Guid gu in wmiAccess.ListMessageId)
+            foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
                 SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
             }
             LogHelper.WriteInfo("All Messages saved to file !");
         }
-
-        /// <summary>
-        /// Extract domain and action from Message context
-        /// </summary>
-        /// <param name="xDoc"></param>
-        /// <param name="sAction"></param>
-        /// <param name="sDomaine"></param>
-        private static void ExtractDataFromContextMessage(XDocument xDoc, out String sAction, out String sDomaine)
-        {
-            XNamespace ns = xDoc.Root.Name.Namespace;
-
-            XName elementName = XName.Get("Property");
-
-            sAction = String.Empty;
-            sDomaine = String.Empty;
-
-            var nodes = xDoc.Descendants(elementName);
-            //search property Domaine and Action and retrieve value
-            foreach (var node in nodes)
-            {
-                if (node.Attributes().Where(p => String.Equals(p.Value, "Domaine")).Count() == 1)
-                    sDomaine = node.Attributes().First(p => p.Name == "Value").Value;
-
-                if (node.Attributes().Where(p => p.Value == "Action").Count() == 1)
-                    sAction = node.Attributes().First(p => p.Name == "Value").Value;
-
-            }
-        }
-
-       
     }
 }

@@ -7,8 +7,16 @@ using BizTalkZombieManagement.Entity.ConstantName;
 
 namespace BizTalkZombieManagement.Business
 {
+    /// <summary>
+    /// call resource manager
+    /// </summary>
     public static class ResourceLogic
     {
+        /// <summary>
+        /// retrieve specific text from resource file by key name
+        /// </summary>
+        /// <param name="KeyName"></param>
+        /// <returns></returns>
         public static String GetString(String KeyName)
         {
             if (!String.IsNullOrEmpty(ResourceDal.GetString(KeyName)))

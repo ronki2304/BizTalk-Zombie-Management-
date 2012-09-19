@@ -13,18 +13,17 @@ namespace BizTalkZombieManagement.Dal
     public class BizTalkArtifacts
     {
         #region static private members
-        private static String _StarshipURI = String.Empty;
         private static String _BtsConnectionString = String.Empty;
         #endregion
 
         #region private member
-        private Dictionary<Guid,String> MessageDictionnary;
+        private Dictionary<Guid,String> _MessageDictionnary;
         #endregion
 
 
         public BizTalkArtifacts()
         {
-            MessageDictionnary = new Dictionary<Guid, String>();
+            _MessageDictionnary = new Dictionary<Guid, String>();
         }
 
         #region register key
@@ -35,7 +34,7 @@ namespace BizTalkZombieManagement.Dal
 
 
         /// <summary>
-        /// retrieve BTS connection
+        /// retrieve BTS connection from register key
         /// </summary>
         private static string BtsConnectionString
         {
@@ -53,14 +52,14 @@ namespace BizTalkZombieManagement.Dal
         }
 
         /// <summary>
-        /// retrieve message body by message ID
+        /// retrieve message body by message ID and store it in the dictionary
         /// </summary>
         /// <param name="messageId"></param>
-        /// <returns></returns>
+        /// <returns>the message content</returns>
         public String GetMessageBodyByMessageId(Guid messageId, Guid instanceId)
         {
             //check if it is the first message retrieving
-            if (!MessageDictionnary.ContainsKey(messageId))
+            if (!_MessageDictionnary.ContainsKey(messageId))
             {
                 using (BizTalkOperations operations = new BizTalkOperations())
                 {
@@ -72,24 +71,24 @@ namespace BizTalkZombieManagement.Dal
                         body = streamReader.ReadToEnd();
                     }
                     //add the new message to the dictionnary
-                    MessageDictionnary.Add(messageId, body);
+                    _MessageDictionnary.Add(messageId, body);
                     return body;
                 }
             }
             else
             {
-                return MessageDictionnary[messageId];
+                return _MessageDictionnary[messageId];
             }
         }
 
         /// <summary>
-        /// Retrieve message with a list of Message ID
+        /// Retrieve message with a list of Message ID, they will be stored in dictionary
         /// </summary>
-        /// <param name="lGu"></param>
-        /// <param name="instanceId"></param>
+        /// <param name="lGu">list of message ID</param>
+        /// <param name="instanceId">BizTalk instance id</param>
         public void GetAllMessagesBody(IEnumerable<Guid> messagesId, Guid instanceId)
         {
-            if (messagesId != null && messagesId.Count() > 0)
+            if (messagesId != null && messagesId.Any())
             {
                 foreach (Guid gu in messagesId)
                 {

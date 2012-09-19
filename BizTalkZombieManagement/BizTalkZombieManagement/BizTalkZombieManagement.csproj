@@ -111,17 +111,19 @@
     <Compile Include="Business\ConfigParameter.cs" />
     <Compile Include="Business\LogHelper.cs" />
     <Compile Include="Business\ResourceLogic.cs" />
-    <Compile Include="Business\WMIProperties.cs" />
+    <Compile Include="Entity\ConstantName\WMIProperties.cs" />
     <Compile Include="Business\ZombieManagement.cs" />
     <Compile Include="DAL\AppSettingDAL.cs" />
     <Compile Include="DAL\BizTalkArtifacts.cs" />
     <Compile Include="DAL\ResourceDal.cs" />
     <Compile Include="DAL\SaveFile.cs" />
-    <Compile Include="DAL\Logdiagnostic.cs" />
+    <Compile Include="DAL\LogDiagnostic.cs" />
     <Compile Include="DAL\PerfCounter.cs" />
     <Compile Include="DAL\WMIAccess.cs" />
-    <Compile Include="Entity\AppKeyName.cs" />
-    <Compile Include="Entity\ConstanteName.cs" />
+    <Compile Include="Entity\ConstantName\AppKeyName.cs" />
+    <Compile Include="Entity\ConstantName\ResourceKeyName.cs" />
+    <Compile Include="Entity\ConstantName\ConstEventLog.cs" />
+    <Compile Include="Entity\ConstantName\WmiQuery.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

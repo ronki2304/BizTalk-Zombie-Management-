@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BizTalkZombieManagement.Business
+namespace BizTalkZombieManagement.Entity.ConstantName
 {
+    /// <summary>
+    /// WMI properties used
+    /// </summary>
     public static class WmiProperties
     {
         public const String ServiceInstanceId = "ServiceInstanceID";
