@@ -12,5 +12,8 @@ namespace BizTalkZombieManagement.Entity
     {
         public const String FilePath = "FILE_DumpFolder";
         public const String FileActivated = "FILE_Activated";
+
+        public const String MSMQPath = "MSMQ_Path";
+        public const String MSMQActivated = "MSMQ8Activated";
     }
 }

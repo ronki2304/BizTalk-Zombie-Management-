@@ -40,7 +40,7 @@ namespace BizTalkZombieManagement.Business
                 
                 
                 //check for save zombie message to file
-                if (ConfigParameter.FileActivated)
+                if (ConfigParameter.FILEActivated)
                 {
                     UsingFileLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
                 }
@@ -70,7 +70,7 @@ namespace BizTalkZombieManagement.Business
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
+                SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FILEPath);
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaved));
         }

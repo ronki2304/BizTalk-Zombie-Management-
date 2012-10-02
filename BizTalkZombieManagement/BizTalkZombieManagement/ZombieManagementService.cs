@@ -25,7 +25,7 @@ namespace BizTalkZombieManagement
             try
             {
                 //check configuration before starting
-                if (IsConfigurationOK())
+                if (ConfigParameter.IsConfigurationOK())
                 {
 #if DEBUG
                     LogHelper.WriteInfo("Debug mode enable");
@@ -92,26 +92,6 @@ namespace BizTalkZombieManagement
         #endregion
 
 
-        private static Boolean IsConfigurationOK()
-        {
-            Boolean isOK = true;
-            //check All AppSetting
-            //file key
-            if (ConfigParameter.FileActivated)
-            {
-                if (String.IsNullOrEmpty(ConfigParameter.FilePath))
-                {
-                    isOK = false;
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.AddressMissing)));
-                }
-
-                if (!Directory.Exists(ConfigParameter.FilePath)) //folder not found
-                {
-                    isOK = false;
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.DumpFolderNotFound), ConfigParameter.FilePath));
-                }
-            }
-            return isOK;
-        }
+        
     }
 }

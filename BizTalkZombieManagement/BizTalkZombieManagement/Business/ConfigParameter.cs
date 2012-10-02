@@ -11,9 +11,9 @@ namespace BizTalkZombieManagement.Business
 {
     public static class ConfigParameter
     {
+        #region File Configuration
         private static String _FilePath;
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "FILEDumpFolder", Justification="I name as I want")]
-        public static String FilePath
+        public static String FILEPath
         {
             get
             {
@@ -36,20 +36,66 @@ namespace BizTalkZombieManagement.Business
         }
 
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "FILEActivated", Justification = "I name as I want")]
-        public static Boolean FileActivated
+        public static Boolean FILEActivated
         {
             get
             {
                 Boolean breturn;
-                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.FileActivated),out breturn))
+                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.FileActivated), out breturn))
                 {
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileActivatedError),AppKeyName.FileActivated));
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileActivatedError), AppKeyName.FileActivated));
                     return false;
                 }
 
                 return breturn;
             }
         }
+
+        private static Boolean IsFileConfigurationOK(Boolean isOK)
+        {
+            if (String.IsNullOrEmpty(ConfigParameter.FILEPath))
+            {
+                isOK = false;
+                LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.AddressMissing)));
+            }
+
+            if (!Directory.Exists(ConfigParameter.FILEPath)) //folder not found
+            {
+                isOK = false;
+                LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.DumpFolderNotFound), ConfigParameter.FILEPath));
+            }
+            return isOK;
+        } 
+        #endregion
+
+        public static Boolean IsConfigurationOK()
+        {
+            Boolean isOK = true;
+            //check All AppSetting
+            //file key
+            if (ConfigParameter.FILEActivated)
+            {
+                isOK = IsFileConfigurationOK(isOK);
+            }
+            return isOK;
+        }
+
+        #region MSMQ Configuration
+        public static Boolean MSMQActivated
+        {
+            get
+            {
+                Boolean breturn;
+                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.MSMQActivated), out breturn))
+                {
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileActivatedError), AppKeyName.FileActivated));
+                    return false;
+                }
+
+                return breturn;
+            }
+        }
+        #endregion
+
     }
 }
