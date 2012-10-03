@@ -126,6 +126,9 @@
   <data name="Error_Folder" xml:space="preserve">
     <value>Folder for dump {0} is not found</value>
   </data>
+  <data name="Error_NoLayerActivated" xml:space="preserve">
+    <value>Error please, reconfigure Zombie Management, no dump layer found</value>
+  </data>
   <data name="Error_ResourceKeyNotFound" xml:space="preserve">
     <value>The resource key desired {0} is not found</value>
   </data>
@@ -139,7 +142,7 @@
     <value>Event arrived</value>
   </data>
   <data name="File_Activated_Error" xml:space="preserve">
-    <value>Format Exception {0} haven't got a boolean value \n Dump file won't be activate</value>
+    <value>Format Exception {0} haven't got a boolean value \n Dump file won't be activated</value>
   </data>
   <data name="File_Invalid_Path" xml:space="preserve">
     <value>Path contain in {0} is not a valid path, service will not start until you correct it, please open configuration file and correct the DumpFolder key value</value>
@@ -149,6 +152,15 @@
   </data>
   <data name="File_Saving" xml:space="preserve">
     <value>Saving all message to file...</value>
+  </data>
+  <data name="Msmq_PathNotFound" xml:space="preserve">
+    <value>The specified MSMQ {0} doest not exist</value>
+  </data>
+  <data name="Msmq_SavedMessage" xml:space="preserve">
+    <value>All Message are sent to MSMQ</value>
+  </data>
+  <data name="Msmq_SavingMessage" xml:space="preserve">
+    <value>All Message will be send to MSMQ</value>
   </data>
   <data name="No_Zombie_Found" xml:space="preserve">
     <value>No zombie message found, the instance {0} is not a zombie instance</value>

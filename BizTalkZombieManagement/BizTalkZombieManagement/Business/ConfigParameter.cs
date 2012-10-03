@@ -6,6 +6,7 @@ using System.IO;
 using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entity;
 using BizTalkZombieManagement.Entity.ConstantName;
+using System.Messaging;
 
 namespace BizTalkZombieManagement.Business
 {
@@ -51,34 +52,47 @@ namespace BizTalkZombieManagement.Business
             }
         }
 
-        private static Boolean IsFileConfigurationOK(Boolean isOK)
+        private static Boolean IsFileConfigurationOK()
         {
             if (String.IsNullOrEmpty(ConfigParameter.FILEPath))
             {
-                isOK = false;
                 LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.AddressMissing)));
+                return false;
             }
 
             if (!Directory.Exists(ConfigParameter.FILEPath)) //folder not found
             {
-                isOK = false;
                 LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.DumpFolderNotFound), ConfigParameter.FILEPath));
+                return false;
             }
-            return isOK;
+            return true;
         } 
         #endregion
 
+        /// <summary>
+        /// check AppSetting for the only one layer activated
+        /// </summary>
+        /// <returns></returns>
         public static Boolean IsConfigurationOK()
         {
-            Boolean isOK = true;
-            //check All AppSetting
             //file key
             if (ConfigParameter.FILEActivated)
             {
-                isOK = IsFileConfigurationOK(isOK);
+                return IsFileConfigurationOK();
             }
-            return isOK;
+
+            //Msmq Key
+            if (ConfigParameter.MSMQActivated)
+            {
+                return IsMsmqConfigurationOK();
+            }
+
+            //Configuration Error
+            LogHelper.WriteError(ResourceLogic.GetString(ResourceKeyName.ErrorNoLayerActivated));
+            return false;
         }
+
+      
 
         #region MSMQ Configuration
         public static Boolean MSMQActivated
@@ -93,6 +107,34 @@ namespace BizTalkZombieManagement.Business
                 }
 
                 return breturn;
+            }
+        }
+
+        private static String _MsmqPath=null;
+
+        public static String MsmqPath
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_MsmqPath))
+                {
+                    _MsmqPath = AppSettingDal.RetrieveSpecificKey(AppKeyName.MSMQPath);
+                }
+                return _MsmqPath;
+            }
+        }
+
+
+        private static Boolean IsMsmqConfigurationOK()
+        {
+            if (MessageQueue.Exists(ConfigParameter.MsmqPath))
+            {
+                return true;
+            }
+            else
+            {
+                LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.MsmqPathNotFound), ConfigParameter.MsmqPath));
+                return false;
             }
         }
         #endregion

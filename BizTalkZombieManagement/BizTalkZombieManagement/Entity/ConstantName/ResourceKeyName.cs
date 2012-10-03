@@ -20,5 +20,9 @@ namespace BizTalkZombieManagement.Entity.ConstantName
         public const String DeleteZombieOrchestration = "Delete_Zombie_Orchestration";
         public const String FileInvalidPath = "File_Invalid_Path";
         public const String FileActivatedError = "File_Activated_Error";
+        public const String MsmqPathNotFound = "Msmq_PathNotFound";
+        public const String ErrorNoLayerActivated = "Error_NoLayerActivated";
+        public const String MsmqSaving = "Msmq_SavingMessage";
+        public const String MsmqSaved = "Msmq_SavedMessage";
     }
 }

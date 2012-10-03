@@ -8,6 +8,7 @@ using BizTalkZombieManagement.Dal;
 using System.IO;
 using BizTalkZombieManagement.Entity.ConstantName;
 using System.Threading.Tasks;
+using BizTalkZombieManagement.DAL;
 
 namespace BizTalkZombieManagement.Business
 {
@@ -44,6 +45,12 @@ namespace BizTalkZombieManagement.Business
                 {
                     UsingFileLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
                 }
+
+                //check for send message on MSMQ
+                if (ConfigParameter.MSMQActivated)
+                {
+                    UsingMsmqLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
+                }
             }
             else
             {
@@ -73,6 +80,24 @@ namespace BizTalkZombieManagement.Business
                 SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FILEPath);
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaved));
+        }
+
+        /// <summary>
+        /// Send all message in MSMQ
+        /// </summary>
+        /// <param name="ServiceInstanceID">Service instance concerned</param>
+        /// <param name="MessagesID">list of all messages ID</param>
+        /// <param name="btArtifact"></param>
+        private static void UsingMsmqLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
+        {
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaving));
+            MsmqAccess msmqAccess = new MsmqAccess(ConfigParameter.MsmqPath);
+            foreach (Guid gu in MessagesID)
+            {
+                String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
+                msmqAccess.SendMesage(sMessage);
+            }
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaved));
         }
     }
 }

@@ -88,6 +88,15 @@ namespace BizTalkZombieManagement.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error please, reconfigure Zombie Management, no dump layer found.
+        /// </summary>
+        internal static string Error_NoLayerActivated {
+            get {
+                return ResourceManager.GetString("Error_NoLayerActivated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The resource key desired {0} is not found.
         /// </summary>
         internal static string Error_ResourceKeyNotFound {
@@ -124,7 +133,7 @@ namespace BizTalkZombieManagement.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Format Exception {0} haven&apos;t got a boolean value \n Dump file won&apos;t be activate.
+        ///   Looks up a localized string similar to Format Exception {0} haven&apos;t got a boolean value \n Dump file won&apos;t be activated.
         /// </summary>
         internal static string File_Activated_Error {
             get {
@@ -156,6 +165,33 @@ namespace BizTalkZombieManagement.Resource {
         internal static string File_Saving {
             get {
                 return ResourceManager.GetString("File_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified MSMQ {0} doest not exist.
+        /// </summary>
+        internal static string Msmq_PathNotFound {
+            get {
+                return ResourceManager.GetString("Msmq_PathNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Message are sent to MSMQ.
+        /// </summary>
+        internal static string Msmq_SavedMessage {
+            get {
+                return ResourceManager.GetString("Msmq_SavedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Message will be send to MSMQ.
+        /// </summary>
+        internal static string Msmq_SavingMessage {
+            get {
+                return ResourceManager.GetString("Msmq_SavingMessage", resourceCulture);
             }
         }
         
