@@ -14,5 +14,6 @@ namespace BizTalkZombieManagement.Entity.ConstantName
         public const String InstanceId = "InstanceID";
         public const String MessageInstanceId = "MessageInstanceID";
         public const String Context = "Context";
+        public const String MessageType = "MessageType";
     }
 }

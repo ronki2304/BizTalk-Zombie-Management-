@@ -26,12 +26,13 @@ namespace BizTalkZombieManagement.Business
 
             //initialize WMI
             WmiIAccess wmiAccess = new WmiIAccess();
-            
-            //retrieve all zombie message id
-            wmiAccess.GetZombieMessage(serviceInstanceId);
 
             //Initialize artifact list
             BizTalkArtifacts btArtifact = new BizTalkArtifacts();
+
+            //retrieve all zombie message id
+            wmiAccess.GetZombieMessage(serviceInstanceId);
+
 
             // Loop over the returned messages from the query
             if (wmiAccess.MessageFound)

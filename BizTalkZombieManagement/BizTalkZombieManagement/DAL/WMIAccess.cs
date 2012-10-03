@@ -62,10 +62,15 @@ namespace BizTalkZombieManagement.Dal
             {
                 foreach (ManagementObject objServiceInstance in searchZombieMessages.Get())
                 {
-                    _ListZombieMessage.Add(objServiceInstance);
+                    //check if the message type is not a system message type
+                    if (!BizTalkArtifacts.IsSystemSchema(objServiceInstance.Properties[WmiProperties.MessageType].Value.ToString()))
+                    {
+                        //if not so add to the list
+                        _ListZombieMessage.Add(objServiceInstance);
 
-                    if (!MessageFound)
-                        MessageFound = true;
+                        if (!MessageFound)
+                            MessageFound = true;
+                    }
                 }
             }
         }

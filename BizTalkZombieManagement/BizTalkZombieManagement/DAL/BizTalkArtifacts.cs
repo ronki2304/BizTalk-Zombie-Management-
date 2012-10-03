@@ -14,23 +14,73 @@ namespace BizTalkZombieManagement.Dal
     {
         #region static private members
         private static String _BtsConnectionString = String.Empty;
+
+        private static List<String> AvoidSchemasType = null;
+
+        private static Object AntiConcurential = new Object();
         #endregion
 
         #region private member
-        private Dictionary<Guid,String> _MessageDictionnary;
+        private Dictionary<Guid, String> _MessageDictionnary;
+
         #endregion
 
 
         public BizTalkArtifacts()
         {
             _MessageDictionnary = new Dictionary<Guid, String>();
+
+            InitializeAvoidSchemaTypeList();
         }
+
+        static BizTalkArtifacts()
+        {
+            InitializeAvoidSchemaTypeList();
+        }
+        /// <summary>
+        /// retrieve all system message type to avoid process on it
+        /// </summary>
+        private static void InitializeAvoidSchemaTypeList()
+        {
+            lock (AntiConcurential)
+            {
+                if (AvoidSchemasType == null)
+                {
+                    AvoidSchemasType = new List<string>();
+                    //initialize catalog to browse assembly to get system assembly
+                    using (BtsCatalogExplorer catalog = new BtsCatalogExplorer())
+                    {
+                        foreach (BtsAssembly assembly in catalog.Assemblies)
+                        {
+                            //once got system assembly let's add all system schemas
+                            if (assembly.IsSystem)
+                            {
+                                if (assembly.Schemas != null)
+                                {
+                                    //add all schema declared in those assemblies
+                                    foreach (Schema schema in assembly.Schemas)
+                                    {
+                                        if (schema.Type == SchemaType.Document)
+                                        {
+                                            AvoidSchemasType.Add(String.Concat(schema.TargetNameSpace, "#", schema.RootName));
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
         #region register key
         private const string REG_KEY_BTS_ADMINISTRATION = @"SOFTWARE\Microsoft\BizTalk Server\3.0\Administration";
         private const string _KeyMgmtDBName = "MgmtDBName";
         private const string _KeyMgmtDBServer = "MgmtDBServer";
         #endregion
+
+
 
 
         /// <summary>
@@ -63,7 +113,6 @@ namespace BizTalkZombieManagement.Dal
             {
                 using (BizTalkOperations operations = new BizTalkOperations())
                 {
-
                     IBaseMessage message = operations.GetMessage(messageId, instanceId);
                     String body = String.Empty;
                     using (StreamReader streamReader = new StreamReader(message.BodyPart.Data))
@@ -95,6 +144,19 @@ namespace BizTalkZombieManagement.Dal
                     GetMessageBodyByMessageId(gu, instanceId);
                 }
             }
+        }
+
+        /// <summary>
+        /// check if the zombie message is not due to a unhandle external fault  like a WCF fault
+        /// </summary>
+        /// <param name="messageType"></param>
+        /// <returns></returns>
+        public static Boolean IsSystemSchema(String messageType)
+        {
+            if (AvoidSchemasType.Contains(messageType))
+                return true;
+            else
+                return false;
         }
     }
 }
