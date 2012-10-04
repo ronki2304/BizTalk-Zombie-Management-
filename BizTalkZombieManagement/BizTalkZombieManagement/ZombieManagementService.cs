@@ -10,6 +10,7 @@ using System.Management;
 using BizTalkZombieManagement.Business;
 using System.IO;
 using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Dal;
 
 namespace BizTalkZombieManagement
 {
@@ -85,6 +86,8 @@ namespace BizTalkZombieManagement
         protected override void OnStop()
         {
             watcher.Stop();
+            //A réécrire
+            PerfCounter.Dispose();
         }
          
         #region member

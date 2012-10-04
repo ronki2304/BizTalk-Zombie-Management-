@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D455FF7C-64ED-4A3F-AAE9-78EAC7CA5A03}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BizTalkZombieManagement</RootNamespace>
     <AssemblyName>BizTalkZombieManagement</AssemblyName>
@@ -114,7 +114,9 @@
     <Compile Include="Business\ConfigParameter.cs" />
     <Compile Include="Business\LogHelper.cs" />
     <Compile Include="Business\ResourceLogic.cs" />
+    <Compile Include="DAL\FtpAccess.cs" />
     <Compile Include="DAL\MsmqAccess.cs" />
+    <Compile Include="Entity\ConstantName\CounterKeyName.cs" />
     <Compile Include="Entity\ConstantName\WMIProperties.cs" />
     <Compile Include="Business\ZombieManagement.cs" />
     <Compile Include="DAL\AppSettingDAL.cs" />

@@ -79,6 +79,8 @@ namespace BizTalkZombieManagement.Business
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
                 SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FILEPath);
+                //updatecounter
+                PerfCounter.UpdateStatistic();
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaved));
         }
@@ -97,6 +99,8 @@ namespace BizTalkZombieManagement.Business
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
                 msmqAccess.SendMesage(sMessage);
+                //updatecounter
+                PerfCounter.UpdateStatistic();
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaved));
         }

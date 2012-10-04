@@ -14,9 +14,7 @@ namespace BizTalkZombieManagement.Dal
     {
         #region static private members
         private static String _BtsConnectionString = String.Empty;
-
         private static List<String> AvoidSchemasType = null;
-
         private static Object AntiConcurential = new Object();
         #endregion
 
@@ -29,8 +27,6 @@ namespace BizTalkZombieManagement.Dal
         public BizTalkArtifacts()
         {
             _MessageDictionnary = new Dictionary<Guid, String>();
-
-            InitializeAvoidSchemaTypeList();
         }
 
         static BizTalkArtifacts()
@@ -50,6 +46,7 @@ namespace BizTalkZombieManagement.Dal
                     //initialize catalog to browse assembly to get system assembly
                     using (BtsCatalogExplorer catalog = new BtsCatalogExplorer())
                     {
+                        catalog.ConnectionString = BtsConnectionString;
                         foreach (BtsAssembly assembly in catalog.Assemblies)
                         {
                             //once got system assembly let's add all system schemas
