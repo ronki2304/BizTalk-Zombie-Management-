@@ -25,7 +25,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
@@ -113,6 +113,7 @@
   <ItemGroup>
     <Compile Include="Business\ConfigParameter.cs" />
     <Compile Include="Business\LogHelper.cs" />
+    <Compile Include="Business\PerfCounterAsync.cs" />
     <Compile Include="Business\ResourceLogic.cs" />
     <Compile Include="DAL\FtpAccess.cs" />
     <Compile Include="DAL\MsmqAccess.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="DAL\ResourceDal.cs" />
     <Compile Include="DAL\SaveFile.cs" />
     <Compile Include="DAL\LogDiagnostic.cs" />
-    <Compile Include="DAL\PerfCounter.cs" />
+    <Compile Include="DAL\PerfCounterAccess.cs" />
     <Compile Include="DAL\WMIAccess.cs" />
     <Compile Include="Entity\ConstantName\AppKeyName.cs" />
     <Compile Include="Entity\ConstantName\ResourceKeyName.cs" />

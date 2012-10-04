@@ -10,7 +10,6 @@ using System.Management;
 using BizTalkZombieManagement.Business;
 using System.IO;
 using BizTalkZombieManagement.Entity.ConstantName;
-using BizTalkZombieManagement.Dal;
 
 namespace BizTalkZombieManagement
 {
@@ -30,8 +29,13 @@ namespace BizTalkZombieManagement
                 {
 #if DEBUG
                     LogHelper.WriteInfo("Debug mode enable");
+
+                    //init counter
+                    PerfCounterAsync.InitPerformanceCounter();
+
                     InitializeWatcher();
                     Console.ReadLine();
+                    PerfCounterAsync.Dispose();
 #else
                     System.ServiceProcess.ServiceBase[] ServicesToRun;
 
@@ -62,7 +66,10 @@ namespace BizTalkZombieManagement
         }
         protected override void OnStart(string[] args)
         {
+            //init counter
+            PerfCounterAsync.InitPerformanceCounter();
 
+            //start watcher
             InitializeWatcher();
         }
 
@@ -86,8 +93,8 @@ namespace BizTalkZombieManagement
         protected override void OnStop()
         {
             watcher.Stop();
-            //A réécrire
-            PerfCounter.Dispose();
+            
+            PerfCounterAsync.Dispose();
         }
          
         #region member
