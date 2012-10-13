@@ -6,7 +6,7 @@ using System.IO;
 
 namespace BizTalkZombieManagement.Dal
 {
-    public static class SaveFile
+    public static class FileLayerAccess
     {
         /// <summary>
         /// Save the message in Xml File

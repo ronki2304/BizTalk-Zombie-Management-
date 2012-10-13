@@ -6,8 +6,9 @@ using System.ServiceModel.Channels;
 using System.IO;
 using System.Xml;
 using System.ServiceModel;
+using BizTalkZombieManagement.Entities.Enum;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     public class WCFAccess
     {

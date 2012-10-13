@@ -28,5 +28,7 @@ namespace BizTalkZombieManagement.Entities.ConstantName
         public const String DebugMode = "Debug_Mode";
 
         public const String WCFActivatedError = "WCF_Activated_Error";
+        public const String WCFSaving = "WCF_SavingMessage";
+        public const String WCFSaved = "WCF_SavedMessage";
     }
 }

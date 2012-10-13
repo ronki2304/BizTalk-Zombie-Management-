@@ -5,7 +5,7 @@ using System.Text;
 using System.Net;
 using System.IO;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     public static class FtpAccess
     {

@@ -177,6 +177,13 @@
   <data name="WCF_Activated_Error" xml:space="preserve">
     <value>Format Exception {0} haven't got a boolean value \n Dump WCF won't be activated</value>
   </data>
+  <data name="WCF_SavedMessage" xml:space="preserve">
+    <value>All message are sent to WCF</value>
+    <comment> </comment>
+  </data>
+  <data name="WCF_SavingMessage" xml:space="preserve">
+    <value>Sending Message over WCF</value>
+  </data>
   <data name="Zombie_Found" xml:space="preserve">
     <value>New Message Zombie Found for service instance {0}</value>
   </data>

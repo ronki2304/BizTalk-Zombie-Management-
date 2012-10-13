@@ -241,6 +241,24 @@ namespace BizTalkZombieManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All message are sent to WCF.
+        /// </summary>
+        public static string WCF_SavedMessage {
+            get {
+                return ResourceManager.GetString("WCF_SavedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sending Message over WCF.
+        /// </summary>
+        public static string WCF_SavingMessage {
+            get {
+                return ResourceManager.GetString("WCF_SavingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Message Zombie Found for service instance {0}.
         /// </summary>
         public static string Zombie_Found {

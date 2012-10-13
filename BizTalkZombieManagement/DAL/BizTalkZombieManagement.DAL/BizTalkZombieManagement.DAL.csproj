@@ -69,13 +69,13 @@
   <ItemGroup>
     <Compile Include="AppSettingDAL.cs" />
     <Compile Include="BizTalkArtifacts.cs" />
-    <Compile Include="FtpAccess.cs" />
+    <Compile Include="Transport\FtpAccess.cs" />
     <Compile Include="LogDiagnostic.cs" />
-    <Compile Include="MsmqAccess.cs" />
+    <Compile Include="Transport\MsmqAccess.cs" />
     <Compile Include="PerfCounterAccess.cs" />
     <Compile Include="ResourceDal.cs" />
-    <Compile Include="SaveFile.cs" />
-    <Compile Include="WCFAccess.cs" />
+    <Compile Include="Transport\FileLayerAccess.cs" />
+    <Compile Include="Transport\WCFAccess.cs" />
     <Compile Include="WMIAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -99,9 +99,7 @@
   <ItemGroup>
     <None Include="key.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

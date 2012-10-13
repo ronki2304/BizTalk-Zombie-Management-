@@ -8,7 +8,7 @@ using BizTalkZombieManagement.Dal;
 using System.IO;
 using BizTalkZombieManagement.Entities.ConstantName;
 using System.Threading.Tasks;
-using BizTalkZombieManagement.DAL;
+using BizTalkZombieManagement.Dal;
 
 namespace BizTalkZombieManagement.Business
 {
@@ -78,7 +78,7 @@ namespace BizTalkZombieManagement.Business
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
+                FileLayerAccess.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }
@@ -98,11 +98,25 @@ namespace BizTalkZombieManagement.Business
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                msmqAccess.SendMesage(sMessage);
+                msmqAccess.SendMessage(sMessage);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaved));
+        }
+
+        private static void UsingWcfLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
+        {
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.WCFSaving));
+            WcfLogic WcfTransport = new WcfLogic();
+            foreach (Guid gu in MessagesID)
+            {
+                String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
+                WcfTransport.SendMessage(sMessage);
+                //updatecounter
+                PerfCounterAsync.UpdateStatistic();
+            }
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.WCFSaved));
         }
     }
 }

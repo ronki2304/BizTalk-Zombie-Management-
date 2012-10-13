@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using System.Xml;
 using System.IO;
 
-namespace BizTalkZombieManagement.DAL
+namespace BizTalkZombieManagement.Dal
 {
     public class MsmqAccess
     {
@@ -23,7 +23,7 @@ namespace BizTalkZombieManagement.DAL
         /// Send message over MSMQ
         /// </summary>
         /// <param name="message"></param>
-        public void SendMesage(String message)
+        public void SendMessage(String message)
         {
             _messageQueue.Send(XElement.Parse(message));
         }

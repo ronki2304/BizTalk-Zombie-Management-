@@ -102,6 +102,7 @@
     <Compile Include="Business\LogHelper.cs" />
     <Compile Include="Business\PerfCounterAsync.cs" />
     <Compile Include="Business\ResourceLogic.cs" />
+    <Compile Include="Business\WcfLogic.cs" />
     <Compile Include="Business\ZombieManagement.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ProjectInstaller.cs">

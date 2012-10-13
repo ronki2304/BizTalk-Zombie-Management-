@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\ItransportLayer.cs" />
     <Compile Include="Interface\ITwoWayAsyncVoid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
