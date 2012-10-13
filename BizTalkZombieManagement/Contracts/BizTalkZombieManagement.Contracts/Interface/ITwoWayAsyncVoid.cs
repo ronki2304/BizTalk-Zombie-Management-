@@ -14,11 +14,9 @@ namespace Microsoft.BizTalk.Adapter.Wcf.Runtime
         // Methods
 
         [OperationContract(AsyncPattern = true, IsOneWay = false, Action = "*", ReplyAction = "*")]
-
         IAsyncResult BeginTwoWayMethod(System.ServiceModel.Channels.Message message, AsyncCallback callback, object state);
 
         [OperationContract(IsOneWay = false, Action = "BizTalkSubmit")]
-
         void BizTalkSubmit(System.ServiceModel.Channels.Message message);
 
         void EndTwoWayMethod(IAsyncResult result);

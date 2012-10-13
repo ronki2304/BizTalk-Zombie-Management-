@@ -61,6 +61,15 @@ namespace BizTalkZombieManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Debug mode enable.
+        /// </summary>
+        public static string Debug_Mode {
+            get {
+                return ResourceManager.GetString("Debug_Mode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now delete zombie orchestration.
         /// </summary>
         public static string Delete_Zombie_Orchestration {
@@ -169,6 +178,15 @@ namespace BizTalkZombieManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Format Exception {0} haven&apos;t got a boolean value \n Dump MSMQ won&apos;t be activated.
+        /// </summary>
+        public static string Msmq_Activated_Error {
+            get {
+                return ResourceManager.GetString("Msmq_Activated_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The specified MSMQ {0} doest not exist.
         /// </summary>
         public static string Msmq_PathNotFound {
@@ -201,6 +219,24 @@ namespace BizTalkZombieManagement.Resources {
         public static string No_Zombie_Found {
             get {
                 return ResourceManager.GetString("No_Zombie_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String {
+            get {
+                return ResourceManager.GetString("String", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Format Exception {0} haven&apos;t got a boolean value \n Dump WCF won&apos;t be activated.
+        /// </summary>
+        public static string WCF_Activated_Error {
+            get {
+                return ResourceManager.GetString("WCF_Activated_Error", resourceCulture);
             }
         }
         

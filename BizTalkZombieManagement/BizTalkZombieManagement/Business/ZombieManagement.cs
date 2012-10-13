@@ -42,13 +42,13 @@ namespace BizTalkZombieManagement.Business
                 
                 
                 //check for save zombie message to file
-                if (ConfigParameter.FILEActivated)
+                if (ConfigParameter.FileActivated)
                 {
                     UsingFileLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
                 }
 
                 //check for send message on MSMQ
-                if (ConfigParameter.MSMQActivated)
+                if (ConfigParameter.MsmqActivated)
                 {
                     UsingMsmqLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
                 }
@@ -78,7 +78,7 @@ namespace BizTalkZombieManagement.Business
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FILEPath);
+                SaveFile.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }

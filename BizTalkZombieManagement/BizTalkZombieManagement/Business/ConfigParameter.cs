@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entities;
 using BizTalkZombieManagement.Entities.ConstantName;
-using System.Messaging;
+using BizTalkZombieManagement.DAL;
 
 namespace BizTalkZombieManagement.Business
 {
@@ -14,7 +12,7 @@ namespace BizTalkZombieManagement.Business
     {
         #region File Configuration
         private static String _FilePath;
-        public static String FILEPath
+        public static String FilePath
         {
             get
             {
@@ -37,7 +35,7 @@ namespace BizTalkZombieManagement.Business
         }
 
 
-        public static Boolean FILEActivated
+        public static Boolean FileActivated
         {
             get
             {
@@ -54,15 +52,15 @@ namespace BizTalkZombieManagement.Business
 
         private static Boolean IsFileConfigurationOK()
         {
-            if (String.IsNullOrEmpty(ConfigParameter.FILEPath))
+            if (String.IsNullOrEmpty(ConfigParameter.FilePath))
             {
                 LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.AddressMissing)));
                 return false;
             }
 
-            if (!Directory.Exists(ConfigParameter.FILEPath)) //folder not found
+            if (!Directory.Exists(ConfigParameter.FilePath)) //folder not found
             {
-                LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.DumpFolderNotFound), ConfigParameter.FILEPath));
+                LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.DumpFolderNotFound), ConfigParameter.FilePath));
                 return false;
             }
             return true;
@@ -73,16 +71,16 @@ namespace BizTalkZombieManagement.Business
         /// check AppSetting for the only one layer activated
         /// </summary>
         /// <returns></returns>
-        public static Boolean IsConfigurationOK()
+        public static Boolean IsConfigurationOk()
         {
             //file key
-            if (ConfigParameter.FILEActivated)
+            if (ConfigParameter.FileActivated)
             {
                 return IsFileConfigurationOK();
             }
 
             //Msmq Key
-            if (ConfigParameter.MSMQActivated)
+            if (ConfigParameter.MsmqActivated)
             {
                 return IsMsmqConfigurationOK();
             }
@@ -95,14 +93,14 @@ namespace BizTalkZombieManagement.Business
       
 
         #region MSMQ Configuration
-        public static Boolean MSMQActivated
+        public static Boolean MsmqActivated
         {
             get
             {
                 Boolean breturn;
                 if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.MSMQActivated), out breturn))
                 {
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileActivatedError), AppKeyName.FileActivated));
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.MsmqActivatedError), AppKeyName.FileActivated));
                     return false;
                 }
 
@@ -127,7 +125,7 @@ namespace BizTalkZombieManagement.Business
 
         private static Boolean IsMsmqConfigurationOK()
         {
-            if (MessageQueue.Exists(ConfigParameter.MsmqPath))
+            if (MsmqAccess.IsMsmqExist(ConfigParameter.MsmqPath))
             {
                 return true;
             }
@@ -139,5 +137,21 @@ namespace BizTalkZombieManagement.Business
         }
         #endregion
 
+        #region WCF
+        public static Boolean WcfActivated
+        {
+            get
+            {
+                Boolean breturn;
+                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.WcfActivated), out breturn))
+                {
+                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.WCFActivatedError), AppKeyName.FileActivated));
+                    return false;
+                }
+
+                return breturn;
+            }
+        }
+        #endregion
     }
 }

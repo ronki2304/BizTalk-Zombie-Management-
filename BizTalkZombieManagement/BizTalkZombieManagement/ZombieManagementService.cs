@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Management;
 using BizTalkZombieManagement.Business;
-using System.IO;
 using BizTalkZombieManagement.Entities.ConstantName;
+using System.Management;
 
 namespace BizTalkZombieManagement
 {
@@ -25,10 +18,10 @@ namespace BizTalkZombieManagement
             try
             {
                 //check configuration before starting
-                if (ConfigParameter.IsConfigurationOK())
+                if (ConfigParameter.IsConfigurationOk())
                 {
 #if DEBUG
-                    LogHelper.WriteInfo("Debug mode enable");
+                    LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.DebugMode));
 
                     //init counter
                     PerfCounterAsync.InitPerformanceCounter();

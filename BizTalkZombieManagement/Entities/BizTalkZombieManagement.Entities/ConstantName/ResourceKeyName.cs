@@ -21,8 +21,12 @@ namespace BizTalkZombieManagement.Entities.ConstantName
         public const String FileInvalidPath = "File_Invalid_Path";
         public const String FileActivatedError = "File_Activated_Error";
         public const String MsmqPathNotFound = "Msmq_PathNotFound";
+        public const String MsmqActivatedError = "Msmq_Activated_Error";
         public const String ErrorNoLayerActivated = "Error_NoLayerActivated";
         public const String MsmqSaving = "Msmq_SavingMessage";
         public const String MsmqSaved = "Msmq_SavedMessage";
+        public const String DebugMode = "Debug_Mode";
+
+        public const String WCFActivatedError = "WCF_Activated_Error";
     }
 }

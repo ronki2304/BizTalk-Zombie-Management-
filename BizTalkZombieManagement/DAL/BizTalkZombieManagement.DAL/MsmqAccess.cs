@@ -11,6 +11,7 @@ namespace BizTalkZombieManagement.DAL
 {
     public class MsmqAccess
     {
+
         private MessageQueue _messageQueue;
 
         public MsmqAccess(String msmqURI)
@@ -31,6 +32,11 @@ namespace BizTalkZombieManagement.DAL
         {
             _messageQueue.Close();
             _messageQueue.Dispose();
+        }
+
+        public static Boolean IsMsmqExist(String Path)
+        {
+            return MessageQueue.Exists(Path);
         }
     }
 }

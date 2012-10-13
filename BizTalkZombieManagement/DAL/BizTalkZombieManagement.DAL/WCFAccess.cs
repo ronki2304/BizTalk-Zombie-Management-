@@ -12,16 +12,14 @@ namespace BizTalkZombieManagement.DAL
     public class WCFAccess
     {
         ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid> factory;
-
-        public WCFAccess(String EndPointName="BTSEndPoint")
+        Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid client = null;
+        public WCFAccess(String EndPointName)
         {
             factory = new ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid>(EndPointName);
+            client = factory.CreateChannel();
         }
         public void sendMessage (String message)
         {
-            
-            var client = factory.CreateChannel();
-
             //create the new message to send over channel
             System.ServiceModel.Channels.Message msg = System.ServiceModel.Channels.Message.CreateMessage(System.ServiceModel.Channels.MessageVersion.Default
                 , "BeginTwoWayMethod"
@@ -38,6 +36,11 @@ namespace BizTalkZombieManagement.DAL
             //End the call once the wait handle signal is received from BizTalk
 
             client.EndTwoWayMethod(res);
+            
+        }
+
+        ~WCFAccess()
+        {
             ((IClientChannel)client).Close();
         }
     }
