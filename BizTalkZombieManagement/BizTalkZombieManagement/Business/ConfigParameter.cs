@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using BizTalkZombieManagement.Dal;
-using BizTalkZombieManagement.Entity;
-using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Entities;
+using BizTalkZombieManagement.Entities.ConstantName;
 using System.Messaging;
 
 namespace BizTalkZombieManagement.Business

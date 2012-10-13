@@ -117,25 +117,8 @@
     <Compile Include="Business\LogHelper.cs" />
     <Compile Include="Business\PerfCounterAsync.cs" />
     <Compile Include="Business\ResourceLogic.cs" />
-    <Compile Include="DAL\FtpAccess.cs" />
-    <Compile Include="DAL\MsmqAccess.cs" />
-    <Compile Include="DAL\WCFAccess.cs" />
-    <Compile Include="Entity\ConstantName\CounterKeyName.cs" />
-    <Compile Include="Entity\ConstantName\WMIProperties.cs" />
     <Compile Include="Business\ZombieManagement.cs" />
-    <Compile Include="DAL\AppSettingDAL.cs" />
-    <Compile Include="DAL\BizTalkArtifacts.cs" />
-    <Compile Include="DAL\ResourceDal.cs" />
-    <Compile Include="DAL\SaveFile.cs" />
-    <Compile Include="DAL\LogDiagnostic.cs" />
-    <Compile Include="DAL\PerfCounterAccess.cs" />
-    <Compile Include="DAL\WMIAccess.cs" />
-    <Compile Include="Entity\ConstantName\AppKeyName.cs" />
-    <Compile Include="Entity\ConstantName\ResourceKeyName.cs" />
-    <Compile Include="Entity\ConstantName\ConstEventLog.cs" />
-    <Compile Include="Entity\ConstantName\WmiQuery.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Interface\ITwoWayAsyncVoid.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -143,11 +126,6 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resource\ZombieResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZombieResource.resx</DependentUpon>
-    </Compile>
     <Compile Include="ZombieManagementService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -164,10 +142,20 @@
     <EmbeddedResource Include="ProjectInstaller.resx">
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource\ZombieResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ZombieResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\BizTalkZombieManagement.Contracts\BizTalkZombieManagement.Contracts.csproj">
+      <Project>{480282E7-BA08-4267-94B3-3BA0769816C7}</Project>
+      <Name>BizTalkZombieManagement.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\BizTalkZombieManagement.DAL\BizTalkZombieManagement.DAL.csproj">
+      <Project>{FE811439-3BBF-4132-977A-C62458E86E85}</Project>
+      <Name>BizTalkZombieManagement.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entities\BizTalkZombieManagement.Entities\BizTalkZombieManagement.Entities.csproj">
+      <Project>{938A4757-362F-410C-B98D-42FF1FBF4E11}</Project>
+      <Name>BizTalkZombieManagement.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

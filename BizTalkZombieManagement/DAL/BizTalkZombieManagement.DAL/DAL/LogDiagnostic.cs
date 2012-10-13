@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 namespace BizTalkZombieManagement.Dal
 {

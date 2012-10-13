@@ -6,7 +6,7 @@ using System.Management;
 using System.Xml.Linq;
 using BizTalkZombieManagement.Dal;
 using System.IO;
-using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Entities.ConstantName;
 using System.Threading.Tasks;
 using BizTalkZombieManagement.DAL;
 

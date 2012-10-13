@@ -2,7 +2,7 @@
 using BizTalkZombieManagement.Business;
 using System;
 using System.Resources;
-using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 [assembly: CLSCompliant(true)]
 namespace BizTalkZombieManagement

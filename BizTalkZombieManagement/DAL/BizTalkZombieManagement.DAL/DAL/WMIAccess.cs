@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Entities.ConstantName;
 using System.Management;
-using BizTalkZombieManagement.Business;
 
 namespace BizTalkZombieManagement.Dal
 {

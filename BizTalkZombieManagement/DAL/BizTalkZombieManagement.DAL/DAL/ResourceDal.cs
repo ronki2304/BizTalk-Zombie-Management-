@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Resources;
-using BizTalkZombieManagement.Resource;
+using BizTalkZombieManagement.Resources;
 
 
 namespace BizTalkZombieManagement.Dal

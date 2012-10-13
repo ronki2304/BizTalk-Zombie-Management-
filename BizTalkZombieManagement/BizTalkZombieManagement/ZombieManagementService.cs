@@ -9,7 +9,7 @@ using System.Text;
 using System.Management;
 using BizTalkZombieManagement.Business;
 using System.IO;
-using BizTalkZombieManagement.Entity.ConstantName;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 namespace BizTalkZombieManagement
 {
