@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AppSettingDAL.cs" />
     <Compile Include="BizTalkArtifacts.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Transport\FtpAccess.cs" />
     <Compile Include="LogDiagnostic.cs" />
     <Compile Include="Transport\MsmqAccess.cs" />
