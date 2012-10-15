@@ -22,5 +22,4 @@ namespace Microsoft.BizTalk.Adapter.Wcf.Runtime
         void EndTwoWayMethod(IAsyncResult result);
 
     }
-
 }

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace BizTalkZombieManagement.Entities.Enum
 {
-    public enum WcfTypes
+    public enum dumpType
     {
-        NamedPipe,
-        TCP,
-        WsHttp
+        File,
+        Msmq,
+        Wcf
     }
 }

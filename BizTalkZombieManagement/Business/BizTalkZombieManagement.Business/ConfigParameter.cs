@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using BizTalkZombieManagement.Business.Transport;
+using BizTalkZombieManagement.Contracts.Interface;
 using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entities;
 using BizTalkZombieManagement.Entities.ConstantName;
-using BizTalkZombieManagement.Dal;
+using BizTalkZombieManagement.Entities.Enum;
 using BizTalkZombieManagement.Dal.Transport;
 
 namespace BizTalkZombieManagement.Business
@@ -36,20 +38,7 @@ namespace BizTalkZombieManagement.Business
         }
 
 
-        public static Boolean FileActivated
-        {
-            get
-            {
-                Boolean breturn;
-                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.FileActivated), out breturn))
-                {
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.FileActivatedError), AppKeyName.FileActivated));
-                    return false;
-                }
-
-                return breturn;
-            }
-        }
+    
 
         private static Boolean IsFileConfigurationOK()
         {
@@ -65,7 +54,7 @@ namespace BizTalkZombieManagement.Business
                 return false;
             }
             return true;
-        } 
+        }
         #endregion
 
         /// <summary>
@@ -74,16 +63,19 @@ namespace BizTalkZombieManagement.Business
         /// <returns></returns>
         public static Boolean IsConfigurationOk()
         {
-            //file key
-            if (ConfigParameter.FileActivated)
+            switch (WhichDumpIsSelected())
             {
-                return IsFileConfigurationOK();
-            }
+                case dumpType.File:
+                    //file key
+                    return IsFileConfigurationOK();
 
-            //Msmq Key
-            if (ConfigParameter.MsmqActivated)
-            {
-                return IsMsmqConfigurationOK();
+
+                case dumpType.Msmq:
+                    //Msmq Key
+                    return IsMsmqConfigurationOK();
+
+                case dumpType.Wcf:
+                    return true; //currently I found no test for validating the configuration
             }
 
             //Configuration Error
@@ -91,25 +83,12 @@ namespace BizTalkZombieManagement.Business
             return false;
         }
 
-      
+
 
         #region MSMQ Configuration
-        public static Boolean MsmqActivated
-        {
-            get
-            {
-                Boolean breturn;
-                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.MSMQActivated), out breturn))
-                {
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.MsmqActivatedError), AppKeyName.FileActivated));
-                    return false;
-                }
+     
 
-                return breturn;
-            }
-        }
-
-        private static String _MsmqPath=null;
+        private static String _MsmqPath = null;
 
         public static String MsmqPath
         {
@@ -138,21 +117,29 @@ namespace BizTalkZombieManagement.Business
         }
         #endregion
 
-        #region WCF
-        public static Boolean WcfActivated
+        /// <summary>
+        /// Retrieve the name of the specific layer which will be used by BizTalkZombieManagement
+        /// </summary>
+        /// <returns></returns>
+        private static dumpType WhichDumpIsSelected()
         {
-            get
-            {
-                Boolean breturn;
-                if (!Boolean.TryParse(AppSettingDal.RetrieveSpecificKey(AppKeyName.WcfActivated), out breturn))
-                {
-                    LogHelper.WriteError(String.Format(ResourceLogic.GetString(ResourceKeyName.WCFActivatedError), AppKeyName.FileActivated));
-                    return false;
-                }
+            return (dumpType)Enum.Parse(typeof(dumpType), AppSettingDal.RetrieveSpecificKey(AppKeyName.DumpLayer));
+        }
 
-                return breturn;
+        
+        public static ItransportLayer GettingTheRightLayer()
+        {
+            switch(WhichDumpIsSelected())
+            {
+                case dumpType.File:
+                    return new FileLogic();
+                case dumpType.Msmq:
+                    return new MsmqLayer();
+                case dumpType.Wcf:
+                    return new WcfLogic();
+                default:
+                    return null;
             }
         }
-        #endregion
     }
 }

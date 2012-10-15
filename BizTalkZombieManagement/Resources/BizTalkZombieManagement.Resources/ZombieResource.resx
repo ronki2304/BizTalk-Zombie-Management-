@@ -150,26 +150,20 @@
   <data name="File_Invalid_Path" xml:space="preserve">
     <value>Path contain in {0} is not a valid path, service will not start until you correct it, please open configuration file and correct the DumpFolder key value</value>
   </data>
-  <data name="File_Saved" xml:space="preserve">
-    <value>All Messages saved to file !</value>
-  </data>
-  <data name="File_Saving" xml:space="preserve">
-    <value>Saving all message to file...</value>
-  </data>
   <data name="Msmq_Activated_Error" xml:space="preserve">
     <value>Format Exception {0} haven't got a boolean value \n Dump MSMQ won't be activated</value>
   </data>
   <data name="Msmq_PathNotFound" xml:space="preserve">
     <value>The specified MSMQ {0} doest not exist</value>
   </data>
-  <data name="Msmq_SavedMessage" xml:space="preserve">
-    <value>All Message are sent to MSMQ</value>
-  </data>
-  <data name="Msmq_SavingMessage" xml:space="preserve">
-    <value>All Message will be send to MSMQ</value>
-  </data>
   <data name="No_Zombie_Found" xml:space="preserve">
     <value>No zombie message found, the instance {0} is not a zombie instance</value>
+  </data>
+  <data name="SavedMessage" xml:space="preserve">
+    <value>All Messages are saved !</value>
+  </data>
+  <data name="SavingMessage" xml:space="preserve">
+    <value>Saving all messages....</value>
   </data>
   <data name="String" xml:space="preserve">
     <value />
@@ -179,7 +173,6 @@
   </data>
   <data name="WCF_SavedMessage" xml:space="preserve">
     <value>All message are sent to WCF</value>
-    <comment> </comment>
   </data>
   <data name="WCF_SavingMessage" xml:space="preserve">
     <value>Sending Message over WCF</value>

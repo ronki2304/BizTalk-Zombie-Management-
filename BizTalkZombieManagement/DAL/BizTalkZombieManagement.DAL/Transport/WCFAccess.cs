@@ -16,7 +16,7 @@ namespace BizTalkZombieManagement.Dal.Transport
         Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid client = null;
         public WCFAccess(String EndPointName)
         {
-            factory = new ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid>(EndPointName);
+           factory = new ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid>(EndPointName);
             client = factory.CreateChannel();
         }
         public void sendMessage (String message)
@@ -35,9 +35,7 @@ namespace BizTalkZombieManagement.Dal.Transport
 
 
             //End the call once the wait handle signal is received from BizTalk
-
             client.EndTwoWayMethod(res);
-            
         }
 
         ~WCFAccess()

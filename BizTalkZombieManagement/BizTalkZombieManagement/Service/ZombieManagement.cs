@@ -9,6 +9,7 @@ using BizTalkZombieManagement.Entities.ConstantName;
 using System.Threading.Tasks;
 using BizTalkZombieManagement.Business;
 using BizTalkZombieManagement.Business.Transport;
+using BizTalkZombieManagement.Contracts.Interface;
 
 namespace BizTalkZombieManagement.Service
 {
@@ -37,21 +38,11 @@ namespace BizTalkZombieManagement.Service
             // Loop over the returned messages from the query
             if (wmiAccess.MessageFound)
             {
+                //need to destroy the orchestration after
                 DeleteOrchestrationAction = true;
                 LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.ZombieFound), serviceInstanceId));
-                
-                
-                //check for save zombie message to file
-                if (ConfigParameter.FileActivated)
-                {
-                    UsingFileLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
-                }
-
-                //check for send message on MSMQ
-                if (ConfigParameter.MsmqActivated)
-                {
-                    UsingMsmqLayer(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
-                }
+                //saving all messages
+                SaveMessages(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
             }
             else
             {
@@ -67,57 +58,27 @@ namespace BizTalkZombieManagement.Service
         }
 
         /// <summary>
-        /// Saving all messages in directory
+        /// save all message in the selected dump layer
         /// </summary>
-        /// <param name="ServiceInstanceID">Service instance concerned</param>
-        /// <param name="MessagesID">list of all messages ID</param>
+        /// <param name="ServiceInstanceID"></param>
+        /// <param name="MessagesID"></param>
         /// <param name="btArtifact"></param>
-        private static void UsingFileLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
+        private static void SaveMessages(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
         {
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaving));
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MessageSaving));
+            //retrieve the right layer
+            ItransportLayer accessLayer = ConfigParameter.GettingTheRightLayer();
             foreach (Guid gu in MessagesID)
             {
+                //retrieving the message
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                FileLogic fl = new FileLogic();
-                fl.SendMessage(sMessage, gu);
+                //save the message
+                accessLayer.SendMessage(sMessage, gu);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaved));
+            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MessageSaved));
         }
-
-        /// <summary>
-        /// Send all message in MSMQ
-        /// </summary>
-        /// <param name="ServiceInstanceID">Service instance concerned</param>
-        /// <param name="MessagesID">list of all messages ID</param>
-        /// <param name="btArtifact"></param>
-        private static void UsingMsmqLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
-        {
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaving));
-            MsmqLayer msmq = new MsmqLayer();
-            foreach (Guid gu in MessagesID)
-            {
-                String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                msmq.SendMessage(sMessage,gu);
-                //updatecounter
-                PerfCounterAsync.UpdateStatistic();
-            }
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaved));
-        }
-
-        private static void UsingWcfLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
-        {
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.WCFSaving));
-            WcfLogic WcfTransport = new WcfLogic();
-            foreach (Guid gu in MessagesID)
-            {
-                String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                WcfTransport.SendMessage(sMessage,gu);
-                //updatecounter
-                PerfCounterAsync.UpdateStatistic();
-            }
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.WCFSaved));
-        }
+        
     }
 }
