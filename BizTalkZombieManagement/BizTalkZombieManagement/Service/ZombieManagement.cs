@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Management;
 using System.Xml.Linq;
-using BizTalkZombieManagement.Dal;
 using System.IO;
 using BizTalkZombieManagement.Entities.ConstantName;
 using System.Threading.Tasks;
-using BizTalkZombieManagement.Dal;
+using BizTalkZombieManagement.Business;
+using BizTalkZombieManagement.Business.Transport;
 
-namespace BizTalkZombieManagement.Business
+namespace BizTalkZombieManagement.Service
 {
     public static class ZombieManagement
     {
@@ -25,10 +25,10 @@ namespace BizTalkZombieManagement.Business
 
 
             //initialize WMI
-            WmiIAccess wmiAccess = new WmiIAccess();
+            WmiLogic wmiAccess = new WmiLogic();
 
             //Initialize artifact list
-            BizTalkArtifacts btArtifact = new BizTalkArtifacts();
+            BtArtifactLogic btArtifact = new BtArtifactLogic();
 
             //retrieve all zombie message id
             wmiAccess.GetZombieMessage(serviceInstanceId);
@@ -62,7 +62,7 @@ namespace BizTalkZombieManagement.Business
             if (DeleteOrchestrationAction)
             {
                 LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.DeleteZombieOrchestration)));
-                WmiIAccess.TerminateOrchestration(serviceInstanceId);
+                WmiLogic.TerminateOrchestration(serviceInstanceId);
             }
         }
 
@@ -72,13 +72,14 @@ namespace BizTalkZombieManagement.Business
         /// <param name="ServiceInstanceID">Service instance concerned</param>
         /// <param name="MessagesID">list of all messages ID</param>
         /// <param name="btArtifact"></param>
-        private static void UsingFileLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
+        private static void UsingFileLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
         {
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.FileSaving));
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                FileLayerAccess.SaveToFile(gu, sMessage, ConfigParameter.FilePath);
+                FileLogic fl = new FileLogic();
+                fl.SendMessage(sMessage, gu);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }
@@ -91,28 +92,28 @@ namespace BizTalkZombieManagement.Business
         /// <param name="ServiceInstanceID">Service instance concerned</param>
         /// <param name="MessagesID">list of all messages ID</param>
         /// <param name="btArtifact"></param>
-        private static void UsingMsmqLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
+        private static void UsingMsmqLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
         {
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaving));
-            MsmqAccess msmqAccess = new MsmqAccess(ConfigParameter.MsmqPath);
+            MsmqLayer msmq = new MsmqLayer();
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                msmqAccess.SendMessage(sMessage);
+                msmq.SendMessage(sMessage,gu);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MsmqSaved));
         }
 
-        private static void UsingWcfLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BizTalkArtifacts btArtifact)
+        private static void UsingWcfLayer(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
         {
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.WCFSaving));
             WcfLogic WcfTransport = new WcfLogic();
             foreach (Guid gu in MessagesID)
             {
                 String sMessage = btArtifact.GetMessageBodyByMessageId(gu, ServiceInstanceID);
-                WcfTransport.SendMessage(sMessage);
+                WcfTransport.SendMessage(sMessage,gu);
                 //updatecounter
                 PerfCounterAsync.UpdateStatistic();
             }

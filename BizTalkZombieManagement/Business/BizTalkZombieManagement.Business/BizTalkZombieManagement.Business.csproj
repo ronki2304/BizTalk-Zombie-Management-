@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{938A4757-362F-410C-B98D-42FF1FBF4E11}</ProjectGuid>
+    <ProjectGuid>{D5542372-D06E-4A49-9BFC-AF82AF2526DD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BizTalkZombieManagement.Entities</RootNamespace>
-    <AssemblyName>BizTalkZombieManagement.Entities</AssemblyName>
+    <RootNamespace>BizTalkZombieManagement.Business</RootNamespace>
+    <AssemblyName>BizTalkZombieManagement.Business</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -50,18 +50,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstantName\AppKeyName.cs" />
-    <Compile Include="ConstantName\ConstEventLog.cs" />
-    <Compile Include="ConstantName\CounterKeyName.cs" />
-    <Compile Include="ConstantName\ResourceKeyName.cs" />
-    <Compile Include="ConstantName\WMIProperties.cs" />
-    <Compile Include="ConstantName\WmiQuery.cs" />
-    <Compile Include="Entities\WmiResult.cs" />
-    <Compile Include="Enum\WcfType.cs" />
+    <Compile Include="BtArtifactLogic.cs" />
+    <Compile Include="ConfigParameter.cs" />
+    <Compile Include="LogHelper.cs" />
+    <Compile Include="PerfCounterAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceLogic.cs" />
+    <Compile Include="Transport\FileLogic.cs" />
+    <Compile Include="Transport\MsmqLayer.cs" />
+    <Compile Include="Transport\WcfLogic.cs" />
+    <Compile Include="WmiLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Contracts\BizTalkZombieManagement.Contracts\BizTalkZombieManagement.Contracts.csproj">
+      <Project>{480282E7-BA08-4267-94B3-3BA0769816C7}</Project>
+      <Name>BizTalkZombieManagement.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DAL\BizTalkZombieManagement.DAL\BizTalkZombieManagement.DAL.csproj">
+      <Project>{FE811439-3BBF-4132-977A-C62458E86E85}</Project>
+      <Name>BizTalkZombieManagement.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Entities\BizTalkZombieManagement.Entities\BizTalkZombieManagement.Entities.csproj">
+      <Project>{938A4757-362F-410C-B98D-42FF1FBF4E11}</Project>
+      <Name>BizTalkZombieManagement.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

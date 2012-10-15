@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using System.Xml;
 using System.IO;
 
-namespace BizTalkZombieManagement.Dal
+namespace BizTalkZombieManagement.Dal.Transport
 {
     public class MsmqAccess
     {

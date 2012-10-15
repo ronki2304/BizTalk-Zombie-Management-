@@ -21,9 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkZombieManagement.Resources", "Resources\BizTalkZombieManagement.Resources\BizTalkZombieManagement.Resources.csproj", "{2BDFF411-A81B-418A-B6E4-656548044793}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{5AECF680-BA34-464F-A613-82973F56201B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkZombieManagement.Business", "Business\BizTalkZombieManagement.Business\BizTalkZombieManagement.Business.csproj", "{D5542372-D06E-4A49-9BFC-AF82AF2526DD}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
+		SccNumberOfProjects = 8
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs35
 		SccLocalPath0 = .
@@ -49,6 +53,10 @@ Global
 		SccProjectTopLevelParentUniqueName6 = BizTalkZombieManagement.sln
 		SccProjectName6 = Resources/BizTalkZombieManagement.Resources
 		SccLocalPath6 = Resources\\BizTalkZombieManagement.Resources
+		SccProjectUniqueName7 = Business\\BizTalkZombieManagement.Business\\BizTalkZombieManagement.Business.csproj
+		SccProjectTopLevelParentUniqueName7 = BizTalkZombieManagement.sln
+		SccProjectName7 = Business/BizTalkZombieManagement.Business
+		SccLocalPath7 = Business\\BizTalkZombieManagement.Business
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +103,12 @@ Global
 		{2BDFF411-A81B-418A-B6E4-656548044793}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BDFF411-A81B-418A-B6E4-656548044793}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BDFF411-A81B-418A-B6E4-656548044793}.Release|x86.ActiveCfg = Release|Any CPU
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,5 +118,6 @@ Global
 		{480282E7-BA08-4267-94B3-3BA0769816C7} = {EE3B6154-1582-4205-B85E-503E126BC4F1}
 		{FE811439-3BBF-4132-977A-C62458E86E85} = {8933D7E1-CA3B-42AD-A333-DAC20006E6C2}
 		{2BDFF411-A81B-418A-B6E4-656548044793} = {A2C91732-277B-49AE-8443-AF2F6200E09E}
+		{D5542372-D06E-4A49-9BFC-AF82AF2526DD} = {5AECF680-BA34-464F-A613-82973F56201B}
 	EndGlobalSection
 EndGlobal

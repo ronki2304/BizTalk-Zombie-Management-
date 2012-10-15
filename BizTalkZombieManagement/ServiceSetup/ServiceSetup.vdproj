@@ -1680,7 +1680,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BizTalk Zombie Management"
         "ProductCode" = "8:{E10B0D0A-28A5-4F68-AEA6-3C6CDE356C3D}"
-        "PackageCode" = "8:{92FD45BE-800C-4FC2-B710-C4587622C45B}"
+        "PackageCode" = "8:{BE4440B4-71CD-494E-A948-24DB0DA2A9C0}"
         "UpgradeCode" = "8:{8246F5ED-C95E-40C5-A588-A18B9C3BB77E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -2295,7 +2295,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AC0BCDECDCD04BD2AEF9E9B1E09042B6"
             {
-            "SourcePath" = "8:..\\BizTalkZombieManagement\\obj\\Debug\\BizTalkZombieManagement.exe"
+            "SourcePath" = "8:..\\BizTalkZombieManagement\\obj\\Release\\BizTalkZombieManagement.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_6D08AA26A76E48C59003AA1B909DAEFC"

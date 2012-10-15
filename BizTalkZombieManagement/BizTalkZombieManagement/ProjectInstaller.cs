@@ -30,10 +30,10 @@ namespace BizTalkZombieManagement
         private void AfterInstallService(object send, InstallEventArgs e)
         {
             //start the service
-            using (ServiceController sc = new ServiceController("ZombieManagementService"))
-            {
-                sc.Start();
-            }
+            //using (ServiceController sc = new ServiceController("ZombieManagementService"))
+            //{
+            //    sc.Start();
+            //}
         }
         public override void Commit(IDictionary savedState)
         {

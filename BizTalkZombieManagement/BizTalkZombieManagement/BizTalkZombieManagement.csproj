@@ -98,12 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\ConfigParameter.cs" />
-    <Compile Include="Business\LogHelper.cs" />
-    <Compile Include="Business\PerfCounterAsync.cs" />
-    <Compile Include="Business\ResourceLogic.cs" />
-    <Compile Include="Business\WcfLogic.cs" />
-    <Compile Include="Business\ZombieManagement.cs" />
+    <Compile Include="Service\ZombieManagement.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -130,18 +125,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business\BizTalkZombieManagement.Business\BizTalkZombieManagement.Business.csproj">
+      <Project>{D5542372-D06E-4A49-9BFC-AF82AF2526DD}</Project>
+      <Name>BizTalkZombieManagement.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\BizTalkZombieManagement.Contracts\BizTalkZombieManagement.Contracts.csproj">
       <Project>{480282E7-BA08-4267-94B3-3BA0769816C7}</Project>
       <Name>BizTalkZombieManagement.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\BizTalkZombieManagement.DAL\BizTalkZombieManagement.DAL.csproj">
-      <Project>{FE811439-3BBF-4132-977A-C62458E86E85}</Project>
-      <Name>BizTalkZombieManagement.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Entities\BizTalkZombieManagement.Entities\BizTalkZombieManagement.Entities.csproj">
       <Project>{938A4757-362F-410C-B98D-42FF1FBF4E11}</Project>
       <Name>BizTalkZombieManagement.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Business\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

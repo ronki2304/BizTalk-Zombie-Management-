@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace BizTalkZombieManagement.Dal
+namespace BizTalkZombieManagement.Dal.Transport
 {
     public static class FileLayerAccess
     {

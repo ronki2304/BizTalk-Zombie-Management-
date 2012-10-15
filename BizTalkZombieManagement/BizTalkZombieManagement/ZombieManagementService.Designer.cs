@@ -3,6 +3,7 @@ using BizTalkZombieManagement.Business;
 using System;
 using System.Resources;
 using BizTalkZombieManagement.Entities.ConstantName;
+using BizTalkZombieManagement.Service;
 
 [assembly: CLSCompliant(true)]
 namespace BizTalkZombieManagement

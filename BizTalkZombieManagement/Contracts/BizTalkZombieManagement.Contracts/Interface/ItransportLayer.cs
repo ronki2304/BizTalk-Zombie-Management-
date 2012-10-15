@@ -7,6 +7,6 @@ namespace BizTalkZombieManagement.Contracts.Interface
 {
     public interface ItransportLayer
     {
-        void SendMessage(String message);
+        void SendMessage(String message, Guid messageInstanceID);
     }
 }

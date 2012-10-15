@@ -14,60 +14,47 @@ namespace BizTalkZombieManagement.Dal
     {
         #region static private members
         private static String _BtsConnectionString = String.Empty;
-        private static List<String> AvoidSchemasType = null;
-        private static Object AntiConcurential = new Object();
-        #endregion
-
-        #region private member
-        private Dictionary<Guid, String> _MessageDictionnary;
 
         #endregion
-
 
         public BizTalkArtifacts()
         {
-            _MessageDictionnary = new Dictionary<Guid, String>();
+
         }
 
-        static BizTalkArtifacts()
-        {
-            InitializeAvoidSchemaTypeList();
-        }
+
         /// <summary>
         /// retrieve all system message type to avoid process on it
         /// </summary>
-        private static void InitializeAvoidSchemaTypeList()
+        public static List<String> InitializeAvoidSchemaTypeList()
         {
-            lock (AntiConcurential)
+            List<string> AvoidSchemasType = new List<string>();
+            //initialize catalog to browse assembly to get system assembly
+            using (BtsCatalogExplorer catalog = new BtsCatalogExplorer())
             {
-                if (AvoidSchemasType == null)
+                catalog.ConnectionString = BtsConnectionString;
+                foreach (BtsAssembly assembly in catalog.Assemblies)
                 {
-                    AvoidSchemasType = new List<string>();
-                    //initialize catalog to browse assembly to get system assembly
-                    using (BtsCatalogExplorer catalog = new BtsCatalogExplorer())
+                    //once got system assembly let's add all system schemas
+                    if (assembly.IsSystem)
                     {
-                        catalog.ConnectionString = BtsConnectionString;
-                        foreach (BtsAssembly assembly in catalog.Assemblies)
+                        if (assembly.Schemas != null)
                         {
-                            //once got system assembly let's add all system schemas
-                            if (assembly.IsSystem)
+                            //add all schema declared in those assemblies
+                            foreach (Schema schema in assembly.Schemas)
                             {
-                                if (assembly.Schemas != null)
+                                if (schema.Type == SchemaType.Document)
                                 {
-                                    //add all schema declared in those assemblies
-                                    foreach (Schema schema in assembly.Schemas)
-                                    {
-                                        if (schema.Type == SchemaType.Document)
-                                        {
-                                            AvoidSchemasType.Add(String.Concat(schema.TargetNameSpace, "#", schema.RootName));
-                                        }
-                                    }
+                                    AvoidSchemasType.Add(String.Concat(schema.TargetNameSpace, "#", schema.RootName));
                                 }
                             }
                         }
                     }
                 }
             }
+
+            return AvoidSchemasType;
+
         }
 
 
@@ -105,55 +92,17 @@ namespace BizTalkZombieManagement.Dal
         /// <returns>the message content</returns>
         public String GetMessageBodyByMessageId(Guid messageId, Guid instanceId)
         {
-            //check if it is the first message retrieving
-            if (!_MessageDictionnary.ContainsKey(messageId))
+            using (BizTalkOperations operations = new BizTalkOperations())
             {
-                using (BizTalkOperations operations = new BizTalkOperations())
+                IBaseMessage message = operations.GetMessage(messageId, instanceId);
+                String body = String.Empty;
+                using (StreamReader streamReader = new StreamReader(message.BodyPart.Data))
                 {
-                    IBaseMessage message = operations.GetMessage(messageId, instanceId);
-                    String body = String.Empty;
-                    using (StreamReader streamReader = new StreamReader(message.BodyPart.Data))
-                    {
-                        body = streamReader.ReadToEnd();
-                    }
-                    //add the new message to the dictionnary
-                    _MessageDictionnary.Add(messageId, body);
-                    return body;
+                    body = streamReader.ReadToEnd();
                 }
+                //add the new message to the dictionnary
+                return body;
             }
-            else
-            {
-                return _MessageDictionnary[messageId];
-            }
-        }
-
-        /// <summary>
-        /// Retrieve message with a list of Message ID, they will be stored in dictionary
-        /// </summary>
-        /// <param name="lGu">list of message ID</param>
-        /// <param name="instanceId">BizTalk instance id</param>
-        public void GetAllMessagesBody(IEnumerable<Guid> messagesId, Guid instanceId)
-        {
-            if (messagesId != null && messagesId.Any())
-            {
-                foreach (Guid gu in messagesId)
-                {
-                    GetMessageBodyByMessageId(gu, instanceId);
-                }
-            }
-        }
-
-        /// <summary>
-        /// check if the zombie message is not due to a unhandle external fault  like a WCF fault
-        /// </summary>
-        /// <param name="messageType"></param>
-        /// <returns></returns>
-        public static Boolean IsSystemSchema(String messageType)
-        {
-            if (AvoidSchemasType.Contains(messageType))
-                return true;
-            else
-                return false;
         }
     }
 }

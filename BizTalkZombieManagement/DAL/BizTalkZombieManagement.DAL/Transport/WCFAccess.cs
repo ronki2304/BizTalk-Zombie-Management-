@@ -8,7 +8,7 @@ using System.Xml;
 using System.ServiceModel;
 using BizTalkZombieManagement.Entities.Enum;
 
-namespace BizTalkZombieManagement.Dal
+namespace BizTalkZombieManagement.Dal.Transport
 {
     public class WCFAccess
     {
