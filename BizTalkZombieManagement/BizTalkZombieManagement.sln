@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkZombieManagement.Con
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{8933D7E1-CA3B-42AD-A333-DAC20006E6C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkZombieManagement.DAL", "DAL\BizTalkZombieManagement.DAL\BizTalkZombieManagement.DAL.csproj", "{FE811439-3BBF-4132-977A-C62458E86E85}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkZombieManagement.Dal", "DAL\BizTalkZombieManagement.DAL\BizTalkZombieManagement.Dal.csproj", "{FE811439-3BBF-4132-977A-C62458E86E85}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{A2C91732-277B-49AE-8443-AF2F6200E09E}"
 EndProject

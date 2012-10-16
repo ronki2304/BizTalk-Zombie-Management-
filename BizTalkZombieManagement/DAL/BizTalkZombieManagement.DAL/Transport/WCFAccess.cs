@@ -6,16 +6,16 @@ using System.Xml;
 #endregion
 namespace BizTalkZombieManagement.Dal.Transport
 {
-    public class WCFAccess
+    public class WcfAccess
     {
         ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid> factory;
         Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid client = null;
-        public WCFAccess(String EndPointName)
+        public WcfAccess(String endPointName)
         {
-           factory = new ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid>(EndPointName);
+           factory = new ChannelFactory<Microsoft.BizTalk.Adapter.Wcf.Runtime.ITwoWayAsyncVoid>(endPointName);
             client = factory.CreateChannel();
         }
-        public void sendMessage (String message)
+        public void SendMessage (String message)
         {
             //create the new message to send over channel
             using (System.ServiceModel.Channels.Message msg = System.ServiceModel.Channels.Message.CreateMessage(System.ServiceModel.Channels.MessageVersion.Default
@@ -35,9 +35,11 @@ namespace BizTalkZombieManagement.Dal.Transport
             }
         }
 
-        ~WCFAccess()
+        ~WcfAccess()
         {
             ((IClientChannel)client).Close();
         }
+
+   
     }
 }

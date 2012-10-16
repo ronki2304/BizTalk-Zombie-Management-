@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D5542372-D06E-4A49-9BFC-AF82AF2526DD}</ProjectGuid>
+    <ProjectGuid>{FE811439-3BBF-4132-977A-C62458E86E85}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BizTalkZombieManagement.Business</RootNamespace>
-    <AssemblyName>BizTalkZombieManagement.Business</AssemblyName>
+    <RootNamespace>BizTalkZombieManagement.Dal</RootNamespace>
+    <AssemblyName>BizTalkZombieManagement.Dal</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -26,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,10 +45,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Code Analysis|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Code Analysis\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <CodeAnalysisLogFile>bin\Debug\BizTalkZombieManagement.Business.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisLogFile>bin\Debug\BizTalkZombieManagement.DAL.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
     <ErrorReport>prompt</ErrorReport>
@@ -56,11 +58,27 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.BizTalk.ExplorerOM, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2010\Developer Tools\Microsoft.BizTalk.ExplorerOM.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Operations, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2010\Microsoft.BizTalk.Operations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Pipeline, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2010\Microsoft.BizTalk.Pipeline.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,35 +86,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BtArtifactLogic.cs" />
-    <Compile Include="ConfigParameter.cs" />
+    <Compile Include="AppSettingDAL.cs" />
+    <Compile Include="BizTalkArtifacts.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="LogHelper.cs" />
-    <Compile Include="PerfCounterAsync.cs" />
+    <Compile Include="Transport\FtpAccess.cs" />
+    <Compile Include="LogDiagnostic.cs" />
+    <Compile Include="Transport\MsmqAccess.cs" />
+    <Compile Include="PerfCounterAccess.cs" />
+    <Compile Include="ResourceDal.cs" />
+    <Compile Include="Transport\FileLayerAccess.cs" />
+    <Compile Include="Transport\WCFAccess.cs" />
+    <Compile Include="WmiAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceLogic.cs" />
-    <Compile Include="Transport\FileLogic.cs" />
-    <Compile Include="Transport\MsmqLayer.cs" />
-    <Compile Include="Transport\WcfLogic.cs" />
-    <Compile Include="WmiLogic.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="key.snk" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Contracts\BizTalkZombieManagement.Contracts\BizTalkZombieManagement.Contracts.csproj">
       <Project>{480282E7-BA08-4267-94B3-3BA0769816C7}</Project>
       <Name>BizTalkZombieManagement.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\DAL\BizTalkZombieManagement.DAL\BizTalkZombieManagement.Dal.csproj">
-      <Project>{FE811439-3BBF-4132-977A-C62458E86E85}</Project>
-      <Name>BizTalkZombieManagement.Dal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Entities\BizTalkZombieManagement.Entities\BizTalkZombieManagement.Entities.csproj">
       <Project>{938A4757-362F-410C-B98D-42FF1FBF4E11}</Project>
       <Name>BizTalkZombieManagement.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Resources\BizTalkZombieManagement.Resources\BizTalkZombieManagement.Resources.csproj">
+      <Project>{2BDFF411-A81B-418A-B6E4-656548044793}</Project>
+      <Name>BizTalkZombieManagement.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.snk" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

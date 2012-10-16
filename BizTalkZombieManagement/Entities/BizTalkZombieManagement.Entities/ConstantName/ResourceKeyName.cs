@@ -23,7 +23,7 @@ namespace BizTalkZombieManagement.Entities.ConstantName
         public const String ErrorNoLayerActivated = "Error_NoLayerActivated";
         public const String DebugMode = "Debug_Mode";
 
-        public const String WCFActivatedError = "WCF_Activated_Error";
+        public const String WcfActivatedError = "WCF_Activated_Error";
         public const String MessageSaving = "SavingMessage";
         public const String MessageSaved = "SavedMessage";
     }

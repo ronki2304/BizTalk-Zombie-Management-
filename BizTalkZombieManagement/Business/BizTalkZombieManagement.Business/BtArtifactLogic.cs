@@ -6,7 +6,7 @@ using BizTalkZombieManagement.Dal;
 
 namespace BizTalkZombieManagement.Business
 {
-    public class BtArtifactLogic
+    public class BTArtifactLogic
     {
         #region private static members
         private static List<String> AvoidSchemasType = null;
@@ -19,13 +19,13 @@ namespace BizTalkZombieManagement.Business
         #endregion
 
         #region constructor
-        public BtArtifactLogic()
+        public BTArtifactLogic()
         {
             _MessageDictionnary = new Dictionary<Guid, String>();
             artifact = new BizTalkArtifacts();
         }
 
-        static BtArtifactLogic()
+        static BTArtifactLogic()
         {
             InitializeAvoidSchemaTypeList();
         }

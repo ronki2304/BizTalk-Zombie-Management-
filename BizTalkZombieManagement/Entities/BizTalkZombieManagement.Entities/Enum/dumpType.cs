@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BizTalkZombieManagement.Entities.Enum
+namespace BizTalkZombieManagement.Entities.CustomEnum
 {
-    public enum dumpType
+    public enum DumpType
     {
         File,
         Msmq,

@@ -2,11 +2,11 @@
 using System.IO;
 using System.Linq;
 using BizTalkZombieManagement.Business.Transport;
-using BizTalkZombieManagement.Contracts.Interface;
+using BizTalkZombieManagement.Contracts.CustomInterfaces;
 using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entities;
 using BizTalkZombieManagement.Entities.ConstantName;
-using BizTalkZombieManagement.Entities.Enum;
+using BizTalkZombieManagement.Entities.CustomEnum;
 using BizTalkZombieManagement.Dal.Transport;
 
 namespace BizTalkZombieManagement.Business
@@ -65,16 +65,16 @@ namespace BizTalkZombieManagement.Business
         {
             switch (WhichDumpIsSelected())
             {
-                case dumpType.File:
+                case DumpType.File:
                     //file key
                     return IsFileConfigurationOK();
 
 
-                case dumpType.Msmq:
+                case DumpType.Msmq:
                     //Msmq Key
                     return IsMsmqConfigurationOK();
 
-                case dumpType.Wcf:
+                case DumpType.Wcf:
                     return true; //currently I found no test for validating the configuration
             }
 
@@ -96,7 +96,7 @@ namespace BizTalkZombieManagement.Business
             {
                 if (String.IsNullOrEmpty(_MsmqPath))
                 {
-                    _MsmqPath = AppSettingDal.RetrieveSpecificKey(AppKeyName.MSMQPath);
+                    _MsmqPath = AppSettingDal.RetrieveSpecificKey(AppKeyName.MsmqPath);
                 }
                 return _MsmqPath;
             }
@@ -105,7 +105,7 @@ namespace BizTalkZombieManagement.Business
 
         private static Boolean IsMsmqConfigurationOK()
         {
-            if (MsmqAccess.IsMsmqExist(ConfigParameter.MsmqPath))
+            if (MsmqAccess.IsExist(ConfigParameter.MsmqPath))
             {
                 return true;
             }
@@ -121,21 +121,21 @@ namespace BizTalkZombieManagement.Business
         /// Retrieve the name of the specific layer which will be used by BizTalkZombieManagement
         /// </summary>
         /// <returns></returns>
-        private static dumpType WhichDumpIsSelected()
+        private static DumpType WhichDumpIsSelected()
         {
-            return (dumpType)Enum.Parse(typeof(dumpType), AppSettingDal.RetrieveSpecificKey(AppKeyName.DumpLayer));
+            return (DumpType)Enum.Parse(typeof(DumpType), AppSettingDal.RetrieveSpecificKey(AppKeyName.DumpLayer));
         }
 
         
-        public static ItransportLayer GettingTheRightLayer()
+        public static ITransportLayer GettingTheRightLayer()
         {
             switch(WhichDumpIsSelected())
             {
-                case dumpType.File:
+                case DumpType.File:
                     return new FileLogic();
-                case dumpType.Msmq:
+                case DumpType.Msmq:
                     return new MsmqLayer();
-                case dumpType.Wcf:
+                case DumpType.Wcf:
                     return new WcfLogic();
                 default:
                     return null;

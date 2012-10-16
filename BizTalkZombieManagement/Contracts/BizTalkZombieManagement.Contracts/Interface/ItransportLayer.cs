@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BizTalkZombieManagement.Contracts.Interface
+namespace BizTalkZombieManagement.Contracts.CustomInterfaces
 {
-    public interface ItransportLayer
+    public interface ITransportLayer
     {
-        void SendMessage(String message, Guid messageInstanceID);
+        void SendMessage(String message, Guid messageInstanceId);
     }
 }

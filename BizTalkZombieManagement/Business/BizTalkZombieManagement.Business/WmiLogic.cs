@@ -55,12 +55,12 @@ namespace BizTalkZombieManagement.Business
         /// <param name="serviceInstanceId"></param>
         public void GetZombieMessage(Guid serviceInstanceId)
         {
-            _ListZombieMessage = WmiIAccess.GetZombieMessage(serviceInstanceId);
+            _ListZombieMessage = WmiAccess.GetZombieMessage(serviceInstanceId);
 
             for (int i = 0; i < _ListZombieMessage.Count; i++)
             {
                 //check if the message type is not a system message type
-                if (BtArtifactLogic.IsSystemSchema(_ListZombieMessage[i].MessageType))
+                if (BTArtifactLogic.IsSystemSchema(_ListZombieMessage[i].MessageType))
                 {
                     //if not so add to the list
                     _ListZombieMessage.RemoveAt(i);
@@ -74,7 +74,7 @@ namespace BizTalkZombieManagement.Business
         #region static method
         public static void TerminateOrchestration(Guid serviceInstanceId)
         {
-            WmiIAccess.TerminateOrchestration(serviceInstanceId);
+            WmiAccess.TerminateOrchestration(serviceInstanceId);
         }
         #endregion
     }

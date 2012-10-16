@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BizTalkZombieManagement.Contracts.Interface;
+using BizTalkZombieManagement.Contracts.CustomInterfaces;
 using BizTalkZombieManagement.Dal.Transport;
 
 namespace BizTalkZombieManagement.Business.Transport
 {
-    public class MsmqLayer : ItransportLayer
+    public class MsmqLayer : ITransportLayer
     {
         private MsmqAccess access;
         public MsmqLayer()
@@ -19,14 +19,14 @@ namespace BizTalkZombieManagement.Business.Transport
         {
             return ConfigParameter.MsmqPath;
         }
-        public void SendMessage(string message, Guid messageInstanceID)
+        public void SendMessage(string message, Guid messageInstanceId)
         {
             access.SendMessage(message);
         }
 
-        public static Boolean IsMsmqExist()
+        public static Boolean IsExist()
         {
-           return MsmqAccess.IsMsmqExist(getMsmqPath());
+           return MsmqAccess.IsExist(getMsmqPath());
         }
 
     }

@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BizTalkZombieManagement.Contracts.Interface;
+using BizTalkZombieManagement.Contracts.CustomInterfaces;
 using BizTalkZombieManagement.Dal.Transport;
 
 namespace BizTalkZombieManagement.Business.Transport
 {
-    public class FileLogic : ItransportLayer
+    public class FileLogic : ITransportLayer
     {
         public FileLogic()
         {
         }
 
-        private String getFilePath()
+        private static String getFilePath()
         {
             return ConfigParameter.FilePath;
         }
-        public void SendMessage(string message, Guid messageInstanceID)
+        public void SendMessage(string message, Guid messageInstanceId)
         {
-            FileLayerAccess.SaveToFile(messageInstanceID, message, getFilePath());
+            FileLayerAccess.SaveToFile(messageInstanceId, message, getFilePath());
         }
     }
 }

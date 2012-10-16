@@ -14,9 +14,9 @@ namespace BizTalkZombieManagement.Dal.Transport
 
         private MessageQueue _messageQueue;
 
-        public MsmqAccess(String msmqURI)
+        public MsmqAccess(String Uri)
         {
-            _messageQueue = new MessageQueue(msmqURI);
+            _messageQueue = new MessageQueue(Uri);
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace BizTalkZombieManagement.Dal.Transport
             _messageQueue.Dispose();
         }
 
-        public static Boolean IsMsmqExist(String Path)
+        public static Boolean IsExist(String path)
         {
-            return MessageQueue.Exists(Path);
+            return MessageQueue.Exists(path);
         }
     }
 }

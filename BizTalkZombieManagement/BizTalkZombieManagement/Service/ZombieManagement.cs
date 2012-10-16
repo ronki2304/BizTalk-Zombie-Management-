@@ -9,7 +9,7 @@ using BizTalkZombieManagement.Entities.ConstantName;
 using System.Threading.Tasks;
 using BizTalkZombieManagement.Business;
 using BizTalkZombieManagement.Business.Transport;
-using BizTalkZombieManagement.Contracts.Interface;
+using BizTalkZombieManagement.Contracts.CustomInterfaces;
 
 namespace BizTalkZombieManagement.Service
 {
@@ -29,7 +29,7 @@ namespace BizTalkZombieManagement.Service
             WmiLogic wmiAccess = new WmiLogic();
 
             //Initialize artifact list
-            BtArtifactLogic btArtifact = new BtArtifactLogic();
+            BTArtifactLogic btArtifact = new BTArtifactLogic();
 
             //retrieve all zombie message id
             wmiAccess.GetZombieMessage(serviceInstanceId);
@@ -63,11 +63,11 @@ namespace BizTalkZombieManagement.Service
         /// <param name="ServiceInstanceID"></param>
         /// <param name="MessagesID"></param>
         /// <param name="btArtifact"></param>
-        private static void SaveMessages(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BtArtifactLogic btArtifact)
+        private static void SaveMessages(Guid ServiceInstanceID, IEnumerable<Guid> MessagesID, BTArtifactLogic btArtifact)
         {
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MessageSaving));
             //retrieve the right layer
-            ItransportLayer accessLayer = ConfigParameter.GettingTheRightLayer();
+            ITransportLayer accessLayer = ConfigParameter.GettingTheRightLayer();
             foreach (Guid gu in MessagesID)
             {
                 //retrieving the message

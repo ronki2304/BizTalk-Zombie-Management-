@@ -5,28 +5,28 @@ using System.Text;
 using BizTalkZombieManagement.Dal.Transport;
 using BizTalkZombieManagement.Dal;
 using BizTalkZombieManagement.Entities;
-using BizTalkZombieManagement.Entities.Enum;
-using BizTalkZombieManagement.Contracts.Interface;
+using BizTalkZombieManagement.Entities.CustomEnum;
+using BizTalkZombieManagement.Contracts.CustomInterfaces;
 
 namespace BizTalkZombieManagement.Business
 {
-    public class WcfLogic : ItransportLayer
+    public class WcfLogic : ITransportLayer
     {
-        private WCFAccess _access = null;
+        private WcfAccess _access = null;
 
         public WcfLogic()
         {
-            _access = new WCFAccess(GetEndpointName().ToString());
+            _access = new WcfAccess(GetEndpointName().ToString());
         }
 
-        private WcfTypes GetEndpointName()
+        private static WcfType GetEndpointName()
         {
-            return (WcfTypes) Enum.Parse(typeof(WcfTypes), AppSettingDal.RetrieveSpecificKey(AppKeyName.WcfType));
+            return (WcfType) Enum.Parse(typeof(WcfType), AppSettingDal.RetrieveSpecificKey(AppKeyName.WcfType));
         }
 
-        public void SendMessage(String message, Guid messageInstanceID)
+        public void SendMessage(String message, Guid messageInstanceId)
         {
-            _access.sendMessage(message);
+            _access.SendMessage(message);
         }
     }
 }

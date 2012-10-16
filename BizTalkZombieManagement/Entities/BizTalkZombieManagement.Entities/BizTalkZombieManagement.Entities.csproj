@@ -78,6 +78,7 @@
     <Compile Include="Entities\WmiResult.cs" />
     <Compile Include="Enum\dumpType.cs" />
     <Compile Include="Enum\WcfType.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

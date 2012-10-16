@@ -11,7 +11,7 @@ namespace BizTalkZombieManagement.Entities
     public static class AppKeyName
     {
         public const String FilePath = "FILE_DumpFolder";
-        public const String MSMQPath = "MSMQ_Path";
+        public const String MsmqPath = "MSMQ_Path";
         public const String WcfType = "WCF_TYPE";
         public const String DumpLayer = "DumpLayer";
     }
