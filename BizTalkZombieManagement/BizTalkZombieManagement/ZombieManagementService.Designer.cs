@@ -37,7 +37,7 @@ namespace BizTalkZombieManagement
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "ZombieManagementService";
+            this.ServiceName = WindowsServiceKey.ServiceName;
         }
 
         #endregion

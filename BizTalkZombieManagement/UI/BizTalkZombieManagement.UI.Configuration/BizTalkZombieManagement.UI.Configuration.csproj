@@ -62,6 +62,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -87,6 +88,9 @@
     </Compile>
     <Compile Include="ViewModel\ConfiguratorViewModel.cs" />
     <Compile Include="ViewModel\FirstViewModel.cs" />
+    <Compile Include="View\Configurator.xaml.cs">
+      <DependentUpon>Configurator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FirstView.xaml.cs">
       <DependentUpon>FirstView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +137,10 @@
     <ProjectReference Include="..\..\Business\BizTalkZombieManagement.Business\BizTalkZombieManagement.Business.csproj">
       <Project>{D5542372-D06E-4A49-9BFC-AF82AF2526DD}</Project>
       <Name>BizTalkZombieManagement.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Entities\BizTalkZombieManagement.Entities\BizTalkZombieManagement.Entities.csproj">
+      <Project>{938A4757-362F-410C-B98D-42FF1FBF4E11}</Project>
+      <Name>BizTalkZombieManagement.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

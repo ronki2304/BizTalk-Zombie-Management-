@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration.Install;
 using System.Linq;
 using System.ServiceProcess;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 
 namespace BizTalkZombieManagement
@@ -20,7 +21,7 @@ namespace BizTalkZombieManagement
 
             this.ZombieManagementServiceInstaller.StartType = ServiceStartMode.Automatic;
             this.ZombieManagementServiceInstaller.Description = "Service to handle BizTalk Zombie instance";
-            this.ZombieManagementServiceInstaller.ServicesDependedOn = new String[] { "ENTSSO" }; //check if sso is install
+            this.ZombieManagementServiceInstaller.ServicesDependedOn = new String[] { WindowsServiceKey.DependedService }; //check if sso is install
             //Setting credential
             this.serviceProcessInstaller1.Account = ServiceAccount.User;
 

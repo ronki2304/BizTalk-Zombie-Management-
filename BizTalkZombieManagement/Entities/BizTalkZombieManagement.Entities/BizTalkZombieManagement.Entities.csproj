@@ -73,6 +73,7 @@
     <Compile Include="ConstantName\ConstEventLog.cs" />
     <Compile Include="ConstantName\CounterKeyName.cs" />
     <Compile Include="ConstantName\ResourceKeyName.cs" />
+    <Compile Include="ConstantName\WindowsServiceKey.cs" />
     <Compile Include="ConstantName\WMIProperties.cs" />
     <Compile Include="ConstantName\WmiQuery.cs" />
     <Compile Include="Entities\WmiResult.cs" />

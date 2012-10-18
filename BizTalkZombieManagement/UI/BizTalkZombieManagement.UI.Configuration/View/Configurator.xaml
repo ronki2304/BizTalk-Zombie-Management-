@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Configurator" Height="300" Width="300">
     <Grid>
-        
+        <Label Content="Ca marche" Height="28" HorizontalAlignment="Left" Margin="48,86,0,0" Name="label1" VerticalAlignment="Top" Width="119" />
     </Grid>
 </Window>

@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 {
-    public class ConfiguratorViewModel
+    public class ConfiguratorViewModel : BaseViewModel
     {
         #region Commandes
         public ICommand ClickCommand { get; set; }

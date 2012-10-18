@@ -79,6 +79,7 @@
     <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -88,6 +89,7 @@
   <ItemGroup>
     <Compile Include="AppSettingDAL.cs" />
     <Compile Include="BizTalkArtifacts.cs" />
+    <Compile Include="Configuration\WindowsServiceAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Transport\FtpAccess.cs" />
     <Compile Include="LogDiagnostic.cs" />

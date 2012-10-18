@@ -21,8 +21,8 @@ namespace BizTalkZombieManagement.UI.Configuration
             base.OnStartup(e);
 
             //Remplacer par votre fenêtre
-            View.FirstView window = new View.FirstView();
-            ViewModel.FirstViewModel vm = new ViewModel.FirstViewModel();
+            View.Configurator window = new View.Configurator();
+            ViewModel.ConfiguratorViewModel  vm = new ViewModel.ConfiguratorViewModel();
             window.DataContext = vm;
             window.Show();
         }

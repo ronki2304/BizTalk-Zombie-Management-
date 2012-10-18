@@ -70,6 +70,8 @@
   <ItemGroup>
     <Compile Include="BtArtifactLogic.cs" />
     <Compile Include="ConfigParameter.cs" />
+    <Compile Include="Configuration\ServiceWindowsEvent.cs" />
+    <Compile Include="Configuration\WindowsServiceLogic.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="PerfCounterAsync.cs" />
