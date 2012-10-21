@@ -24,24 +24,8 @@ namespace BizTalkZombieManagement.UI.Configuration.View
         public Configurator()
         {
             InitializeComponent();
-            WindowsServiceLogic logic = new WindowsServiceLogic();
-            logic.OnStateChange += test;
-            if (logic.ServiceFound)
-            {
-                label1.Content = logic.state;
-            }
+           
         }
 
-        private void test (object o, ServiceWindowsEvent e)
-        {
-            Dispatcher.Invoke(
-   System.Windows.Threading.DispatcherPriority.Normal,
-   new Action(
-     delegate()
-     {
-         label1.Content = e.NewStatus;
-     }
- ));
-        }
     }
 }

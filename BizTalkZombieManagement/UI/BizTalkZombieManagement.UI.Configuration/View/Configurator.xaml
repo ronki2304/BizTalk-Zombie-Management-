@@ -3,6 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Configurator" Height="300" Width="300">
     <Grid>
-        <Label Content="Ca marche" Height="28" HorizontalAlignment="Left" Margin="48,86,0,0" Name="label1" VerticalAlignment="Top" Width="119" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+       
+        <Label Content="{Binding State}" Height="28" HorizontalAlignment="Left" Name="lblServiceState" VerticalAlignment="Top" Width="119" Grid.Row="0" />
+        <RadioButton Content="File" Height="16" HorizontalAlignment="Left" Name="rbFile"  GroupName="DumpType" Grid.Row="1" IsEnabled="{Binding IsActiveCommand}"/>
+        <RadioButton Content="MSMQ" Height="16" HorizontalAlignment="Left" Name="rbMsmq" GroupName="DumpType"  Grid.Row="2" IsEnabled="{Binding IsActiveCommand}"/>
+        <RadioButton Content="WCF"  Height="16" HorizontalAlignment="Left" Name="rbWCF" GroupName="DumpType"   Grid.Row="3" IsEnabled="{Binding IsActiveCommand}"/>
     </Grid>
 </Window>
