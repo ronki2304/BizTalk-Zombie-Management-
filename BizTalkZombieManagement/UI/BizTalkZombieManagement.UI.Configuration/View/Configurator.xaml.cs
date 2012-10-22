@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.ServiceProcess;
 using BizTalkZombieManagement.Entities.ConstantName;
 using BizTalkZombieManagement.Business.Configuration;
+using System.Windows.Forms;
 
 namespace BizTalkZombieManagement.UI.Configuration.View
 {
@@ -27,5 +28,13 @@ namespace BizTalkZombieManagement.UI.Configuration.View
            
         }
 
+        private void BrowseFolder(object sender, RoutedEventArgs e)
+        {
+            var dlg = new FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dlg.ShowDialog();
+            txtFolder.Text = dlg.SelectedPath;
+        }
+
+   
     }
 }

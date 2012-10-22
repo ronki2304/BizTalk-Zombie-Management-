@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BizTalkZombieManagement.UI.Configuration.View.Configurator"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Configurator" Height="300" Width="300">
+        Title="Configurator" Height="383" Width="490">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -9,10 +9,20 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
        
-        <Label Content="{Binding State}" Height="28" HorizontalAlignment="Left" Name="lblServiceState" VerticalAlignment="Top" Width="119" Grid.Row="0" />
-        <RadioButton Content="File" Height="16" HorizontalAlignment="Left" Name="rbFile"  GroupName="DumpType" Grid.Row="1" IsEnabled="{Binding IsActiveCommand}"/>
-        <RadioButton Content="MSMQ" Height="16" HorizontalAlignment="Left" Name="rbMsmq" GroupName="DumpType"  Grid.Row="2" IsEnabled="{Binding IsActiveCommand}"/>
-        <RadioButton Content="WCF"  Height="16" HorizontalAlignment="Left" Name="rbWCF" GroupName="DumpType"   Grid.Row="3" IsEnabled="{Binding IsActiveCommand}"/>
+        <Label Content="{Binding State}" Height="28" HorizontalAlignment="Left" Name="lblServiceState" VerticalAlignment="Top" Width="119" Grid.Row="0" Grid.Column="0"/>
+        <RadioButton Content="File" Height="16" HorizontalAlignment="Left" Name="rbFile"  GroupName="DumpType" Grid.Row="1" IsEnabled="{Binding IsActiveCommand}" IsChecked="{Binding Path=FileSelected, Mode=TwoWay}" Grid.Column="0"/>
+
+        <Label Grid.Row="1" Grid.Column="1" Content="Please select a folder : "  IsEnabled="{Binding FileSelected}" HorizontalAlignment="Left"/>
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="{Binding FileSelected}" Width="101" Text="{Binding FilePath,Mode=TwoWay}" Name="txtFolder"  />
+        <Button  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="{Binding FileSelected}" Content="Browse" Click="BrowseFolder" />
+        
+        <RadioButton Content="MSMQ" Height="16" HorizontalAlignment="Left" Name="rbMsmq" GroupName="DumpType"  Grid.Row="2" IsEnabled="{Binding IsActiveCommand}" Grid.Column="0"/>
+        <RadioButton Content="WCF"  Height="16" HorizontalAlignment="Left" Name="rbWCF" GroupName="DumpType"   Grid.Row="3" IsEnabled="{Binding IsActiveCommand}" Grid.Column="0"/>
     </Grid>
 </Window>

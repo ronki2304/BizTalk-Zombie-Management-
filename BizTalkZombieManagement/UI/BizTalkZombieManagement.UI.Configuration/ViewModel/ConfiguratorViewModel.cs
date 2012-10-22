@@ -47,6 +47,31 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return String.Equals("Stopped",_State); }
         }
 
+        #region File case
+        private Boolean _FileSelected;
+
+        public Boolean FileSelected
+        {
+            get { return _FileSelected; }
+            set
+            {
+                _FileSelected = value;
+                OnPropertyChanged("FileSelected");
+            }
+        }
+
+        private String _FilePath;
+
+        public String FilePath
+        {
+            get { return _FilePath; }
+            set
+            {
+                _FilePath = value;
+            }
+        }
+        #endregion
+
        /// <summary>
        /// Getting the new service state
        /// </summary>
@@ -59,6 +84,8 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                 State = String.Concat("Currently the service is ", e.NewStatus);
             }
         }
+
+
 
     }
 }
