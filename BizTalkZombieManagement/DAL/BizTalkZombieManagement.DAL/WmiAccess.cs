@@ -35,18 +35,11 @@ namespace BizTalkZombieManagement.Dal
             using (ManagementObjectSearcher searchZombieMessages =
                    new ManagementObjectSearcher(new ManagementScope(WmiQuery.WmiScope), new ObjectQuery(sQuery), null))
             {
-                foreach (ManagementObject objServiceInstance in searchZombieMessages.Get())
-                {
-                    listToReturn.Add(new WmiResult
-                        {
-                            InstanceID = Guid.Parse(objServiceInstance.Properties[WmiProperties.ServiceInstanceId].Value.ToString())
-                           ,
-                            MessageType = objServiceInstance.Properties[WmiProperties.MessageType].Value.ToString()
-                           ,
-                            MessageInstanceId = Guid.Parse(objServiceInstance.Properties[WmiProperties.MessageInstanceId].Value.ToString())
-
-                        });
-                }
+                listToReturn.AddRange(from ManagementObject objServiceInstance in searchZombieMessages.Get()
+                                      select new WmiResult
+                                                 {
+                                                     InstanceID = Guid.Parse(objServiceInstance.Properties[WmiProperties.ServiceInstanceId].Value.ToString()), MessageType = objServiceInstance.Properties[WmiProperties.MessageType].Value.ToString(), MessageInstanceId = Guid.Parse(objServiceInstance.Properties[WmiProperties.MessageInstanceId].Value.ToString())
+                                                 });
             }
             return listToReturn;
         }

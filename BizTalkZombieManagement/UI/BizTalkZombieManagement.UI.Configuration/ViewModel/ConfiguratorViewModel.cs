@@ -4,20 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using BizTalkZombieManagement.Business.Configuration;
+using System.Windows.Forms;
+using System.Collections.ObjectModel;
+using BizTalkZombieManagement.Entities.CustomEnum;
 
 namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 {
     public class ConfiguratorViewModel : BaseViewModel
     {
         #region Commandes
-        public ICommand ClickCommand { get; set; }
+        public ICommand ClickBrowseFolder { get; set; }
+        public ICommand saveConfigurationCommand { get; set; }
         #endregion
 
         public ConfiguratorViewModel()
         {
+            ClickBrowseFolder = new RelayCommand(param => BrowseFolder(), param => true);
             WindowsServiceLogic logic = new WindowsServiceLogic();
             logic.OnStateChange += NewState;
             State = logic.state;
+            WcfBindingType = new ObservableCollection<string>();
+            this.initializeWcfBindingType();
         }
 
         private String _State;
@@ -35,6 +42,8 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                     OnPropertyChanged("State");
                     //refresh the active command
                     OnPropertyChanged("IsActiveCommand");
+                    OnPropertyChanged("FileSelected");
+                    OnPropertyChanged("MSMQSelected");
                 }
             }
         }
@@ -44,7 +53,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         /// </summary>
         public Boolean IsActiveCommand
         {
-            get { return String.Equals("Stopped",_State); }
+            get { return String.Equals("Stopped", _State); }
         }
 
         #region File case
@@ -52,7 +61,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 
         public Boolean FileSelected
         {
-            get { return _FileSelected; }
+            get { return _FileSelected && IsActiveCommand; }
             set
             {
                 _FileSelected = value;
@@ -60,32 +69,85 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             }
         }
 
-        private String _FilePath;
+        private String _FolderPath;
 
-        public String FilePath
+        public String FolderPath
         {
-            get { return _FilePath; }
+            get { return _FolderPath; }
             set
             {
-                _FilePath = value;
+                _FolderPath = value;
+                OnPropertyChanged("FolderPath");
             }
         }
         #endregion
 
-       /// <summary>
-       /// Getting the new service state
-       /// </summary>
-       /// <param name="o"></param>
-       /// <param name="e"></param>
+
+        #region MSMQ case
+        private Boolean _MSMQSelected;
+        public Boolean MSMQSelected
+        {
+            get { return _MSMQSelected && IsActiveCommand; }
+            set
+            {
+                _MSMQSelected = value;
+                OnPropertyChanged("MSMQSelected");
+            }
+        }
+        #endregion
+
+        #region WCF case
+
+        private Boolean _WcfSelected;
+        public Boolean WcfSelected
+        {
+            get { return _WcfSelected && IsActiveCommand; }
+            set
+            {
+                _WcfSelected = value;
+                OnPropertyChanged("WcfSelected");
+            }
+
+
+        }
+
+        public ObservableCollection<String> WcfBindingType { get; private set; }
+
+
+        private void initializeWcfBindingType()
+        {
+
+            ObservableCollection<String> list = new ObservableCollection<string>();
+            list.Add("Select binding");
+            foreach (var EnumName in Enum.GetValues(typeof(WcfType)))
+            {
+                list.Add(EnumName.ToString());
+            }
+
+        }
+        #endregion
+        /// <summary>
+        /// Getting the new service state
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
         private void NewState(object o, ServiceWindowsEvent e)
         {
             if (State != e.NewStatus)
             {
-                State = String.Concat("Currently the service is ", e.NewStatus);
+                State = e.NewStatus;
             }
         }
 
-
+        private void BrowseFolder()
+        {
+            var dlg = new FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dlg.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                FolderPath = dlg.SelectedPath;
+            }
+        }
 
     }
 }

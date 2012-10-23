@@ -28,12 +28,7 @@ namespace BizTalkZombieManagement.UI.Configuration.View
            
         }
 
-        private void BrowseFolder(object sender, RoutedEventArgs e)
-        {
-            var dlg = new FolderBrowserDialog();
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog();
-            txtFolder.Text = dlg.SelectedPath;
-        }
+       
 
    
     }

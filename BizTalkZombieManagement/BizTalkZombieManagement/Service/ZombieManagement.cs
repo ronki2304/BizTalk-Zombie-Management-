@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Management;
-using System.Xml.Linq;
 using System.IO;
 using BizTalkZombieManagement.Entities.ConstantName;
 using System.Threading.Tasks;
@@ -22,7 +21,7 @@ namespace BizTalkZombieManagement.Service
         /// <param name="serviceInstanceId"></param>
         public static void ReplayZombieMessage(Guid serviceInstanceId)
         {
-            Boolean DeleteOrchestrationAction = false;
+            Boolean deleteOrchestrationAction = false;
 
 
             //initialize WMI
@@ -39,7 +38,7 @@ namespace BizTalkZombieManagement.Service
             if (wmiAccess.MessageFound)
             {
                 //need to destroy the orchestration after
-                DeleteOrchestrationAction = true;
+                deleteOrchestrationAction = true;
                 LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.ZombieFound), serviceInstanceId));
                 //saving all messages
                 SaveMessages(serviceInstanceId, wmiAccess.ListMessageId, btArtifact);
@@ -50,7 +49,7 @@ namespace BizTalkZombieManagement.Service
             }
 
             //Now terminate the current orchestration 
-            if (DeleteOrchestrationAction)
+            if (deleteOrchestrationAction)
             {
                 LogHelper.WriteInfo(String.Format(ResourceLogic.GetString(ResourceKeyName.DeleteZombieOrchestration)));
                 WmiLogic.TerminateOrchestration(serviceInstanceId);
@@ -79,6 +78,6 @@ namespace BizTalkZombieManagement.Service
             }
             LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.MessageSaved));
         }
-        
+
     }
 }
