@@ -10,28 +10,40 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="67*"/>
             <ColumnDefinition Width="137*"/>
             <ColumnDefinition Width="60*"/>
         </Grid.ColumnDefinitions>
-       
+
         <Label Content="{Binding State}" Height="28" HorizontalAlignment="Left" Name="lblServiceState" VerticalAlignment="Top" Width="119" Grid.Row="0" Grid.Column="0"/>
+
+        <Button Content="{Binding ServiceAction}" Grid.Row="0" Grid.Column="1" Command="{Binding ManageServiceCommand}"/>
         <RadioButton Content="File" Height="16" HorizontalAlignment="Left" Name="rbFile"  GroupName="DumpType" Grid.Row="1" IsEnabled="{Binding IsActiveCommand}" IsChecked="{Binding Path=FileSelected}" Grid.Column="0"/>
-
-        <Label Grid.Row="1" Grid.Column="1" Content="Please select a folder : "  IsEnabled="{Binding FileSelected}" HorizontalAlignment="Left" Width="Auto"/>
-        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="{Binding FileSelected}" Width="101" Text="{Binding FolderPath,Mode=TwoWay}"/>
-        <Button  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="{Binding FileSelected}" Content="Browse" Command="{Binding ClickBrowseFolder}" />
-
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Grid.Row="1" Grid.Column="1" Content="Please select a folder : "  IsEnabled="{Binding FileSelected}" HorizontalAlignment="Left" Width="Auto"/>
+            <StackPanel Orientation="Horizontal" >
+                <TextBox Grid.Row="1" Grid.Column="1" IsEnabled="{Binding FileSelected}" Text="{Binding FolderPath,Mode=TwoWay}" Width="199" />
+                <Button  Grid.Row="1" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding FileSelected}" Content="Browse" Command="{Binding ClickBrowseFolder}" />
+            </StackPanel>
+        </StackPanel>
         <RadioButton Content="MSMQ" Height="16" HorizontalAlignment="Left" Name="rbMsmq" GroupName="DumpType"  Grid.Row="2" IsEnabled="{Binding IsActiveCommand}" Grid.Column="0" IsChecked="{Binding Path=MSMQSelected}" />
+        <StackPanel Grid.Column="1" Grid.Row="2">
         <Label Grid.Row="2" Grid.Column="1" Content="Please Set the address : "  IsEnabled="{Binding MSMQSelected}" HorizontalAlignment="Left"/>
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="{Binding MSMQSelected}" Width="101" Text="{Binding FolderPath,Mode=TwoWay}"/>
-
+        <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="{Binding MSMQSelected}"  Text="{Binding FolderPath,Mode=TwoWay}"/>
+        </StackPanel>
 
         <RadioButton Content="WCF"  Height="16" HorizontalAlignment="Left" Name="rbWCF" GroupName="DumpType"   Grid.Row="3" IsEnabled="{Binding IsActiveCommand}" Grid.Column="0" IsChecked="{Binding WcfSelected}"/>
-        <ComboBox ItemsSource="{Binding GetWcfBindingType, Mode=OneWay}" IsEnabled="{Binding WcfSelected}" Grid.Row="3" Grid.Column="1" />
+        <StackPanel  Grid.Row="3" Grid.Column="1">
 
-        <Button Content="Save Configuration" Grid.Column="2" Grid.Row="4" Command="{Binding saveConfigurationCommand }"  />
+            <ComboBox ItemsSource="{Binding WcfBindingType, Mode=OneWay}" IsEnabled="{Binding WcfSelected}" Grid.Row="3" Grid.Column="1" SelectedIndex="0" />
+            <StackPanel Orientation="Horizontal">
+                <Label Grid.Row="3" Grid.Column="1" Content="Please Set the address : "  IsEnabled="{Binding MSMQSelected}" HorizontalAlignment="Left"/>
+                <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" IsEnabled="{Binding MSMQSelected}" Width="101" Text="{Binding FolderPath,Mode=TwoWay}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Button Content="Save Configuration" Grid.Column="2" Grid.Row="4" Command="{Binding saveConfigurationCommand }" />
     </Grid>
 </Window>        

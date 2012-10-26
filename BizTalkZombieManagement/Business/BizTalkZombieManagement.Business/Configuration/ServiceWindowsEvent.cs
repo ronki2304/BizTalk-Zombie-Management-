@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ServiceProcess;
 
 namespace BizTalkZombieManagement.Business.Configuration
 {
@@ -10,9 +11,9 @@ namespace BizTalkZombieManagement.Business.Configuration
     /// </summary>
     public class ServiceWindowsEvent : EventArgs
     {
-        public String NewStatus {get; private set;}
+        public ServiceControllerStatus NewStatus { get; private set; }
 
-        public ServiceWindowsEvent(String Status)
+        public ServiceWindowsEvent(ServiceControllerStatus Status)
         {
             NewStatus = Status;
         }

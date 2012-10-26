@@ -51,9 +51,15 @@ namespace BizTalkZombieManagement
         /// <param name="e"></param>
         private static void HandleZombieEvent(object sender, EventArrivedEventArgs e)
         {
-            LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.EventArrived));
-            ZombieManagement.ReplayZombieMessage(Guid.Parse(e.NewEvent.Properties[WmiProperties.InstanceId].Value.ToString()));
-
+            try
+            {
+                LogHelper.WriteInfo(ResourceLogic.GetString(ResourceKeyName.EventArrived));
+                ZombieManagement.ReplayZombieMessage(Guid.Parse(e.NewEvent.Properties[WmiProperties.InstanceId].Value.ToString()));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.WriteError(ex);
+            }
         }
         #endregion
     }

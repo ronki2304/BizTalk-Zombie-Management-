@@ -77,7 +77,7 @@
     <Compile Include="ConstantName\WMIProperties.cs" />
     <Compile Include="ConstantName\WmiQuery.cs" />
     <Compile Include="Entities\WmiResult.cs" />
-    <Compile Include="Enum\dumpType.cs" />
+    <Compile Include="Enum\DumpType.cs" />
     <Compile Include="Enum\WcfType.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

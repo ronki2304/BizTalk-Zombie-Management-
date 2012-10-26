@@ -5,6 +5,7 @@ using System.Text;
 using BizTalkZombieManagement.Dal.Configuration;
 using System.Timers;
 using BizTalkZombieManagement.Entities.ConstantName;
+using System.ServiceProcess;
 
 
 namespace BizTalkZombieManagement.Business.Configuration
@@ -15,7 +16,7 @@ namespace BizTalkZombieManagement.Business.Configuration
         WindowsServiceAccess service;
         private Timer aTimer;
         public Boolean ServiceFound { get; private set; }
-        public String state { get; private set; }
+        public ServiceControllerStatus state { get; private set; }
 
         #region event generation
         public delegate void ServiceStatusChangedDelegate(object o, ServiceWindowsEvent e);
@@ -59,7 +60,19 @@ namespace BizTalkZombieManagement.Business.Configuration
             
         }
 
-       
+       public void StartOrStopService()
+        {
+           switch (state)
+           {
+               case ServiceControllerStatus.Stopped:
+                   service.Start();
+                   break;
+               case ServiceControllerStatus.Running:
+                   service.Stop();
+                   break;
+               default: break;
+           }
+        }
 
 
     }

@@ -7,6 +7,7 @@ using BizTalkZombieManagement.Business.Configuration;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using BizTalkZombieManagement.Entities.CustomEnum;
+using System.ServiceProcess;
 
 namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 {
@@ -15,23 +16,32 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         #region Commandes
         public ICommand ClickBrowseFolder { get; set; }
         public ICommand saveConfigurationCommand { get; set; }
+        public ICommand ManageServiceCommand { get; set; }
         #endregion
 
+        #region Items Sources
+        public ObservableCollection<String> WcfBindingType { get; private set; }
+        #endregion
+
+        #region private member
+        WindowsServiceLogic _ServiceWindowsLogic = new WindowsServiceLogic();
+        #endregion
         public ConfiguratorViewModel()
         {
             ClickBrowseFolder = new RelayCommand(param => BrowseFolder(), param => true);
-            WindowsServiceLogic logic = new WindowsServiceLogic();
-            logic.OnStateChange += NewState;
-            State = logic.state;
-            WcfBindingType = new ObservableCollection<string>();
+            ManageServiceCommand = new RelayCommand(param => ManageService(), param => true);
+            
+            _ServiceWindowsLogic.OnStateChange += NewState;
+            State = _ServiceWindowsLogic.state;
+            WcfBindingType = new ObservableCollection<String>();
             this.initializeWcfBindingType();
         }
 
-        private String _State;
+        private ServiceControllerStatus _State;
         /// <summary>
         /// Show the current service state
         /// </summary>
-        public String State
+        public ServiceControllerStatus State
         {
             get { return _State; }
             set
@@ -39,6 +49,19 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                 if (_State != value)
                 {
                     _State = value;
+
+                    switch (_State)
+                    {
+                        case ServiceControllerStatus.Running:
+                            ServiceAction = "Stop";
+                            break;
+                        case ServiceControllerStatus.Stopped:
+                            ServiceAction = "Start";
+                            break;
+                        default:
+                            break;
+                    }
+
                     OnPropertyChanged("State");
                     //refresh the active command
                     OnPropertyChanged("IsActiveCommand");
@@ -48,14 +71,33 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             }
         }
 
+
+
         /// <summary>
         /// Active the control is the servcie state is Stopped
         /// </summary>
         public Boolean IsActiveCommand
         {
-            get { return String.Equals("Stopped", _State); }
+            get { return Enum.Equals(ServiceControllerStatus.Stopped, _State); }
         }
 
+        private String _ServiceAction;
+        /// <summary>
+        /// display the button action start or stop service
+        /// </summary>
+        public String ServiceAction
+        {
+            get
+            {
+                return _ServiceAction;
+            }
+            set
+            {
+                _ServiceAction = String.Concat(value, " the service");
+                OnPropertyChanged("ServiceAction");
+
+            }
+        }
         #region File case
         private Boolean _FileSelected;
 
@@ -111,21 +153,21 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 
         }
 
-        public ObservableCollection<String> WcfBindingType { get; private set; }
+       
 
 
         private void initializeWcfBindingType()
         {
-
-            ObservableCollection<String> list = new ObservableCollection<string>();
-            list.Add("Select binding");
+            WcfBindingType.Add("Select binding" );
             foreach (var EnumName in Enum.GetValues(typeof(WcfType)))
             {
-                list.Add(EnumName.ToString());
+                WcfBindingType.Add(EnumName.ToString());
             }
 
         }
         #endregion
+
+
         /// <summary>
         /// Getting the new service state
         /// </summary>
@@ -139,6 +181,9 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             }
         }
 
+        /// <summary>
+        /// Open new dialog bo to select a folder
+        /// </summary>
         private void BrowseFolder()
         {
             var dlg = new FolderBrowserDialog();
@@ -149,5 +194,16 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             }
         }
 
+        /// <summary>
+        /// Start or stop the service windows
+        /// </summary>
+        private void ManageService()
+        {
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+            _ServiceWindowsLogic.StartOrStopService();
+            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+        }
+
+       
     }
 }

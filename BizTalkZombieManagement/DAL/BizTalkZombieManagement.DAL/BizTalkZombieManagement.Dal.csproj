@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="AppSettingDAL.cs" />
     <Compile Include="BizTalkArtifacts.cs" />
+    <Compile Include="Configuration\ConfigurationFileAccess.cs" />
     <Compile Include="Configuration\WindowsServiceAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Transport\FtpAccess.cs" />

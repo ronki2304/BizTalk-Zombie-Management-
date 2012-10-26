@@ -42,27 +42,29 @@ namespace BizTalkZombieManagement.Dal.Configuration
         /// return the current status of the service
         /// </summary>
         /// <returns></returns>
-        public String GetStatusService()
+        public ServiceControllerStatus GetStatusService()
         {
             sc.Refresh();
-            return sc.Status.ToString();
+            return sc.Status;
         }
 
 
         /// <summary>
-        /// start the service
+        /// start the service and wait until the real state
         /// </summary>
         public void Start()
         {
             sc.Start();
+            sc.WaitForStatus(ServiceControllerStatus.Running);
         }
 
         /// <summary>
-        /// Stop the service
+        /// Stop the service and wait it is really in stop state
         /// </summary>
         public void Stop()
         {
             sc.Stop();
+            sc.WaitForStatus(ServiceControllerStatus.Stopped);
         }
     }
 }

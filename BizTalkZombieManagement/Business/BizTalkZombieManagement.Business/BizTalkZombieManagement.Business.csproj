@@ -61,6 +61,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +71,7 @@
   <ItemGroup>
     <Compile Include="BtArtifactLogic.cs" />
     <Compile Include="ConfigParameter.cs" />
+    <Compile Include="Configuration\ConfigurationFileEditor.cs" />
     <Compile Include="Configuration\ServiceWindowsEvent.cs" />
     <Compile Include="Configuration\WindowsServiceLogic.cs" />
     <Compile Include="GlobalSuppressions.cs" />
