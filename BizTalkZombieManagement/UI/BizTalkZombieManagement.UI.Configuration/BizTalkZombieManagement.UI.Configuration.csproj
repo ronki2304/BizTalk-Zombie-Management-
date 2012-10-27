@@ -139,6 +139,10 @@
       <Project>{D5542372-D06E-4A49-9BFC-AF82AF2526DD}</Project>
       <Name>BizTalkZombieManagement.Business</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Contracts\BizTalkZombieManagement.Contracts\BizTalkZombieManagement.Contracts.csproj">
+      <Project>{480282E7-BA08-4267-94B3-3BA0769816C7}</Project>
+      <Name>BizTalkZombieManagement.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Entities\BizTalkZombieManagement.Entities\BizTalkZombieManagement.Entities.csproj">
       <Project>{938A4757-362F-410C-B98D-42FF1FBF4E11}</Project>
       <Name>BizTalkZombieManagement.Entities</Name>

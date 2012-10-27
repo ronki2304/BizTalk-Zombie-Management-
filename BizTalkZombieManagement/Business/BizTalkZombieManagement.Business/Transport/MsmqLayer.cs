@@ -23,11 +23,23 @@ namespace BizTalkZombieManagement.Business.Transport
         {
             access.SendMessage(message);
         }
-
+        /// <summary>
+        /// use in the service windows to determine if the uri store is ok
+        /// </summary>
+        /// <returns></returns>
         public static Boolean IsExist()
         {
            return MsmqAccess.IsExist(getMsmqPath());
         }
 
+        /// <summary>
+        /// use in the UI to check if the new Uri is available
+        /// </summary>
+        /// <param name="sUri"></param>
+        /// <returns></returns>
+        public static Boolean IsExist(String sUri)
+        {
+            return MsmqAccess.IsExist(sUri);
+        }
     }
 }

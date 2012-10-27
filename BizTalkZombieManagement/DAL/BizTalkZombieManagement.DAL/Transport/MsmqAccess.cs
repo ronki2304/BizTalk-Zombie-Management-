@@ -36,7 +36,7 @@ namespace BizTalkZombieManagement.Dal.Transport
 
         public static Boolean IsExist(String path)
         {
-            return MessageQueue.Exists(path);
+            return !String.IsNullOrEmpty(path) && MessageQueue.Exists(path);
         }
     }
 }

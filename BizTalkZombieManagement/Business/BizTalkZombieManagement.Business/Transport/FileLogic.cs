@@ -21,5 +21,10 @@ namespace BizTalkZombieManagement.Business.Transport
         {
             FileLayerAccess.SaveToFile(messageInstanceId, message, getFilePath());
         }
+
+        public static Boolean IsValidPathFolder(String path)
+        {
+            return FileLayerAccess.IsValidPathFolder(path);
+        }
     }
 }

@@ -22,8 +22,7 @@ namespace BizTalkZombieManagement.Business
                 if (String.IsNullOrEmpty(_FilePath))
                 {
                     //check illegal character
-                    if (!AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath).Any(it => Path.GetInvalidPathChars().Contains(it))
-                        && !String.IsNullOrEmpty(AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath)))
+                    if (FileLogic.IsValidPathFolder(AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath)))
                     {
                         _FilePath = AppSettingDal.RetrieveSpecificKey(AppKeyName.FilePath);
                     }

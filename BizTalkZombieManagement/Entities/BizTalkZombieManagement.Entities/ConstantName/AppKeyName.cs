@@ -14,5 +14,10 @@ namespace BizTalkZombieManagement.Entities
         public const String MsmqPath = "MSMQ_Path";
         public const String WcfType = "WCF_TYPE";
         public const String DumpLayer = "DumpLayer";
+
+        /// <summary>
+        /// use only in the configuration editor
+        /// </summary>
+        public const String ConfigFilePath = "ConfigFilePath";
     }
 }

@@ -9,6 +9,6 @@ namespace BizTalkZombieManagement.Entities.CustomEnum
     {
         NamedPipe,
         Tcp,
-        WSHttp
+        WsHttp
     }
 }
