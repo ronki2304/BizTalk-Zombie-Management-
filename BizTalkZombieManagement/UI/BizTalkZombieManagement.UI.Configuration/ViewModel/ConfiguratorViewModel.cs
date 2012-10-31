@@ -100,6 +100,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                             ServiceAction = "Start";
                             break;
                         default:
+                            ServiceAction = "Stop";
                             break;
                     }
 
@@ -328,7 +329,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                 dtype= DumpType.Msmq;
                 svalue=MsmqPath;
 
-                if (!MsmqLayer.IsExist())
+                if (!MsmqLayer.IsExist(svalue))
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
                     MessageBox.Show("Please specify a valid Msmq path");
@@ -363,7 +364,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             {
                 MessageBox.Show(String.Format("Don't forget to create a BizTalk port with {0} binding and with no security \n if you want to change the security layer, please modify the service configueation file located in the installation path", binding.ToString()));
             }
-            MessageBox.Show("Configuration Saved \n now please restart the service");
+            MessageBox.Show("Configuration Saved \n Now please restart the service");
         }
        
     }

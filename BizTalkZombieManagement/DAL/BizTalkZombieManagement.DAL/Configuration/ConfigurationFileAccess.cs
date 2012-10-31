@@ -85,9 +85,9 @@ namespace BizTalkZombieManagement.Dal.Configuration
         /// <returns></returns>
         public Uri GetWcfUri(WcfType bdg)
         {
-             System.ServiceModel.Configuration.ServiceModelSectionGroup serviceModelSection = System.ServiceModel.Configuration.ServiceModelSectionGroup.GetSectionGroup(configuration);
+            System.ServiceModel.Configuration.ServiceModelSectionGroup serviceModelSection = System.ServiceModel.Configuration.ServiceModelSectionGroup.GetSectionGroup(configuration);
 
-             return serviceModelSection.Client.Endpoints[WrapperEndpoint[bdg]].Address;
+            return serviceModelSection.Client.Endpoints[WrapperEndpoint[bdg]].Address;
         }
         #endregion
         #endregion
@@ -96,13 +96,19 @@ namespace BizTalkZombieManagement.Dal.Configuration
         #region private method
         private void RetrieveEndpointID()
         {
-            WrapperEndpoint = new Dictionary<WcfType,int>();
+            WrapperEndpoint = new Dictionary<WcfType, int>();
             System.ServiceModel.Configuration.ServiceModelSectionGroup serviceModelSection = System.ServiceModel.Configuration.ServiceModelSectionGroup.GetSectionGroup(configuration);
 
 
             for (int i = 0; i < serviceModelSection.Client.Endpoints.Count; i++)
             {
-                WrapperEndpoint.Add((WcfType)Enum.Parse(typeof(WcfType), serviceModelSection.Client.Endpoints[i].Name), i);
+                WcfType val;
+
+                //test because when you've got BizTalk Adapter Pack you have got some default endpoint more like SAP or Oracle
+                if (Enum.TryParse<WcfType>(serviceModelSection.Client.Endpoints[i].Name, out val))
+                {
+                    WrapperEndpoint.Add(val, i);
+                }
             }
 
         }
