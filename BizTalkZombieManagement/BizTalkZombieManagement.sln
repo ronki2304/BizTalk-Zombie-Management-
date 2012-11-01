@@ -29,9 +29,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{85660263-5A39-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizTalkZombieManagement.UI.Configuration", "UI\BizTalkZombieManagement.UI.Configuration\BizTalkZombieManagement.UI.Configuration.csproj", "{3A3472CA-804E-4547-A3F7-29AD07B670C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{5311A957-FB44-4CBB-A854-85034041F759}"
+	ProjectSection(SolutionItems) = preProject
+		..\Binaries\ReuxablesLegacy.dll = ..\Binaries\ReuxablesLegacy.dll
+	EndProjectSection
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ServiceSetupWIX", "ServiceSetup\ServiceSetupWIX\ServiceSetupWIX.wixproj", "{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs35
 		SccLocalPath0 = .
@@ -49,7 +56,7 @@ Global
 		SccProjectTopLevelParentUniqueName4 = BizTalkZombieManagement.sln
 		SccProjectName4 = Contracts/BizTalkZombieManagement.Contracts
 		SccLocalPath4 = Contracts\\BizTalkZombieManagement.Contracts
-		SccProjectUniqueName5 = DAL\\BizTalkZombieManagement.DAL\\BizTalkZombieManagement.DAL.csproj
+		SccProjectUniqueName5 = DAL\\BizTalkZombieManagement.DAL\\BizTalkZombieManagement.Dal.csproj
 		SccProjectTopLevelParentUniqueName5 = BizTalkZombieManagement.sln
 		SccProjectName5 = DAL/BizTalkZombieManagement.DAL
 		SccLocalPath5 = DAL\\BizTalkZombieManagement.DAL
@@ -65,6 +72,9 @@ Global
 		SccProjectTopLevelParentUniqueName8 = BizTalkZombieManagement.sln
 		SccProjectName8 = UI/BizTalkZombieManagement.UI.Configuration
 		SccLocalPath8 = UI\\BizTalkZombieManagement.UI.Configuration
+		SccProjectUniqueName9 = ServiceSetup\\ServiceSetupWIX\\ServiceSetupWIX.wixproj
+		SccProjectName9 = ServiceSetup/ServiceSetupWIX
+		SccLocalPath9 = ServiceSetup\\ServiceSetupWIX
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Code Analysis|Any CPU = Code Analysis|Any CPU
@@ -200,6 +210,21 @@ Global
 		{3A3472CA-804E-4547-A3F7-29AD07B670C5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{3A3472CA-804E-4547-A3F7-29AD07B670C5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{3A3472CA-804E-4547-A3F7-29AD07B670C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|Any CPU.ActiveCfg = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|Mixed Platforms.ActiveCfg = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|Mixed Platforms.Build.0 = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|x86.ActiveCfg = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|x86.Build.0 = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|x86.ActiveCfg = Debug|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|x86.Build.0 = Debug|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|Any CPU.ActiveCfg = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|Mixed Platforms.Build.0 = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|x86.ActiveCfg = Release|x86
+		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

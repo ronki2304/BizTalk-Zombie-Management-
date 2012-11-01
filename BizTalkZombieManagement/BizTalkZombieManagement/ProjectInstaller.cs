@@ -6,6 +6,7 @@ using System.Configuration.Install;
 using System.Linq;
 using System.ServiceProcess;
 using BizTalkZombieManagement.Entities.ConstantName;
+using System.Windows.Forms;
 
 
 namespace BizTalkZombieManagement
@@ -20,37 +21,27 @@ namespace BizTalkZombieManagement
             //Configuration service
 
             this.ZombieManagementServiceInstaller.StartType = ServiceStartMode.Automatic;
+            this.ZombieManagementServiceInstaller.DelayedAutoStart = true;
             this.ZombieManagementServiceInstaller.Description = "Service to handle BizTalk Zombie instance";
             this.ZombieManagementServiceInstaller.ServicesDependedOn = new String[] { WindowsServiceKey.DependedService }; //check if sso is install
 
 #if DEBUG
+            this.serviceProcessInstaller1.Account = ServiceAccount.LocalService;
 #else
 
 
             //Setting credential
             this.serviceProcessInstaller1.Account = ServiceAccount.User;
 #endif
-            this.AfterInstall += new InstallEventHandler(AfterInstallService);
-        }
-
-        private void AfterInstallService(object send, InstallEventArgs e)
-        {
-            //Boolean runConfig = Convert.ToBoolean(Context.Parameters["CHECKBOXA1"]);
-            //if (runConfig)
-            //{
-            //    System.Diagnostics.Process.Start("BizTalkZombieManagement.UI.Configuration.exe");
-            //}
-            //start the service
-            //using (ServiceController sc = new ServiceController("ZombieManagementService"))
-            //{
-            //    sc.Start();
-            //}
-        }
-        public override void Commit(IDictionary savedState)
-        {
-            base.Commit(savedState);
-            System.Diagnostics.Process.Start(Context.Parameters["AssemblyPath"]+@"\BizTalkZombieManagement.UI.Configuration.exe");
             
         }
+
+       
+        public override void Commit(IDictionary savedState)
+        {
+            MessageBox.Show("BizTalk Zombie Management is now installed, to use it, please open the configuration tool located in the start menu for starting service");
+            base.Commit(savedState);
+        }
+
     }
 }

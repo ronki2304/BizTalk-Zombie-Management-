@@ -30,14 +30,14 @@
         <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Top">
             <TextBlock Grid.Row="2" Grid.Column="1" Text="Please select a folder : "  IsEnabled="{Binding FileSelected}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="Auto" Height="24"/>
             <StackPanel Orientation="Horizontal" >
-                <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="{Binding FileSelected}" Text="{Binding FolderPath,Mode=TwoWay}" Width="199" />
+                <TextBox Grid.Row="2" Grid.Column="1" IsEnabled="{Binding FileSelected}" Text="{Binding FolderPath,Mode=TwoWay}" Width="199" Height="24"/>
                 <Button  Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Right" IsEnabled="{Binding FileSelected}" Content="Browse" Command="{Binding ClickBrowseFolder}" />
             </StackPanel>
         </StackPanel>
         <RadioButton Content="MSMQ" VerticalAlignment="Top"  HorizontalAlignment="Left" Name="rbMsmq" GroupName="DumpType"  Grid.Row="4" IsEnabled="{Binding IsActiveCommand}" IsChecked="{Binding Path=MSMQSelected}" />
         <StackPanel Grid.Column="1" Grid.Row="4">
             <TextBlock Grid.Row="4" Grid.Column="1" Text="Please Set the address : "  IsEnabled="{Binding MSMQSelected}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24"/>
-            <TextBox Grid.Row="4" Grid.Column="1" IsEnabled="{Binding MSMQSelected}"  Text="{Binding MsmqPath,Mode=TwoWay}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" IsEnabled="{Binding MSMQSelected}"  Text="{Binding MsmqPath,Mode=TwoWay}" Height="24"/>
         </StackPanel>
 
         <RadioButton Content="WCF" VerticalAlignment="Top"  HorizontalAlignment="Left" Name="rbWCF" GroupName="DumpType"   Grid.Row="6" IsEnabled="{Binding IsActiveCommand}" IsChecked="{Binding WcfSelected}" />
@@ -46,11 +46,11 @@
             <ComboBox ItemsSource="{Binding WcfBindingType, Mode=OneWay}" IsEnabled="{Binding WcfSelected}" Grid.Row="4" Grid.Column="1" SelectedIndex="1" SelectedValue="{Binding SelectedBindingType, Mode=TwoWay}" VerticalAlignment="Top" Margin="0,0,0,5"/>
 
             <TextBlock Grid.Row="6" Grid.Column="1" Text="Please Set the address : "  IsEnabled="{Binding WcfSelected}" HorizontalAlignment="Left" Height="24"/>
-            <TextBox Grid.Row="6" Grid.Column="1" IsEnabled="{Binding WcfAndBindingTypeSelect}" Text="{Binding WcfUri,Mode=TwoWay}" />
+            <TextBox Grid.Row="6" Grid.Column="1" IsEnabled="{Binding WcfAndBindingTypeSelect}" Text="{Binding WcfUri,Mode=TwoWay}" Height="24" />
 
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Center">
-            <Button Content="{Binding ServiceAction}"  Command="{Binding ManageServiceCommand}" Margin="0,0,5,0"/>
+            <Button Content="{Binding ServiceAction}"  Command="{Binding ManageServiceCommand}" Margin="0,0,5,0" Height="24"/>
             <Button Content="Save Configuration" Command="{Binding saveConfigurationCommand }" IsEnabled="{Binding IsActiveCommand}" Margin="5,0,0,0" />
         </StackPanel>
     </Grid>

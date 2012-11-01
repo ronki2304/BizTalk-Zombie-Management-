@@ -64,7 +64,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReuxablesLegacy">
-      <HintPath>..\..\..\LEGACY\ReuxablesLegacy.dll</HintPath>
+      <HintPath>..\..\..\Binaries\ReuxablesLegacy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -94,12 +94,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\ConfiguratorViewModel.cs" />
-    <Compile Include="ViewModel\FirstViewModel.cs" />
     <Compile Include="View\Configurator.xaml.cs">
       <DependentUpon>Configurator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FirstView.xaml.cs">
-      <DependentUpon>FirstView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -134,10 +130,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\Configurator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\FirstView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

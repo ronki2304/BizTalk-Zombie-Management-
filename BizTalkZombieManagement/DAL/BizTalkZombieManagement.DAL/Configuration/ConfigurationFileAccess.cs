@@ -26,8 +26,9 @@ namespace BizTalkZombieManagement.Dal.Configuration
         /// <param name="path"></param>
         public ConfigurationFileAccess(String path)
         {
-            configuration = ConfigurationManager.OpenExeConfiguration(path);
-            RetrieveEndpointID();
+                configuration = ConfigurationManager.OpenExeConfiguration(path);
+                RetrieveEndpointID();
+            
         }
 
         #region Public method

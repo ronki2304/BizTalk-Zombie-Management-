@@ -38,7 +38,9 @@
             // 
             // ZombieManagementServiceInstaller
             // 
+            this.ZombieManagementServiceInstaller.DelayedAutoStart = true;
             this.ZombieManagementServiceInstaller.ServiceName = "ZombieManagementService";
+            this.ZombieManagementServiceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller
             // 
