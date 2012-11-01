@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interface\ItransportLayer.cs" />
     <Compile Include="Interface\ITwoWayAsyncVoid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,28 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using BizTalkZombieManagement.Entities.ConstantName;
 using System.Management;
+using BizTalkZombieManagement.Entities.ConstantName;
 using BizTalkZombieManagement.Entities.Entities;
 
 namespace BizTalkZombieManagement.Dal
 {
-    public class WmiAccess
+    public static class WmiAccess
     {
-        
-
-        /// <summary>
-        /// Default constructor intialize the mesage list
-        /// </summary>
-        public WmiAccess()
-        {
-            
-        }
-
-        
-
-
         #region method
         /// <summary>
         /// retrieve all zombie message for one biztalk orchestration service instance
@@ -38,7 +24,7 @@ namespace BizTalkZombieManagement.Dal
                 listToReturn.AddRange(from ManagementObject objServiceInstance in searchZombieMessages.Get()
                                       select new WmiResult
                                                  {
-                                                     InstanceID = Guid.Parse(objServiceInstance.Properties[WmiProperties.ServiceInstanceId].Value.ToString()), MessageType = objServiceInstance.Properties[WmiProperties.MessageType].Value.ToString(), MessageInstanceId = Guid.Parse(objServiceInstance.Properties[WmiProperties.MessageInstanceId].Value.ToString())
+                                                     InstanceId = Guid.Parse(objServiceInstance.Properties[WmiProperties.ServiceInstanceId].Value.ToString()), MessageType = objServiceInstance.Properties[WmiProperties.MessageType].Value.ToString(), MessageInstanceId = Guid.Parse(objServiceInstance.Properties[WmiProperties.MessageInstanceId].Value.ToString())
                                                  });
             }
             return listToReturn;

@@ -212,17 +212,14 @@ Global
 		{3A3472CA-804E-4547-A3F7-29AD07B670C5}.Release|x86.ActiveCfg = Release|Any CPU
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|Any CPU.ActiveCfg = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|Mixed Platforms.ActiveCfg = Release|x86
-		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|Mixed Platforms.Build.0 = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|x86.ActiveCfg = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Code Analysis|x86.Build.0 = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|x86.ActiveCfg = Debug|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Debug|x86.Build.0 = Debug|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|Any CPU.ActiveCfg = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|Mixed Platforms.Build.0 = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|x86.ActiveCfg = Release|x86
 		{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

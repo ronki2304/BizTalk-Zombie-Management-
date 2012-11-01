@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.ServiceProcess;
+using System.Windows.Forms;
 using System.Windows.Input;
 using BizTalkZombieManagement.Business.Configuration;
-using System.Windows.Forms;
-using System.Collections.ObjectModel;
-using BizTalkZombieManagement.Entities.CustomEnum;
-using System.ServiceProcess;
 using BizTalkZombieManagement.Business.Transport;
+using BizTalkZombieManagement.Entities.CustomEnum;
+using BizTalkZombieManagement.Business;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 {
@@ -16,7 +15,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
     {
         #region Commandes
         public ICommand ClickBrowseFolder { get; set; }
-        public ICommand saveConfigurationCommand { get; set; }
+        public ICommand SaveConfigurationCommand { get; set; }
         public ICommand ManageServiceCommand { get; set; }
         #endregion
 
@@ -37,10 +36,10 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             //add delegate
             ClickBrowseFolder = new RelayCommand(param => BrowseFolder(), param => true);
             ManageServiceCommand = new RelayCommand(param => ManageService(), param => true);
-            saveConfigurationCommand = new RelayCommand(param => saveConfiguration(), param => true);
+            SaveConfigurationCommand = new RelayCommand(param => saveConfiguration(), param => true);
             //use by the windows service logic timer
             _ServiceWindowsLogic.OnStateChange += NewState;
-            State = _ServiceWindowsLogic.state;
+            State = _ServiceWindowsLogic.State;
 
             //initialize the combobox
             WcfBindingType = new ObservableCollection<String>();
@@ -56,22 +55,22 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 
         private void FillControls()
         {
-            DumpType dtype = _editor.GetTheCurrentDumpLayer();
+            DumpType dtype = _editor.CurrentDumpLayer;
 
             switch (dtype)
             {
                 case DumpType.File:
                     FileSelected = true;
-                    FolderPath = _editor.GetFolderPath();
+                    FolderPath = _editor.FolderPath;
                     break;
                 case DumpType.Msmq:
-                    MSMQSelected = true;
-                    MsmqPath = _editor.GetMsmqPath();
+                    MsmqSelected = true;
+                    MsmqPath = _editor.MsmqPath;
                     break;
                 case DumpType.Wcf:
-                    SelectedBindingType = _editor.GetWcfType();
+                    SelectedBindingType = _editor.WcfType;
                     WcfSelected = true;
-                    WcfUri = _editor.GetWcfUri((WcfType)Enum.Parse(typeof(WcfType),SelectedBindingType));
+                    WcfUri = _editor.GetWcfUri((WcfType)Enum.Parse(typeof(WcfType), SelectedBindingType)).ToString();
                     break;
                 default:
                     break;
@@ -108,7 +107,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                     //refresh the active command
                     OnPropertyChanged("IsActiveCommand");
                     OnPropertyChanged("FileSelected");
-                    OnPropertyChanged("MSMQSelected");
+                    OnPropertyChanged("MsmqSelected");
                     OnPropertyChanged("WcfSelected");
                     OnPropertyChanged("WcfAndBindingTypeSelect");
                 }
@@ -170,14 +169,14 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 
 
         #region MSMQ case
-        private Boolean _MSMQSelected;
-        public Boolean MSMQSelected
+        private Boolean _MsmqSelected;
+        public Boolean MsmqSelected
         {
-            get { return _MSMQSelected && IsActiveCommand; }
+            get { return _MsmqSelected && IsActiveCommand; }
             set
             {
-                _MSMQSelected = value;
-                OnPropertyChanged("MSMQSelected");
+                _MsmqSelected = value;
+                OnPropertyChanged("MsmqSelected");
             }
         }
 
@@ -221,7 +220,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                 OnPropertyChanged("SelectedBindingType");
 
                 WcfAndBindingTypeSelect = Enum.IsDefined(typeof(WcfType), value);
-                
+
             }
         }
 
@@ -247,7 +246,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         }
         private void initializeWcfBindingType()
         {
-            WcfBindingType.Add("Select binding" );
+            WcfBindingType.Add("Select binding");
             foreach (var EnumName in Enum.GetValues(typeof(WcfType)))
             {
                 WcfBindingType.Add(EnumName.ToString());
@@ -262,7 +261,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         /// </summary>
         /// <param name="o"></param>
         /// <param name="e"></param>
-        private void NewState(object o, ServiceWindowsEvent e)
+        private void NewState(object o, ServiceWindowsEventArgs e)
         {
             if (State != e.NewStatus)
             {
@@ -276,10 +275,21 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         private void BrowseFolder()
         {
             var dlg = new FolderBrowserDialog();
-            System.Windows.Forms.DialogResult result = dlg.ShowDialog();
-            if (result == DialogResult.OK)
+            try
             {
-                FolderPath = dlg.SelectedPath;
+                System.Windows.Forms.DialogResult result = dlg.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    FolderPath = dlg.SelectedPath;
+                }
+            }
+            catch (Exception e)
+            {
+                LogHelper.WriteError(e);
+            }
+            finally
+            {
+                dlg.Dispose();
             }
         }
 
@@ -296,43 +306,43 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         /// <summary>
         /// Saving the new configuration
         /// </summary>
-        private void  saveConfiguration()
+        private void saveConfiguration()
         {
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-            DumpType dtype= DumpType.File ; //default value
-            String svalue=String.Empty; //define the way where the xml will be dropped
-            WcfType binding =  WcfType.NamedPipe; //default value
+            DumpType dtype = DumpType.File; //default value
+            String svalue = String.Empty; //define the way where the xml will be dropped
+            WcfType binding = WcfType.NamedPipe; //default value
 
-            if (!FileSelected && !MSMQSelected && !WcfSelected)
+            if (!FileSelected && !MsmqSelected && !WcfSelected)
             {
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
-                MessageBox.Show("Please select a Type");
+                MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.SelectType));
                 return;
             }
             //retrieve the current dump layer
             if (FileSelected)
             {
-                dtype= DumpType.File;
-                svalue= FolderPath;
+                dtype = DumpType.File;
+                svalue = FolderPath;
                 //test if the folder exist
                 if (!FileLogic.IsValidPathFolder(svalue))
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
-                    MessageBox.Show("Please specify a valid folder path");
+                    MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ValidFolderPath));
                     return;
                 }
-                
+
             }
 
-            if (MSMQSelected)
+            if (MsmqSelected)
             {
-                dtype= DumpType.Msmq;
-                svalue=MsmqPath;
+                dtype = DumpType.Msmq;
+                svalue = MsmqPath;
 
                 if (!MsmqLayer.IsExist(svalue))
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
-                    MessageBox.Show("Please specify a valid Msmq path");
+                    MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ValidMsmqPath));
                     return;
                 }
             }
@@ -340,32 +350,32 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             if (WcfSelected)
             {
                 dtype = DumpType.Wcf;
-                svalue= WcfUri;
-                
+                svalue = WcfUri;
+
                 if (!Enum.TryParse<WcfType>(SelectedBindingType, out binding))
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
-                    MessageBox.Show("Please specify a valid Wcf Binding");
+                    MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ValidWcfBinding));
                     return;
                 }
 
                 if (String.IsNullOrEmpty(svalue))
                 {
                     Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
-                    MessageBox.Show("Please specify a valid Wcf uri");
+                    MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ValidWcfUri));
                     return;
                 }
             }
-           
+
             _editor.updateConfigurationFile(dtype, svalue, binding);
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
 
-            if (dtype== DumpType.Wcf)
+            if (dtype == DumpType.Wcf)
             {
-                MessageBox.Show(String.Format("Don't forget to create a BizTalk port with {0} binding and with no security \n if you want to change the security layer, please modify the service configueation file located in the installation path", binding.ToString()));
+                MessageBox.Show(String.Format(ResourceLogic.GetString(ResourceKeyName.WcfPortCreation), binding.ToString()));
             }
-            MessageBox.Show("Configuration Saved \n Now please restart the service");
+            MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ConfigurationSaved));
         }
-       
+
     }
 }

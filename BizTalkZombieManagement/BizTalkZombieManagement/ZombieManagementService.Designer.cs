@@ -1,7 +1,6 @@
-﻿using System.Management;
+﻿using System;
+using System.Management;
 using BizTalkZombieManagement.Business;
-using System;
-using System.Resources;
 using BizTalkZombieManagement.Entities.ConstantName;
 using BizTalkZombieManagement.Service;
 

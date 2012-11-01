@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Configuration_Saved" xml:space="preserve">
+    <value>Configuration Saved \n Now please restart the service</value>
+  </data>
   <data name="Debug_Mode" xml:space="preserve">
     <value>Debug mode enable</value>
   </data>
   <data name="Delete_Zombie_Orchestration" xml:space="preserve">
     <value>Now delete zombie orchestration</value>
+  </data>
+  <data name="EndInstallation" xml:space="preserve">
+    <value>BizTalk Zombie Management is now installed, to use it, please open the configuration tool located in the start menu for starting service</value>
   </data>
   <data name="Error_AddressMissing" xml:space="preserve">
     <value>Folder address is missing</value>
@@ -165,11 +171,29 @@
   <data name="SavingMessage" xml:space="preserve">
     <value>Saving all messages....</value>
   </data>
+  <data name="Select_Type" xml:space="preserve">
+    <value>Please select a Type</value>
+  </data>
   <data name="String" xml:space="preserve">
     <value />
   </data>
+  <data name="Valid_Folder_Path" xml:space="preserve">
+    <value>Please specify a valid folder path</value>
+  </data>
+  <data name="Valid_Msmq_Path" xml:space="preserve">
+    <value>Please specify a valid Msmq path</value>
+  </data>
+  <data name="Valid_WCF_Binding" xml:space="preserve">
+    <value>Please specify a valid Wcf Binding</value>
+  </data>
+  <data name="Valid_WCF_URI" xml:space="preserve">
+    <value>Please specify a valid Wcf uri</value>
+  </data>
   <data name="WCF_Activated_Error" xml:space="preserve">
     <value>Format Exception {0} haven't got a boolean value \n Dump WCF won't be activated</value>
+  </data>
+  <data name="WCF_port_creation" xml:space="preserve">
+    <value>Don't forget to create a BizTalk port with {0} binding and with no security \n if you want to change the security layer, please modify the service configueation file located in the installation path</value>
   </data>
   <data name="WCF_SavedMessage" xml:space="preserve">
     <value>All message are sent to WCF</value>

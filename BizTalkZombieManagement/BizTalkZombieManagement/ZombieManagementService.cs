@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Management;
 using System.ServiceProcess;
 using BizTalkZombieManagement.Business;
 using BizTalkZombieManagement.Entities.ConstantName;
-using System.Management;
 
 namespace BizTalkZombieManagement
 {
@@ -12,6 +12,7 @@ namespace BizTalkZombieManagement
         {
             InitializeComponent();
         }
+        [STAThread]
         static void Main()
         {
 

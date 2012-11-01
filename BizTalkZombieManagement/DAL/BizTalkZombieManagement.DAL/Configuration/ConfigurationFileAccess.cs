@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Configuration;
-using BizTalkZombieManagement.Entities;
 using BizTalkZombieManagement.Entities.CustomEnum;
 
 namespace BizTalkZombieManagement.Dal.Configuration
@@ -51,12 +48,12 @@ namespace BizTalkZombieManagement.Dal.Configuration
         /// update the endpoint uri in the configuration file only for WCF
         /// </summary>
         /// <param name="uri"></param>
-        /// <param name="BindingType"></param>
-        public void UpdateUri(Uri uri, WcfType BindingType)
+        /// <param name="bindingType"></param>
+        public void UpdateUri(Uri uri, WcfType bindingType)
         {
             System.ServiceModel.Configuration.ServiceModelSectionGroup serviceModelSection = System.ServiceModel.Configuration.ServiceModelSectionGroup.GetSectionGroup(configuration);
 
-            serviceModelSection.Client.Endpoints[WrapperEndpoint[BindingType]].Address = uri;
+            serviceModelSection.Client.Endpoints[WrapperEndpoint[bindingType]].Address = uri;
         }
 
         /// <summary>

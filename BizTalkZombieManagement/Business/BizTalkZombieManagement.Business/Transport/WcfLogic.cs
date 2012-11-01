@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BizTalkZombieManagement.Dal.Transport;
+using BizTalkZombieManagement.Contracts.CustomInterfaces;
 using BizTalkZombieManagement.Dal;
+using BizTalkZombieManagement.Dal.Transport;
 using BizTalkZombieManagement.Entities;
 using BizTalkZombieManagement.Entities.CustomEnum;
-using BizTalkZombieManagement.Contracts.CustomInterfaces;
 
 namespace BizTalkZombieManagement.Business
 {

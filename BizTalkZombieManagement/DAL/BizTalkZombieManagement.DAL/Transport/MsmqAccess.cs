@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Messaging;
 using System.Xml.Linq;
-using System.Xml;
-using System.IO;
 
 namespace BizTalkZombieManagement.Dal.Transport
 {
@@ -14,9 +9,9 @@ namespace BizTalkZombieManagement.Dal.Transport
 
         private MessageQueue _messageQueue;
 
-        public MsmqAccess(String Uri)
+        public MsmqAccess(String uri)
         {
-            _messageQueue = new MessageQueue(Uri);
+            _messageQueue = new MessageQueue(uri);
         }
 
         /// <summary>

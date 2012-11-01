@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BizTalkZombieManagement.Dal.Configuration;
-using System.Timers;
-using BizTalkZombieManagement.Entities.ConstantName;
 using System.ServiceProcess;
+using System.Timers;
+using BizTalkZombieManagement.Dal.Configuration;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 
 namespace BizTalkZombieManagement.Business.Configuration
 {
     
-    public class WindowsServiceLogic
+    public sealed class WindowsServiceLogic:IDisposable
     {
         WindowsServiceAccess service;
         private Timer aTimer;
         public Boolean ServiceFound { get; private set; }
-        public ServiceControllerStatus state { get; private set; }
+        public ServiceControllerStatus State { get; private set; }
 
         #region event generation
-        public delegate void ServiceStatusChangedDelegate(object o, ServiceWindowsEvent e);
-        public event ServiceStatusChangedDelegate OnStateChange;
+        public delegate void ServiceStatusChangedEventHandler(object sender, ServiceWindowsEventArgs e);
+        public event ServiceStatusChangedEventHandler OnStateChange;
         #endregion
 
         public WindowsServiceLogic()
@@ -34,7 +31,7 @@ namespace BizTalkZombieManagement.Business.Configuration
                 aTimer.Elapsed += TimeElapsed;
                 aTimer.Enabled = true;
                 ServiceFound = true;
-                state = service.GetStatusService();
+                State = service.ServiceStatus;
             }
             else
             {
@@ -50,19 +47,19 @@ namespace BizTalkZombieManagement.Business.Configuration
         {
           
             //first check the service status
-            if (ServiceFound && state != service.GetStatusService())
+            if (ServiceFound && State != service.ServiceStatus)
             {
                 //keep the lastest state
-                state = service.GetStatusService();
+                State = service.ServiceStatus;
                 //generate event for UI
-                OnStateChange(this, new ServiceWindowsEvent(state));
+                OnStateChange(this, new ServiceWindowsEventArgs(State));
             }
             
         }
 
        public void StartOrStopService()
         {
-           switch (state)
+           switch (State)
            {
                case ServiceControllerStatus.Stopped:
                    service.Start();
@@ -75,5 +72,11 @@ namespace BizTalkZombieManagement.Business.Configuration
         }
 
 
+
+       public void Dispose()
+       {
+           service.Dispose();
+           aTimer.Dispose();
+       }
     }
 }

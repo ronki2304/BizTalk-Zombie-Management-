@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ServiceProcess;
 using BizTalkZombieManagement.Entities.ConstantName;
 
@@ -10,7 +7,7 @@ namespace BizTalkZombieManagement.Dal.Configuration
     /// <summary>
     /// Handle the service Zombie status
     /// </summary>
-    public class WindowsServiceAccess
+    public sealed class WindowsServiceAccess : IDisposable
     {
         private ServiceController sc;
         private Boolean _serviceFound = false;
@@ -42,10 +39,13 @@ namespace BizTalkZombieManagement.Dal.Configuration
         /// return the current status of the service
         /// </summary>
         /// <returns></returns>
-        public ServiceControllerStatus GetStatusService()
+        public ServiceControllerStatus ServiceStatus
         {
-            sc.Refresh();
-            return sc.Status;
+            get
+            {
+                sc.Refresh();
+                return sc.Status;
+            }
         }
 
 
@@ -65,6 +65,11 @@ namespace BizTalkZombieManagement.Dal.Configuration
         {
             sc.Stop();
             sc.WaitForStatus(ServiceControllerStatus.Stopped);
+        }
+
+        public void Dispose()
+        {
+            sc.Dispose();
         }
     }
 }

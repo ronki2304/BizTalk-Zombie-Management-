@@ -1,6 +1,5 @@
-﻿using System.ServiceModel;
-using System;
-using System.ServiceModel.Channels;
+﻿using System;
+using System.ServiceModel;
 namespace Microsoft.BizTalk.Adapter.Wcf.Runtime
 {
     /// <summary>

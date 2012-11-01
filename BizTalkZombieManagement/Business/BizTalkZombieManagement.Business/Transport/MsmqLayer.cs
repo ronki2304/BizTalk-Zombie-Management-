@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using BizTalkZombieManagement.Contracts.CustomInterfaces;
 using BizTalkZombieManagement.Dal.Transport;
 
@@ -35,11 +32,11 @@ namespace BizTalkZombieManagement.Business.Transport
         /// <summary>
         /// use in the UI to check if the new Uri is available
         /// </summary>
-        /// <param name="sUri"></param>
+        /// <param name="uri"></param>
         /// <returns></returns>
-        public static Boolean IsExist(String sUri)
+        public static Boolean IsExist(String uri)
         {
-            return MsmqAccess.IsExist(sUri);
+            return MsmqAccess.IsExist(uri);
         }
     }
 }

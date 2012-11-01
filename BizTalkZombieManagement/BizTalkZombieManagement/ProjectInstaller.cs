@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration.Install;
-using System.Linq;
 using System.ServiceProcess;
-using BizTalkZombieManagement.Entities.ConstantName;
 using System.Windows.Forms;
+using BizTalkZombieManagement.Entities.ConstantName;
+using BizTalkZombieManagement.Business;
 
 
 namespace BizTalkZombieManagement
@@ -39,7 +37,7 @@ namespace BizTalkZombieManagement
        
         public override void Commit(IDictionary savedState)
         {
-            MessageBox.Show("BizTalk Zombie Management is now installed, to use it, please open the configuration tool located in the start menu for starting service");
+            MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.EndInstallation));
             base.Commit(savedState);
         }
 

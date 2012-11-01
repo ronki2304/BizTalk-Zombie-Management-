@@ -62,6 +62,12 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ReuxablesLegacy">
       <HintPath>..\..\..\Binaries\ReuxablesLegacy.dll</HintPath>
@@ -87,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="App.xaml.cs">
@@ -118,6 +125,7 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="key.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

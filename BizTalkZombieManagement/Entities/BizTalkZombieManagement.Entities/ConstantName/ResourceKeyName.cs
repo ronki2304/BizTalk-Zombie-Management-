@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BizTalkZombieManagement.Entities.ConstantName
 {
@@ -26,5 +23,14 @@ namespace BizTalkZombieManagement.Entities.ConstantName
         public const String WcfActivatedError = "WCF_Activated_Error";
         public const String MessageSaving = "SavingMessage";
         public const String MessageSaved = "SavedMessage";
+
+        public const String EndInstallation = "EndInstallation";
+        public const String WcfPortCreation = "WCF_port_creation";
+        public const String ConfigurationSaved = "Configuration_Saved";
+        public const String SelectType = "Select_Type";
+        public const String ValidFolderPath = "Valid_Folder_Path";
+        public const String ValidMsmqPath = "Valid_Msmq_Path";
+        public const String ValidWcfBinding = "Valid_WCF_Binding";
+        public const String ValidWcfUri = "Valid_WCF_URI";
     }
 }

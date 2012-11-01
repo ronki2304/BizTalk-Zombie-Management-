@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Management;
-using System.IO;
-using BizTalkZombieManagement.Entities.ConstantName;
-using System.Threading.Tasks;
 using BizTalkZombieManagement.Business;
-using BizTalkZombieManagement.Business.Transport;
 using BizTalkZombieManagement.Contracts.CustomInterfaces;
+using BizTalkZombieManagement.Entities.ConstantName;
 
 namespace BizTalkZombieManagement.Service
 {
