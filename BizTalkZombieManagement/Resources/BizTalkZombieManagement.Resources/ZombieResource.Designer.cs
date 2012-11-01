@@ -61,6 +61,24 @@ namespace BizTalkZombieManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You ask to start the service without saving your configuration. Continue?.
+        /// </summary>
+        public static string Config_Change {
+            get {
+                return ResourceManager.GetString("Config_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Zombie Management service.
+        /// </summary>
+        public static string Config_Change_Title {
+            get {
+                return ResourceManager.GetString("Config_Change_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configuration Saved \n Now please restart the service.
         /// </summary>
         public static string Configuration_Saved {
@@ -228,15 +246,6 @@ namespace BizTalkZombieManagement.Resources {
         public static string Select_Type {
             get {
                 return ResourceManager.GetString("Select_Type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String {
-            get {
-                return ResourceManager.GetString("String", resourceCulture);
             }
         }
         

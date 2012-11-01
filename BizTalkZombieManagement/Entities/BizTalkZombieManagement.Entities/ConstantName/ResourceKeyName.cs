@@ -32,5 +32,8 @@ namespace BizTalkZombieManagement.Entities.ConstantName
         public const String ValidMsmqPath = "Valid_Msmq_Path";
         public const String ValidWcfBinding = "Valid_WCF_Binding";
         public const String ValidWcfUri = "Valid_WCF_URI";
+
+        public const String ConfigChange = "Config_Change";
+        public const String ConfigChangeTitle = "Config_Change_Title";
     }
 }

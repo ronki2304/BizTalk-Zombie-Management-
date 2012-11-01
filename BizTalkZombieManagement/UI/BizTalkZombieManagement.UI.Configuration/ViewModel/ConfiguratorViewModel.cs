@@ -50,6 +50,8 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             _editor = new ConfigurationFileEditor();
             FillControls();
 
+            // for the moment config is only show
+            ConfigChange = false;
         }
 
 
@@ -62,15 +64,23 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
                 case DumpType.File:
                     FileSelected = true;
                     FolderPath = _editor.FolderPath;
+                    MsmqPath = String.Empty;
+                    SelectedBindingType = WcfBindingType[0];
+                    WcfUri = String.Empty;
                     break;
                 case DumpType.Msmq:
                     MsmqSelected = true;
                     MsmqPath = _editor.MsmqPath;
+                    FolderPath = String.Empty;
+                    SelectedBindingType = WcfBindingType[0];
+                    WcfUri = String.Empty;
                     break;
                 case DumpType.Wcf:
                     SelectedBindingType = _editor.WcfType;
                     WcfSelected = true;
                     WcfUri = _editor.GetWcfUri((WcfType)Enum.Parse(typeof(WcfType), SelectedBindingType)).ToString();
+                    MsmqPath = String.Empty;
+                    FolderPath = String.Empty;
                     break;
                 default:
                     break;
@@ -141,6 +151,7 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
 
             }
         }
+
         #region File case
         private Boolean _FileSelected;
 
@@ -149,8 +160,12 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return _FileSelected && IsActiveCommand; }
             set
             {
-                _FileSelected = value;
-                OnPropertyChanged("FileSelected");
+                if (_FileSelected != value)
+                {
+                    _FileSelected = value;
+                    OnPropertyChanged("FileSelected");
+                    ConfigChange = true;
+                }
             }
         }
 
@@ -161,8 +176,12 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return _FolderPath; }
             set
             {
-                _FolderPath = value;
-                OnPropertyChanged("FolderPath");
+                if (_FolderPath != value)
+                {
+                    _FolderPath = value;
+                    ConfigChange = true;
+                    OnPropertyChanged("FolderPath");
+                }
             }
         }
         #endregion
@@ -175,8 +194,12 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return _MsmqSelected && IsActiveCommand; }
             set
             {
-                _MsmqSelected = value;
-                OnPropertyChanged("MsmqSelected");
+                if (_MsmqSelected != value)
+                {
+                    _MsmqSelected = value;
+                    OnPropertyChanged("MsmqSelected");
+                    ConfigChange = true;
+                }
             }
         }
 
@@ -189,8 +212,12 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             }
             set
             {
-                _MsmqPath = value;
-                OnPropertyChanged("MsmqPath");
+                if (_MsmqPath != value)
+                {
+                    _MsmqPath = value;
+                    OnPropertyChanged("MsmqPath");
+                    ConfigChange = true;
+                }
             }
         }
         #endregion
@@ -203,8 +230,13 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return _WcfSelected && IsActiveCommand; }
             set
             {
-                _WcfSelected = value;
-                OnPropertyChanged("WcfSelected");
+                if (_WcfSelected != value)
+                {
+                    _WcfSelected = value;
+                    OnPropertyChanged("WcfSelected");
+                    OnPropertyChanged("WcfAndBindingTypeSelect");
+                    ConfigChange = true;
+                }
             }
 
 
@@ -216,10 +248,16 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return _SelectedBindingType; }
             set
             {
-                _SelectedBindingType = value;
-                OnPropertyChanged("SelectedBindingType");
 
-                WcfAndBindingTypeSelect = Enum.IsDefined(typeof(WcfType), value);
+
+                if (_SelectedBindingType != value)
+                {
+                    _SelectedBindingType = value;
+                    OnPropertyChanged("SelectedBindingType");
+                    WcfAndBindingTypeSelect = Enum.IsDefined(typeof(WcfType), value);
+                    ConfigChange = true;
+                }
+
 
             }
         }
@@ -240,8 +278,12 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             get { return _WcfUri; }
             set
             {
-                _WcfUri = value;
-                OnPropertyChanged("WcfUri");
+                if (_WcfUri != value)
+                {
+                    _WcfUri = value;
+                    OnPropertyChanged("WcfUri");
+                    ConfigChange = true;
+                }
             }
         }
         private void initializeWcfBindingType()
@@ -298,6 +340,33 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
         /// </summary>
         private void ManageService()
         {
+            //check if the config has changed without save
+            if (ConfigChange)
+            {
+                DialogResult result = MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ConfigChange), ResourceLogic.GetString(ResourceKeyName.ConfigChangeTitle), MessageBoxButtons.YesNoCancel);
+
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        //let's save
+                        saveConfiguration();
+                        break;
+                    case DialogResult.Cancel:
+                        //stop service management
+                        return;
+                        break;
+                    case DialogResult.No:
+                        //reinit
+                        FillControls();
+                        break;
+                    default:
+                        //so continue with the old values
+                        break;
+
+                }
+
+                ConfigChange = false;
+            }
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
             _ServiceWindowsLogic.StartOrStopService();
             Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
@@ -374,8 +443,30 @@ namespace BizTalkZombieManagement.UI.Configuration.ViewModel
             {
                 MessageBox.Show(String.Format(ResourceLogic.GetString(ResourceKeyName.WcfPortCreation), binding.ToString()));
             }
+
+            //confguration is applied so just apply show mode 
+            ConfigChange = false;
+
             MessageBox.Show(ResourceLogic.GetString(ResourceKeyName.ConfigurationSaved));
+
         }
 
+
+        //check if the config change
+        private Boolean _ConfigChange;
+
+        public Boolean ConfigChange
+        {
+            get
+            {
+                return (_ConfigChange && IsActiveCommand);
+            }
+
+            set
+            {
+                _ConfigChange = value;
+                OnPropertyChanged("ConfigChange");
+            }
+        }
     }
 }

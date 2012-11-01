@@ -174,9 +174,6 @@
   <data name="Select_Type" xml:space="preserve">
     <value>Please select a Type</value>
   </data>
-  <data name="String" xml:space="preserve">
-    <value />
-  </data>
   <data name="Valid_Folder_Path" xml:space="preserve">
     <value>Please specify a valid folder path</value>
   </data>
@@ -203,5 +200,11 @@
   </data>
   <data name="Zombie_Found" xml:space="preserve">
     <value>New Message Zombie Found for service instance {0}</value>
+  </data>
+  <data name="Config_Change" xml:space="preserve">
+    <value>You ask to start the service without saving your configuration. Continue?</value>
+  </data>
+  <data name="Config_Change_Title" xml:space="preserve">
+    <value>Start Zombie Management service</value>
   </data>
 </root>
