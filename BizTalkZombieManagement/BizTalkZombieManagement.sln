@@ -36,6 +36,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{53
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "ServiceSetupWIX", "ServiceSetup\ServiceSetupWIX\ServiceSetupWIX.wixproj", "{FD885A0B-3C7F-4536-93E5-1EEF55A102E9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binding", "Binding", "{87410127-F845-45B0-93FA-AB9124C47755}"
+	ProjectSection(SolutionItems) = preProject
+		..\Binding\NamedPipeBinding.xml = ..\Binding\NamedPipeBinding.xml
+		..\Binding\TcpBinding.xml = ..\Binding\TcpBinding.xml
+		..\Binding\WsHttpBinding.xml = ..\Binding\WsHttpBinding.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 10
@@ -228,6 +235,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{938A4757-362F-410C-B98D-42FF1FBF4E11} = {751A14E7-BBDD-4E3C-AD39-C86A06AEB619}
+		{A2C91732-277B-49AE-8443-AF2F6200E09E} = {751A14E7-BBDD-4E3C-AD39-C86A06AEB619}
 		{480282E7-BA08-4267-94B3-3BA0769816C7} = {EE3B6154-1582-4205-B85E-503E126BC4F1}
 		{FE811439-3BBF-4132-977A-C62458E86E85} = {8933D7E1-CA3B-42AD-A333-DAC20006E6C2}
 		{2BDFF411-A81B-418A-B6E4-656548044793} = {A2C91732-277B-49AE-8443-AF2F6200E09E}
