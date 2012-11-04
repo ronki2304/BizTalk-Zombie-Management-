@@ -61,7 +61,7 @@ namespace BizTalkZombieManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You ask to start the service without saving your configuration. Continue?.
+        ///   Looks up a localized string similar to You ask to start the service without saving your configuration. Do you want to save the configuration before contine ?.
         /// </summary>
         public static string Config_Change {
             get {
