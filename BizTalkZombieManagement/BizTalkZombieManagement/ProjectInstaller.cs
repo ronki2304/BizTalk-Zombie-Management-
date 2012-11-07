@@ -34,6 +34,11 @@ namespace BizTalkZombieManagement
             
         }
 
+        public override void Install(IDictionary stateSaver)
+        {
+            base.Install(stateSaver);
+            PerfCounterAsync.CreateCategory();
+        }
        
         public override void Commit(IDictionary savedState)
         {
@@ -41,5 +46,11 @@ namespace BizTalkZombieManagement
             base.Commit(savedState);
         }
 
+
+        public override void Uninstall(IDictionary savedState)
+        {
+            base.Uninstall(savedState);
+            PerfCounterAsync.DeleteCategory();
+        }
     }
 }

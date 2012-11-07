@@ -10,7 +10,12 @@ namespace BizTalkZombieManagement.Business
         /// </summary>
         public static void InitPerformanceCounter()
         {
+#if DEBUG
+            PerfCounterAccess.CreateCategory();
+#endif
+
             PerfCounterAccess.InitPerfCounter();
+
         }
 
         /// <summary>
@@ -22,11 +27,30 @@ namespace BizTalkZombieManagement.Business
         }
 
         /// <summary>
-        /// clear and delete the performance counter
+        /// clear the performance counter
         /// </summary>
-        public static void Dispose()
+        public static void Close()
         {
-            PerfCounterAccess.Dispose();
+            PerfCounterAccess.Close();
+#if DEBUG
+            PerfCounterAccess.DeleteCategory();
+#endif
+        }
+
+        /// <summary>
+        /// create the performance counter
+        /// </summary>
+        public static void CreateCategory()
+        {
+            PerfCounterAccess.CreateCategory();
+        }
+
+        /// <summary>
+        /// delete the performance counter
+        /// </summary>
+        public static void DeleteCategory()
+        {
+            PerfCounterAccess.DeleteCategory();
         }
     }
 }

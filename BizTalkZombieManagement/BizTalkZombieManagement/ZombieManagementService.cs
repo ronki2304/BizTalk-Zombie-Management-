@@ -29,7 +29,7 @@ namespace BizTalkZombieManagement
 
                     InitializeWatcher();
                     Console.ReadLine();
-                    PerfCounterAsync.Dispose();
+                    PerfCounterAsync.Close();
 #else
                     System.ServiceProcess.ServiceBase[] ServicesToRun;
 
@@ -88,7 +88,7 @@ namespace BizTalkZombieManagement
         {
             watcher.Stop();
             
-            PerfCounterAsync.Dispose();
+            PerfCounterAsync.Close();
         }
          
         #region member
