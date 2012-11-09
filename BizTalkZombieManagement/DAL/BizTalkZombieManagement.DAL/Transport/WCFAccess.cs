@@ -32,14 +32,9 @@ namespace BizTalkZombieManagement.Dal.Transport
 
                 //End the call once the wait handle signal is received from BizTalk
                 client.EndTwoWayMethod(res);
+
+                //((IClientChannel)client).Close();
             }
         }
-
-        ~WcfAccess()
-        {
-            ((IClientChannel)client).Close();
-        }
-
-   
     }
 }

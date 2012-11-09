@@ -23,11 +23,11 @@ namespace BizTalkZombieManagement.Dal.Transport
             _messageQueue.Send(XElement.Parse(message));
         }
 
-        ~MsmqAccess()
-        {
-            _messageQueue.Close();
-            _messageQueue.Dispose();
-        }
+        //~MsmqAccess()
+        //{
+        //    _messageQueue.Close();
+        //    _messageQueue.Dispose();
+        //}
 
         public static Boolean IsExist(String path)
         {
